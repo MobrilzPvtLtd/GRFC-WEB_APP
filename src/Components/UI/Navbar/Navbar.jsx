@@ -122,7 +122,7 @@ const Navbar = () => {
                       </div>
                     </li> --> */}
                 <li class="navbar-dropdown ">
-                  <a href="our-products.html">Products</a>
+                  <Link to="/our-products">Products</Link>
                   {/* <!-- <div class="dropdown">
                         <a href="our-products.html">our products</a>
                         <a href="product-details.html">product details</a>
@@ -138,7 +138,7 @@ const Navbar = () => {
                       </div>
                     </li> --> */}
                 <li class="navbar-dropdown">
-                  <a href="contact.html">Contact</a>
+                  <Link to="/contact-us">Contact</Link>
                 </li>
               </ul>
             </nav>

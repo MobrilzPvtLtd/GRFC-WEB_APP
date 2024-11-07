@@ -10,6 +10,7 @@ import LoginRegister from './Components/UI/Login/LoginRegister';
 import Otp from './Components/UI/Otp/Otp';
 import AboutUs from './Components/UI/Pages/About-us/AboutUs';
 import Services from './Components/UI/Pages/Services/Services';
+import OurProduct from './Components/UI/Pages/Our product/OurProduct';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/otp" element={<Otp/>} />
           <Route path="/about-us" element={<AboutUs/>} />
           <Route path="/services" element={<Services/>} />
+          <Route path="/our-products" element={<OurProduct/>} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer/>
