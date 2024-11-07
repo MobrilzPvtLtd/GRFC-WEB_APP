@@ -4156,7 +4156,7 @@ ul.pd-imgs li a img {
     opacity: 1;
 }
 .about-gallery-img img {
-    width: 390px;
+    width: 100%;
 }
 .about-gallery-img i {
     position: absolute;

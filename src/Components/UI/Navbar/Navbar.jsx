@@ -99,12 +99,12 @@ const Navbar = () => {
                       <!-- </div> --> */}
                 </li>
                 <li class="navbar-dropdown">
-                  <a href="about.html">About</a>
+                  <Link to="/about-us">About</Link>
                 </li>
                 <li class="navbar-dropdown ">
-                  <a href="services.html">
+                  <Link to="/services">
                     <i></i>services
-                  </a>
+                  </Link>
                   {/* <!-- <div class="dropdown">
                         <a href="services.html">services</a>
                         <a href="service-details.html">service details</a>
