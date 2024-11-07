@@ -5,16 +5,15 @@ const ServiceSection = () => {
     <div className="py-4">
         <div class="heading pt-5">
             {/* <!-- <img src="assets/img/heading-img.png" alt="heading-img"> --> */}
-            <h6>Service</h6>
-            <h2>Our Services</h2>
+            <h1 className="text-4xl font-bold">Services</h1>
         </div>
       <section class="gap no-bottom service-fix">
       
         <div class="container">
           <div class="row">
             <div class="col-lg-4 col-md-6">
-              <div class="we-provide">
-                <div class="we-provide-img a01">
+              <div class="we-provide flex flex-col justify-center items-center">
+                <div class="we-provide-img">
                   <img
                     src="assets/images_new/lila-in-primary-care.gif"
                     alt="we-provide-1"
@@ -40,8 +39,8 @@ const ServiceSection = () => {
               </div>
             </div>
             <div class="col-lg-4 col-md-6">
-              <div class="we-provide">
-                <div class="we-provide-img a01">
+              <div class="we-provide flex flex-col justify-center items-center">
+                <div class="we-provide-img">
                   <img
                     src="assets/images_new/doctor2000011111.png"
                     alt="we-provide-1"
@@ -67,8 +66,8 @@ const ServiceSection = () => {
               </div>
             </div>
             <div class="col-lg-4 col-md-6">
-              <div class="we-provide mb-0">
-                <div class="we-provide-img a01">
+              <div class="we-provide flex flex-col justify-center items-center">
+                <div class="we-provide-img">
                   <img src="assets/images_new/cardiology.png" alt="we-provide-1" />
                   <svg
                     width="326"
@@ -100,7 +99,7 @@ const ServiceSection = () => {
         <div class="container">
           <div class="row">
             <div class="col-lg-4 col-md-6">
-              <div class="we-provide">
+              <div class="we-provide flex flex-col justify-center items-center">
                 <div class="we-provide-img a01">
                   <img
                     src="assets/images_new/doctor2000011111.png"
@@ -127,8 +126,8 @@ const ServiceSection = () => {
               </div>
             </div>
             <div class="col-lg-4 col-md-6">
-              <div class="we-provide mb-0">
-                <div class="we-provide-img a01">
+              <div class="we-provide flex flex-col justify-center items-center">
+                <div class="we-provide-img">
                   <img src="assets/images_new/cardiology.png" alt="we-provide-1" />
                   <svg
                     width="326"
@@ -151,8 +150,8 @@ const ServiceSection = () => {
               </div>
             </div>
             <div class="col-lg-4 col-md-6">
-              <div class="we-provide">
-                <div class="we-provide-img a01">
+              <div class="we-provide flex flex-col justify-center items-center">
+                <div class="we-provide-img">
                   <img
                     src="assets/images_new/doctor2000011111.png"
                     alt="we-provide-1"
