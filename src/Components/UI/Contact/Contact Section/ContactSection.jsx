@@ -1,67 +1,192 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    address: '',
+    name: '',
+    email: '',
+    service: '',
+    message: '',
+    petType: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleRadioChange = (e) => {
+    setFormData({
+      ...formData,
+      petType: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log(formData);
+  };
+
   return (
-    <section className="gap">
+    <section className='mt-5'>
       <div className="container">
-        <div className="heading">
-          <h6>We would love to hear from you.</h6>
-          <h2 className='text-7xl font-bold'>Expert Pet Care with a personal touch</h2>
-        </div>
-        <div className="row mt-5">
-          <div className="col-lg-4 col-md-6">
-            <div className="content-us">
-              <svg width="140" height="140" viewBox="0 0 673 673">
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.82698 416.603C-19.0352 298.701 18.5108 173.372 107.497 90.7633L110.607 96.5197C24.3117 177.199 -12.311 298.935 15.0502 413.781L9.82698 416.603ZM89.893 565.433C172.674 654.828 298.511 692.463 416.766 663.224L414.077 658.245C298.613 686.363 175.954 649.666 94.9055 562.725L89.893 565.433ZM656.842 259.141C685.039 374.21 648.825 496.492 562.625 577.656L565.413 582.817C654.501 499.935 691.9 374.187 662.536 256.065L656.842 259.141ZM581.945 107.518C499.236 18.8371 373.997 -18.4724 256.228 10.5134L259.436 16.4515C373.888 -10.991 495.248 25.1518 576.04 110.708L581.945 107.518Z" fill="#000"/>
-              </svg>
-              <i>
-                <svg viewBox="0 0 512 512" style={{ enableBackground: 'new 0 0 512 512' }}>
-                  <path d="M0,81v350h512V81H0z M456.952,111L256,286.104L55.047,111H456.952z M30,128.967l134.031,116.789L30,379.787V128.967z M51.213,401l135.489-135.489L256,325.896l69.298-60.384L460.787,401H51.213z M482,379.788L347.969,245.756L482,128.967V379.788z"></path>
-                </svg>
-              </i>
-              <span>Email Address.</span>
-              <a href="mailto:Username@domain.com">Username@domain.com</a>
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="find-a-dog contact">
+              <h2>Find a dog walker or pet care</h2>
+              <p>Place your trust in We Love Pets, an award-winning dog walking and pet care</p>
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="Enter address or postcode..."
+                  value={formData.address}
+                  onChange={handleChange}
+                />
+                <button type="submit" className="button">
+                  Find Branch
+                </button>
+              </form>
+              <div className="head-office">
+                <div className="d-flex align-items-center">
+                  <i className="fa-solid fa-location-dot"></i>
+                  <h6>Head Office United State:</h6>
+                </div>
+                <p>#201 1218 9th Avenue SE, Calgary, AB T2G 0T1</p>
+              </div>
+              <div className="head-office mb-lg-0">
+                <div className="d-flex align-items-center">
+                  <i className="fa-solid fa-location-dot"></i>
+                  <h6>Head Office United State:</h6>
+                </div>
+                <p>#201 1218 9th Avenue SE, Calgary, AB T2G 0T1</p>
+              </div>
             </div>
           </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="content-us">
-              <svg width="140" height="140" viewBox="0 0 673 673">
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.82698 416.603C-19.0352 298.701 18.5108 173.372 107.497 90.7633L110.607 96.5197C24.3117 177.199 -12.311 298.935 15.0502 413.781L9.82698 416.603ZM89.893 565.433C172.674 654.828 298.511 692.463 416.766 663.224L414.077 658.245C298.613 686.363 175.954 649.666 94.9055 562.725L89.893 565.433ZM656.842 259.141C685.039 374.21 648.825 496.492 562.625 577.656L565.413 582.817C654.501 499.935 691.9 374.187 662.536 256.065L656.842 259.141ZM581.945 107.518C499.236 18.8371 373.997 -18.4724 256.228 10.5134L259.436 16.4515C373.888 -10.991 495.248 25.1518 576.04 110.708L581.945 107.518Z" fill="#000"/>
-              </svg>
-              <i>
-                <svg height="112" viewBox="0 0 24 24" width="112">
-                  <g clipRule="evenodd" fill="rgb(255,255,255)" fillRule="evenodd">
-                    <path d="m7 2.75c-.41421 0-.75.33579-.75.75v17c0 .4142.33579.75.75.75h10c.4142 0 .75-.3358.75-.75v-17c0-.41421-.3358-.75-.75-.75zm-2.25.75c0-1.24264 1.00736-2.25 2.25-2.25h10c1.2426 0 2.25 1.00736 2.25 2.25v17c0 1.2426-1.0074 2.25-2.25 2.25h-10c-1.24264 0-2.25-1.0074-2.25-2.25z"></path>
-                    <path d="m10.25 5c0-.41421.3358-.75.75-.75h2c.4142 0 .75.33579.75.75s-.3358.75-.75.75h-2c-.4142 0-.75-.33579-.75-.75z"></path>
-                    <path d="m9.25 19c0-.4142.33579-.75.75-.75h4c.4142 0 .75.3358.75.75s-.3358.75-.75.75h-4c-.41421 0-.75-.3358-.75-.75z"></path>
-                  </g>
-                </svg>
-              </i>
-              <span>Phone Number.</span>
-              <a href="tel:+091213596224">+09 121 359 6224</a>
-              <h6>24/7 Support team</h6>
-            </div>
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <div className="content-us mb-0">
-              <svg width="140" height="140" viewBox="0 0 673 673">
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.82698 416.603C-19.0352 298.701 18.5108 173.372 107.497 90.7633L110.607 96.5197C24.3117 177.199 -12.311 298.935 15.0502 413.781L9.82698 416.603ZM89.893 565.433C172.674 654.828 298.511 692.463 416.766 663.224L414.077 658.245C298.613 686.363 175.954 649.666 94.9055 562.725L89.893 565.433ZM656.842 259.141C685.039 374.21 648.825 496.492 562.625 577.656L565.413 582.817C654.501 499.935 691.9 374.187 662.536 256.065L656.842 259.141ZM581.945 107.518C499.236 18.8371 373.997 -18.4724 256.228 10.5134L259.436 16.4515C373.888 -10.991 495.248 25.1518 576.04 110.708L581.945 107.518Z" fill="#000"/>
-              </svg>
-              <i>
-                <svg fill="#000000" height="800px" width="800px" version="1.1" viewBox="0 0 25.04 25.04">
-                  <g>
-                    <path d="M24.152,2.586c-0.295-0.295-0.779-0.295-1.073,0L20.577,5.826c-0.295,0.295-0.295,0.779,0,1.073   c0.295,0.295,0.779,0.295,1.073,0l2.502-2.502C24.448,3.365,24.448,2.881,24.152,2.586z M15.071,7.93c-0.431-0.431-1.106-0.431-1.537,0   l-4.838,4.838c-0.431,0.431-0.431,1.106,0,1.537c0.431,0.431,1.106,0.431,1.537,0l4.838-4.838C15.502,9.036,15.502,8.361,15.071,7.93z M23.726,11.734c0.295-0.295,0.295-0.779,0-1.073c-0.295-0.295-0.779-0.295-1.073,0L18.99,14.98c-0.295,0.295-0.295,0.779,0,1.073   c0.295,0.295,0.779,0.295,1.073,0L23.726,11.734z"></path>
-                  </g>
-                </svg>
-              </i>
-              <span>Address.</span>
-              <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">1 Business Park, City, Country</a>
+          <div className="col-lg-6">
+            <div className="looking position-relative contact">
+              <form className="looking-form" onSubmit={handleSubmit}>
+                <h3>Book Your Place or Find out More</h3>
+                <ul>
+                  <li>
+                    <input
+                      type="radio"
+                      id="f-option"
+                      name="petType"
+                      value="dog"
+                      checked={formData.petType === 'dog'}
+                      onChange={handleRadioChange}
+                    />
+                    <label htmlFor="f-option">Dog</label>
+                    <div className="check"></div>
+                  </li>
+                  <li>
+                    <input
+                      type="radio"
+                      id="s-option"
+                      name="petType"
+                      value="cat"
+                      checked={formData.petType === 'cat'}
+                      onChange={handleRadioChange}
+                    />
+                    <label htmlFor="s-option">Cat</label>
+                    <div className="check">
+                      <div className="inside"></div>
+                    </div>
+                  </li>
+                </ul>
+                <div className="row">
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Complete Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Complete Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-lg-12">
+                    <select
+                      className="nice-select Advice"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Service</option>
+                      <option value="service1">Services 1</option>
+                      <option value="service2">Services 2</option>
+                      <option value="service3">Services 3</option>
+                      <option value="service4">Services 4</option>
+                    </select>
+                  </div>
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Complete Name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="col-lg-12">
+                    <textarea
+                      name="message"
+                      placeholder="Please let us know which day package you're interested"
+                      value={formData.message}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                </div>
+                <button type="submit" className="button">
+                  Submit Now
+                </button>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ContactSection
+export default ContactSection;
