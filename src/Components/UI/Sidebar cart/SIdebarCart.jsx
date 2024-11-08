@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import food1 from '../../../images_new/img/food-categorie-1.png';
 import food2 from '../../../images_new/img/food-categorie-2.png';
+import { Link } from 'react-router-dom';
 
 const SIdebarCart = ({visible}) => {
     const [isVisible, setIsVisible] = useState(true);
@@ -52,8 +53,8 @@ const SIdebarCart = ({visible}) => {
           </div>
 
           <div className="cart-btns d-flex align-items-center justify-content-between">
-            <a href="/view-cart" className="font-bold">View Cart</a>
-            <a href="/checkout" className="font-bold theme-bg-clr text-white checkout">Checkout</a>
+            <Link to="/view-cart" className="font-bold">View Cart</Link>
+            <Link to="/checkout" className="font-bold theme-bg-clr text-white checkout">Checkout</Link>
           </div>
         </div>
       </div>
