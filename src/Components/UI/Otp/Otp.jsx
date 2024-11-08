@@ -64,7 +64,7 @@ const Otp = ({ handleCancel, email }) => {
           <button
             onClick={handleOtp}
             type="submit"
-            className="my-4 py-3 px-5 rounded-5 primary-color-bg $white"
+            className="my-4 py-3 px-5 rounded-5 primary-color-bg $white text-white font-semibold transition-transform hover:scale-105"
           >
             Submit
           </button>

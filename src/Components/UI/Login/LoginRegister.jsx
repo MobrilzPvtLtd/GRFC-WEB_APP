@@ -3,11 +3,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import Otp from "../Otp/Otp";
+import loader_gif from '../../../images_new/loader.gif'
+import { toast } from "react-toastify";
 
 const LoginRegister = () => {
+  const [loading , setLoading] = useState(false);
+  const [loading2 , setLoading2] = useState(false);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
+    cpassword: "",
     dob: "",
     identif: "",
     name: "",
@@ -17,16 +22,15 @@ const LoginRegister = () => {
   const [credentials2, setCredentials2] = useState({ email: "", password: "" });
   const [loader, setLoader] = useState(false);
   const [visible, setVisible] = useState(0);
-  let url = "https://grfc.mobrilz.digital/api";
+  // let url = process.env.BACKEND_BASE_URL;
   let navigate = useNavigate();
-
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
   const handleChange = (e) => {
     e.preventDefault();
     setCredentials((prevCredentials) => ({
       ...prevCredentials,
       [e.target.name]: e.target.value,
     }));
-    console.log("dob ka data", credentials);
   };
   const handleChange2 = (e) => {
     e.preventDefault();
@@ -34,27 +38,35 @@ const LoginRegister = () => {
       ...prevCredentials,
       [e.target.name]: e.target.value,
     }));
-    console.log(credentials);
   };
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
+    try{
     const response = await axios.put(`${url}/login/0`, {
       email: credentials2.email,
       password: credentials2.password,
     });
-    // const parsed =  response.JSON();
 
-    setLoader(true);
+    // setLoader(true);
     if (response.status == 200) {
-      setLoader(false);
-      //   alert("login Successful");
-      navigate("/");
+      setTimeout(()=>{
+        toast.success(response.data.message);
+        setLoading(false);
+        navigate("/");
+        localStorage.setItem("token", response.data.data.token)
+       window.location.reload();
+      },1000)
     } else {
       alert("Invalid Credentials");
+      setLoading(false);
+
+    }}catch(err){toast.error(err.message);
     }
   };
   const handleRegister = async (e) => {
+    setLoading2(true);
     try {
       e.preventDefault();
       const register = await axios.post(`${url}/register`, {
@@ -64,23 +76,31 @@ const LoginRegister = () => {
         address: credentials.address,
         phone: credentials.phone,
         email: credentials.email,
-        password: credentials.password,
+        password: credentials.cpassword,
         userType: 0,
         is_admin: 0,
       });
-      console.log("token ke liye system", register.data.data.token);
-
       if (register.status == 200) {
+        setTimeout(()=>{
+
+       
+        setLoading2(false);
+        toast.success(register.data.message);
+
         const token = register.data.data.token;
         localStorage.setItem("authToken", token);
-        console.log("local ka token", token);
 
         handleOpen();
+      },1000)
       } else {
         alert("Details already exists");
+        setLoading2(false);
+
       }
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
+      setLoading2(false);
+
     }
   };
 
@@ -102,7 +122,6 @@ const LoginRegister = () => {
   const handleOpen = () => {
     setIsOpen(true);
   };
-  console.log("input type", inputType);
   return (
     <div>
       {loader ? (
@@ -126,7 +145,7 @@ const LoginRegister = () => {
               <div className="row align-items-center">
                 <div className="col-lg-6">
                   <div className="banner-text">
-                    <h2>Login</h2>
+                    <h2 className="text-7xl font-bold">Login</h2>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
                         <a href="index.html">Home</a>
@@ -192,13 +211,14 @@ const LoginRegister = () => {
                 <div className="col-lg-6">
                   <div className="box login">
                     <h3>Log In Your Account</h3>
-                    <form>
+                    <form onSubmit={handleLogin}>
                       <input
                         type="email"
                         name="email"
                         value={credentials2.email}
                         onChange={handleChange2}
                         placeholder="Username or email address"
+                        required
                       />
                       <input
                         type="password"
@@ -206,6 +226,7 @@ const LoginRegister = () => {
                         value={credentials2.password}
                         onChange={handleChange2}
                         placeholder="Password"
+                        required
                       />
                       <div className="remember">
                         <div className="first">
@@ -220,13 +241,13 @@ const LoginRegister = () => {
                           <a href="javascript:void(0)">Forget a Password?</a>
                         </div>
                       </div>
+                      {loading ? <img className="w-40" src={loader_gif} alt={loader_gif}></img> :
                       <button
                         type="submit"
                         className="button"
-                        onClick={handleLogin}
                       >
                         Login
-                      </button>
+                      </button>}
                     </form>
                   </div>
                 </div>
@@ -263,9 +284,9 @@ const LoginRegister = () => {
                           />
                           <input
                             type="password"
-                            name="password"
+                            name="cpassword"
                             placeholder="Confirm Password"
-                            value={credentials.password}
+                            value={credentials.cpassword}
                             onChange={handleChange}
                           />
                           <p>
@@ -327,7 +348,7 @@ const LoginRegister = () => {
                             to your account, and for other purposes described in
                             our privacy policy.
                           </p>
-
+                          {loading2 ? <img className="w-40 " src={loader_gif} alt={loader_gif}></img> :<div>
                           <button
                             type="button"
                             className="button "
@@ -335,9 +356,14 @@ const LoginRegister = () => {
                           >
                             Previuos
                           </button>
-                          <button type="submit" className="button m-lg-2">
-                            Register
-                          </button>
+                         
+                         
+                      <button
+                        type="submit"
+                        className="button m-lg-2"
+                      >
+                        Register
+                      </button></div>}
                         </div>
                       ) : null}
                     </form>

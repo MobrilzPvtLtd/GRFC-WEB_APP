@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/UI/Navbar/Navbar';  // Adjust import paths as needed
 import Home from './Components/UI/Home/Home';      // Adjust import paths as needed
@@ -12,13 +12,24 @@ import AboutUs from './Components/UI/Pages/About-us/AboutUs';
 import Services from './Components/UI/Pages/Services/Services';
 import OurProduct from './Components/UI/Pages/Our product/OurProduct';
 import Contact from './Components/UI/Pages/Contact/Contact';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SIdebarCart from './Components/UI/Sidebar cart/SIdebarCart';
+import ShopCart from './Components/UI/Pages/Shop-cart/ShopCart';
 
 
 function App() {
+  const [visible , setVisible] = useState(false);
+  const getVisibity =(state)=>{
+setVisible(state);
+  }
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar getVisibity = {getVisibity} />
+        <SIdebarCart visible = {visible}/>
+        
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login-Register" element={<LoginRegister />} />
@@ -27,6 +38,7 @@ function App() {
           <Route path="/services" element={<Services/>} />
           <Route path="/our-products" element={<OurProduct/>} />
           <Route path="/contact-us" element={<Contact/>} />
+          <Route path="/view-cart" element={<ShopCart/>} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer/>

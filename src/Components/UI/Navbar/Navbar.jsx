@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({getVisibity}) => {
+  const [visible , setVisible] = useState(true);
+  const handleVisible = ()=>{
+    setVisible(!visible);
+    getVisibity(visible);
+    console.log("visibiility check" , visible)
+  };
+  let token = localStorage.getItem("token")
   return (
     <div>
       <header>
@@ -65,10 +72,17 @@ const Navbar = () => {
                     <div class="line"></div>
                     <a href="#">Returns</a>
                   </div>
+                  {token ? 
+                  <div class="login">
+                   
+                    <button className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110" onClick={()=>{localStorage.removeItem("token");
+                      window.location.reload();
+                    }} > <i class="fa-solid fa-user"></i> Logout</button>
+                  </div> :
                   <div class="login">
                     <i class="fa-solid fa-user"></i>
                     <Link to="/login-Register">Login / Register</Link>
-                  </div>
+                  </div>}
                 </div>
               </div>
             </div>
@@ -164,7 +178,7 @@ const Navbar = () => {
               <a href="#">
                 <i class="fa-regular fa-heart"></i>
               </a>
-              <div class="hamburger-icon">
+              <div onClick={handleVisible} class="hamburger-icon">
                 <div class="donation">
                   <a href="JavaScript:void(0)" class="mx-0" id="show">
                     <svg
