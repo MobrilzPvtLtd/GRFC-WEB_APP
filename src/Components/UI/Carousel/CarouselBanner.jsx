@@ -43,7 +43,7 @@ const CarouselBanner = () => {
     <div
       className="carousel-container"
       style={{
-        maxWidth: "1920px",
+        maxWidth: "screen",
         minWidth: "320px",
         margin: "2rem auto",
         backgroundImage: `url(${bannerBg})`, // Using template literals for dynamic URL
@@ -51,6 +51,8 @@ const CarouselBanner = () => {
         backgroundPosition: "center", // Centers the image
         maxHeight: "500px",
         minHeight: "200px",
+        marginTop : "10rem",
+        width:"screen"
 
       }}
     >

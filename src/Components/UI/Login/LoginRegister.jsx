@@ -138,7 +138,7 @@ const LoginRegister = () => {
             style={{
               backgroundColor: "#fff",
               backgroundImage: "url(assets/images_new/background_2.png)",
-              marginTop: "-150px",
+              marginTop: "0px",
             }}
           >
             <div className="container">

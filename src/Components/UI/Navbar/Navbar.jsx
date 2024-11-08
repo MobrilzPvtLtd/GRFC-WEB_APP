@@ -10,9 +10,9 @@ const Navbar = ({getVisibity}) => {
   };
   let token = localStorage.getItem("token")
   return (
-    <div>
-      <header>
-        <div class="top-bar">
+    <div className="relative w-full bg-white">
+      <header className="fixed top-0">
+        <div class="top-bar bg-white">
           <div class="container">
             <div class="top-bar-slid">
               <div>

@@ -26,6 +26,7 @@ setVisible(state);
   return (
     <Router>
       <div className="App">
+       
         <Navbar getVisibity = {getVisibity} />
         <SIdebarCart visible = {visible}/>
         
