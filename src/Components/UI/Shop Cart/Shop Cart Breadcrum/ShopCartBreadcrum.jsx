@@ -1,6 +1,8 @@
 import React from 'react'
 import bannerImg1 from "../../../../images_new/img/banner.png";
 import heroShape1 from "../../../../images_new/img/hero-shaps-1.png";
+import banner_1 from "../../../../images_new/banner-img-1-1.jpg"
+import banner_2 from "../../../../images_new/banner-img-2.jpg"
 
 const ShopCartBreadcrum = () => {
   return (
@@ -43,7 +45,7 @@ const ShopCartBreadcrum = () => {
                   ></path>
                 </svg>
                 <img
-                  src="https://via.placeholder.com/232x232"
+                  src={banner_1}
                   alt="banner"
                 />
               </div>
@@ -62,7 +64,7 @@ const ShopCartBreadcrum = () => {
                   ></path>
                 </svg>
                 <img
-                  src="https://via.placeholder.com/299x299"
+                  src={banner_2}
                   alt="banner"
                 />
               </div>
