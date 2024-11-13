@@ -8,7 +8,7 @@ const Services = () => {
     <div>
       <ServiceBreadcrum/>
       <ServicesSection/>
-      <VetServicesSection/>
+      {/* <VetServicesSection/> */}
     </div>
   )
 }

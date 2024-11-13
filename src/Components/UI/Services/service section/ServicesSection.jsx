@@ -24,7 +24,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/vetservice">
                 <h5>ICU</h5>
               </a>
             </div>
@@ -43,7 +43,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/vetservice">
                 <h5>Doctor</h5>
               </a>
             </div>
@@ -62,7 +62,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/vetservice">
                 <h5>Cardio</h5>
               </a>
             </div>
@@ -80,7 +80,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/vetservice">
                 <h5>Feline vet center</h5>
               </a>
             </div>
@@ -98,7 +98,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/vetservice">
                 <h5>vet hotel</h5>
               </a>
             </div>
@@ -116,7 +116,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/vetservice">
                 <h5>dog</h5>
               </a>
             </div>

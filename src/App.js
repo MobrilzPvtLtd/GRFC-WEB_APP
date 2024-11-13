@@ -16,6 +16,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SIdebarCart from './Components/UI/Sidebar cart/SIdebarCart';
 import ShopCart from './Components/UI/Pages/Shop-cart/ShopCart';
+import VetServicesSection from './Components/UI/Services/Vet service section/VetServiceSection';
+import Descr_Page from './Components/UI/Services/Vet service section/Descr_Page';
+import Prescription_Form from './Components/UI/Services/Vet service section/Prescription_Form';
 
 
 function App() {
@@ -40,6 +43,9 @@ setVisible(state);
           <Route path="/our-products" element={<OurProduct/>} />
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/view-cart" element={<ShopCart/>} />
+          <Route path="/vetservice" element={<VetServicesSection/>} />
+          <Route path="/descripservice" element={<Descr_Page/>} />
+          <Route path="/prescription" element={<Prescription_Form/>} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer/>
