@@ -546,7 +546,6 @@ a.search-btn svg {
 }
 .donation:before {
     background-color: #000000;
-    content: "1";
     color: #fff;
     width: 20px;
     height: 20px;

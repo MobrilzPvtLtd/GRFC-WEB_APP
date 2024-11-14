@@ -1,8 +1,48 @@
-import React from 'react';
-import product from "../../../../images_new/product1-min-305x350 (1)vngearhbwfjevaibhwefnj.png"
-import product2 from "../../../../images_new/p53x73.png"
+import React, { useContext, useEffect, useState } from "react";
+import product from "../../../../images_new/product1-min-305x350 (1)vngearhbwfjevaibhwefnj.png";
+import product2 from "../../../../images_new/p53x73.png";
+import axios from "axios";
+import { ValueContext } from "../../../Context/Context_Hook";
+
 
 const ProductSection = () => {
+  const context = useContext(ValueContext);
+  // console.log('object', context)
+
+  const[dataProduct, setdataProduct] = useState([])
+ 
+  let token = localStorage.getItem("token");
+ // console.log("kkkkkkkkkk", token);
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
+  
+  useEffect(() => {
+    const productData = () => {
+      try {
+        axios
+          .get(`${url}/product/1`, {
+            headers: {  "Authorization" : token },
+          })
+          .then((res) =>
+            
+            setdataProduct(res.data.data) )
+          .catch((err) => console.error(err));
+       
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    productData();
+  }, []);
+ //console.log('sdfghjk',  dataProduct)
+ const handleAddCartValue = ()=>{
+  context.setCart_num(context.Cart_num + 1)}
+
+ const handleProps = ()=>{
+ // setCart_num(value)
+    
+ }
+ console.log('kjhgf', context.Cart_num)
   return (
     <section className="gap products-section">
       <div className="container">
@@ -13,16 +53,24 @@ const ProductSection = () => {
               <div className="boder-bar"></div>
               <ul className="category">
                 <li>
-                  <a href="#">Cat Supplies<span>32</span></a>
+                  <a href="#">
+                    Cat Supplies<span>32</span>
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Dog Supplies<span>12</span></a>
+                  <a href="#">
+                    Dog Supplies<span>12</span>
+                  </a>
                 </li>
                 <li>
-                  <a href="#">Animal Feed<span>14</span></a>
+                  <a href="#">
+                    Animal Feed<span>14</span>
+                  </a>
                 </li>
                 <li className="end">
-                  <a href="#">Accessories<span>32</span></a>
+                  <a href="#">
+                    Accessories<span>32</span>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -44,8 +92,20 @@ const ProductSection = () => {
                     </div>
                   </div>
                   <div className="price-field">
-                    <input type="range" min="50" max="150" value="50" id="lower" />
-                    <input type="range" min="50" max="150" value="150" id="upper" />
+                    <input
+                      type="range"
+                      min="50"
+                      max="150"
+                      value="50"
+                      id="lower"
+                    />
+                    <input
+                      type="range"
+                      min="50"
+                      max="150"
+                      value="150"
+                      id="upper"
+                    />
                   </div>
                   <button className="w-100 button">Filter</button>
                 </fieldset>
@@ -82,35 +142,34 @@ const ProductSection = () => {
               </div>
             </div>
             <div className="row">
-              {[...Array(9)].map((_, index) => (
+              { (dataProduct).map((items, index) => (
                 <div className="col-md-4 col-sm-6" key={index}>
                   <div className="healthy-product">
                     <div className="healthy-product-img">
-                      <img
-                        src={product}
-                        alt="food"
-                      />
-                      <ul className="star">
+                      <img src={items.product_img} className="w-fit aspect-square" alt="food" />
+                      {/* <ul className="star">
                         {[...Array(5)].map((_, starIndex) => (
-                          <li key={starIndex}><i className="fa-solid fa-star"></i></li>
+                          <li key={starIndex}>
+                            <i className="fa-solid fa-star"></i>
+                          </li>
                         ))}
-                      </ul>
+                      </ul> */}
                       <div className="add-to-cart">
-                        <a href="#">Add to Cart</a>
+                      <a href="#" onClick={handleAddCartValue} >Add to Cart</a>   
                         <a href="#" className="heart-wishlist">
                           <i className="fa-regular fa-heart"></i>
                         </a>
                       </div>
                     </div>
-                    <span>Animal Feed</span>
-                    <a href="product-details.html">Procan Adult Dog Food</a>
-                    <h6>$32.00</h6>
+                    <span>{items.title}</span>
+                    <a href="product-details.html"> {items.description} </a>
+                    <h6>{items.price}</h6>
+                    {/* {index % 2 === 1 && <h4>-24%</h4>}
                     {index % 2 === 1 && (
-                      <h4>-24%</h4>
-                    )}
-                    {index % 2 === 1 && (
-                      <h6><del>$32.00</del>$22.00</h6>
-                    )}
+                      <h6>
+                        <del>$32.00</del>$22.00
+                      </h6>
+                    )} */}
                   </div>
                 </div>
               ))}
@@ -120,10 +179,18 @@ const ProductSection = () => {
                     <i className="fa-solid fa-arrow-left"></i>
                   </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">......</a></li>
-                <li><a href="#">18</a></li>
+                <li>
+                  <a href="#">1</a>
+                </li>
+                <li>
+                  <a href="#">2</a>
+                </li>
+                <li>
+                  <a href="#">......</a>
+                </li>
+                <li>
+                  <a href="#">18</a>
+                </li>
                 <li className="next">
                   <a href="#">
                     <i className="fa-solid fa-arrow-right"></i>

@@ -26,6 +26,7 @@ function App() {
   const getVisibity =(state)=>{
 setVisible(state);
   }
+  
   return (
     <Router>
       <div className="App">

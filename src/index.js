@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ValueProvider } from './Components/Context/Context_Hook';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ValueProvider>  
+
     <App />
+    </ValueProvider>
+    
   </React.StrictMode>
 );
 

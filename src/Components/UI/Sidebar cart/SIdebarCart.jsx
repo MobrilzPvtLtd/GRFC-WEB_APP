@@ -12,7 +12,7 @@ const SIdebarCart = ({visible}) => {
   useEffect(()=>{
     setIsVisible(visible);
   },[visible])
-  console.log("isvisible " , isVisible)
+  // console.log("isvisible24 " , isVisible)
   const cartItems = [
     { id: 1, name: 'Brown Sandwich', quantity: 1, price: 10.5, image: food1 },
     { id: 2, name: 'Banana Leaves', quantity: 1, price: 12.6, image: food2 },
