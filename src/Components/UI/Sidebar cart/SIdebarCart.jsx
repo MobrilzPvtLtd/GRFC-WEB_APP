@@ -45,14 +45,19 @@ const SIdebarCart = ({visible}) => {
         }
         return false;
       });
+      console.log('price kya h',newArray)
       setValue(newArray);
       setCount(idCount);
     }
    
-    filterFunc(cartItems)
-  },[])
+    filterFunc(context.dataArray)
+  },[context.dataArray])
  
-  console.log('new array' ,  value , " repeat"  , count ,'cartva',context.Cart_num )
+  console.log('new array' ,  value , " repeat"  , count )
+  console.log('data123', context.dataArray)
+
+
+
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (!isVisible) return null;
@@ -64,7 +69,7 @@ const SIdebarCart = ({visible}) => {
         </button>
         <div className="cart-popup">
           <ul>
-            {value.map((item) => (
+            {value.map((item , index) => (
               <li key={item.id} className="d-flex align-items-center position-relative">
                 <div className="p-img light-bg">
                   <img src={item.image} alt="Product Image" />
@@ -72,7 +77,9 @@ const SIdebarCart = ({visible}) => {
                 <div className="p-data">
                   <h3 className="font-semi-bold">{item.name}</h3>
                   <p className="theme-clr font-semi-bold">
-                    {item.quantity} x ${item.price.toFixed(2)}
+                {(index ==1)? 
+                <div>(1 x ${parseInt(item.price).toFixed(2)}) </div> 
+                  : <div>({count} x ${parseInt(item.price).toFixed(2)}) </div>}  
                   </p>
                 </div>
                 <button onClick={() => alert(`Remove ${item.name} from cart`)} className="remove-btn">

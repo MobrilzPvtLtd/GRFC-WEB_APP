@@ -7,9 +7,10 @@ export const ValueProvider = ({ children }) => {
     const[Cart_num, setCart_num]=useState(0)
     const[dataProduct, setdataProduct] = useState([]);
     const[id, setId] = useState([ ]);
+    const [dataArray , setDataArray] = useState([]);
 
     return (
-        <ValueContext.Provider value={{Cart_num, setCart_num ,dataProduct, setdataProduct,id, setId}}>
+        <ValueContext.Provider value={{Cart_num, setCart_num ,dataProduct, setdataProduct,id, setId, dataArray , setDataArray}}>
             {children}
         </ValueContext.Provider>
     );

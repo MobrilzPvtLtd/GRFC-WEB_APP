@@ -8,6 +8,7 @@ import { ValueContext } from "../../../Context/Context_Hook";
 const ProductSection = () => {
   const context = useContext(ValueContext);
   // console.log('object', context)
+  // const [dataArray , setDataArray] = useState([]);
 
   // const[dataProduct, setdataProduct] = useState([]);
   // const[id, setId] = useState([ ]);
@@ -36,16 +37,13 @@ const ProductSection = () => {
 
     productData();
   }, []);
-
-//  console.log('sdfghjk',  dataProduct)
- const handleAddCartValue = (value)=>{
+ const handleAddCartValue = ( array)=>{
   context.setCart_num(context.Cart_num + 1)
 
-  context.setId((prev)=>[...prev , value])
+  context.setDataArray((prev)=>[...prev , array])
 
   
 }
-console.log("id ka array" , context.id)
 
  const handleProps = ()=>{
  // setCart_num(value)
@@ -165,7 +163,7 @@ console.log("id ka array" , context.id)
                       </ul> */}
                       <div className="add-to-cart">
                       <a href="#"
-                       onClick={()=>handleAddCartValue(items.id)} 
+                       onClick={()=>handleAddCartValue(items)} 
                       //  onClick={handleArray}
                        
                        >Add to Cart</a>   
