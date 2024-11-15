@@ -187,7 +187,7 @@ const Navbar = ({getVisibity}) => {
               </a>
               <div onClick={handleVisible} class="hamburger-icon">
                 <div class="donation" >
-                  <a href="JavaScript:void(0)" class="mx-0 relative" id="show">
+                  <Link to="JavaScript:void(0)" class="mx-0 relative" id="show">
                     <svg
                       enable-background="new 0 0 512 512"
                       viewBox="0 0 512 512"
@@ -198,7 +198,7 @@ const Navbar = ({getVisibity}) => {
                       </g>
                     </svg>
                     <span className="top-[-1rem] right-[-1.3rem] bg-black rounded-[50%] w-7 flex justify-center items-center text-white p-1 text-xs absolute">{context.Cart_num}</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

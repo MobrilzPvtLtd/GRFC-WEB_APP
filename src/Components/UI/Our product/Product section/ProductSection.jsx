@@ -9,7 +9,9 @@ const ProductSection = () => {
   const context = useContext(ValueContext);
   // console.log('object', context)
 
-  const[dataProduct, setdataProduct] = useState([])
+  // const[dataProduct, setdataProduct] = useState([]);
+  // const[id, setId] = useState([ ]);
+
  
   let token = localStorage.getItem("token");
  // console.log("kkkkkkkkkk", token);
@@ -24,7 +26,7 @@ const ProductSection = () => {
           })
           .then((res) =>
             
-            setdataProduct(res.data.data) )
+           context.setdataProduct(res.data.data) )
           .catch((err) => console.error(err));
        
       } catch (error) {
@@ -34,9 +36,16 @@ const ProductSection = () => {
 
     productData();
   }, []);
- //console.log('sdfghjk',  dataProduct)
- const handleAddCartValue = ()=>{
-  context.setCart_num(context.Cart_num + 1)}
+
+//  console.log('sdfghjk',  dataProduct)
+ const handleAddCartValue = (value)=>{
+  context.setCart_num(context.Cart_num + 1)
+
+  context.setId((prev)=>[...prev , value])
+
+  
+}
+console.log("id ka array" , context.id)
 
  const handleProps = ()=>{
  // setCart_num(value)
@@ -142,11 +151,11 @@ const ProductSection = () => {
               </div>
             </div>
             <div className="row">
-              { (dataProduct).map((items, index) => (
+              { (context.dataProduct).map((items, index) => (
                 <div className="col-md-4 col-sm-6" key={index}>
                   <div className="healthy-product">
                     <div className="healthy-product-img">
-                      <img src={items.product_img} className="w-fit aspect-square" alt="food" />
+                      <img src={items.product_img} className="w-fit h-fit aspect-square" alt="food" />
                       {/* <ul className="star">
                         {[...Array(5)].map((_, starIndex) => (
                           <li key={starIndex}>
@@ -155,7 +164,11 @@ const ProductSection = () => {
                         ))}
                       </ul> */}
                       <div className="add-to-cart">
-                      <a href="#" onClick={handleAddCartValue} >Add to Cart</a>   
+                      <a href="#"
+                       onClick={()=>handleAddCartValue(items.id)} 
+                      //  onClick={handleArray}
+                       
+                       >Add to Cart</a>   
                         <a href="#" className="heart-wishlist">
                           <i className="fa-regular fa-heart"></i>
                         </a>
