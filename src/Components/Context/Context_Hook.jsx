@@ -8,9 +8,19 @@ export const ValueProvider = ({ children }) => {
     const[dataProduct, setdataProduct] = useState([]);
     const[id, setId] = useState([ ]);
     const [dataArray , setDataArray] = useState([]);
+    const [credentials, setCredentials] = useState({
+        email: "",
+        password: "",
+        cpassword: "",
+        dob: "",
+        identif: "",
+        name: "",
+        address: "",
+        phone: "",
+      });
 
     return (
-        <ValueContext.Provider value={{Cart_num, setCart_num ,dataProduct, setdataProduct,id, setId, dataArray , setDataArray}}>
+        <ValueContext.Provider value={{Cart_num, setCart_num ,dataProduct, setdataProduct,id, setId, dataArray , setDataArray, credentials, setCredentials}}>
             {children}
         </ValueContext.Provider>
     );

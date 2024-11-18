@@ -19,6 +19,7 @@ import ShopCart from './Components/UI/Pages/Shop-cart/ShopCart';
 import VetServicesSection from './Components/UI/Services/Vet service section/VetServiceSection';
 import Descr_Page from './Components/UI/Services/Vet service section/Descr_Page';
 import Prescription_Form from './Components/UI/Services/Vet service section/Prescription_Form';
+import Pet_Form from './Components/UI/Petform/Pet_Form';
 
 
 function App() {
@@ -47,6 +48,7 @@ setVisible(state);
           <Route path="/vetservice" element={<VetServicesSection/>} />
           <Route path="/descripservice" element={<Descr_Page/>} />
           <Route path="/prescription" element={<Prescription_Form/>} />
+          <Route path="/petform" element={<Pet_Form/>} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer/>

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import ServiceBreadcrum from "../Service Breadcrum/ServiceBreadcrum";
 import bg from "../../../../images_new/background_2.png";
 import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
 import banner_2 from "../../../../images_new/banner-img-2.jpg";
+import { ValueContext } from "../../../Context/Context_Hook";
 
 const Prescription_Form = () => {
+  let token = localStorage.getItem("token");
+  const context = useContext(ValueContext);
+  // JSON.parse(localStorage.getItem("userInfo"))
+  let User_info = JSON.parse(localStorage.getItem("User_info"));
+  console.log("object", context.credentials, User_info);
   return (
     <>
       <section
@@ -67,33 +73,37 @@ const Prescription_Form = () => {
             }}
           >
             <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
-            <form action="" className="p-3">
-              <input
-                type="text"
-                placeholder="Username"
-                className="form-control mb-3 txt-dg"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="form-control mb-3 txt_dg"
-              />
-              <input
-                type="number"
-                placeholder="Phone"
-                className="form-control mb-3 txt_dg"
-              />
-              <input
-                type="time"
-                placeholder="Pickup Time"
-                className="form-control mb-3 txt_dg"
-              />
-              <input
-                type="date"
-                placeholder="Pickup Date"
-                className="form-control mb-3 txt_dg"
-              />
-              <label>
+            {token ? (
+              <form action="" className="p-3">
+                <input
+                  type="text"
+                  placeholder="username"
+                  className="form-control mb-3 txt-dg"
+                  value={User_info.name}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="form-control mb-3 txt_dg"
+                  value={User_info.email}
+                />
+                <input
+                  type="number"
+                  placeholder="Phone"
+                  className="form-control mb-3 txt_dg"
+                  value={User_info.phone}
+                />
+                <input
+                  type="time"
+                  placeholder="Pickup Time"
+                  className="form-control mb-3 txt_dg "
+                />
+                <input
+                  type="date"
+                  placeholder="Pickup Date"
+                  className="form-control mb-3 txt_dg"
+                />
+                <label>
                 <b>Pet Details </b>
               </label>
               <textarea
@@ -102,15 +112,190 @@ const Prescription_Form = () => {
                 placeholder="Write Here"
                 className="form-control mb-3 "
               ></textarea>
-              <div className="flex justify-center">
-                {" "}
+
+                {/* <div className="flex justify-between mt-4">
+                  <div>
+                    {" "}
+                    <b>Pet Details </b>
+                  </div>{" "}
+                  <div>
+                    {" "}
+                    <button
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      type="button"
+                      class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    >
+                      Add Pets
+                    </button>
+                  </div>
+                </div> */}
+                {/* <table class="table-responsive w-100 mx-auto" >
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">First</th>
+                      <th scope="col">Last</th>
+                      <th scope="col">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td colspan="2">Larry the Bird</td>
+                      <td>@twitter</td>
+                    </tr>
+                  </tbody>
+                </table> */}
+
+                <div className="flex justify-center">
+                  {" "}
+                  <button className="btn btn-success">
+                    <a href="#" className="text-white">
+                      Submit{" "}
+                    </a>
+                  </button>{" "}
+                </div>
+              </form>
+            ) : (
+              <form action="" className="p-3">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  className="form-control mb-3 txt-dg"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="number"
+                  placeholder="Phone"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="time"
+                  placeholder="Pickup Time"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="date"
+                  placeholder="Pickup Date"
+                  className="form-control mb-3 txt_dg"
+                />
+                <label>
+                  <b>Pet Details </b>
+                </label>
+                <textarea
+                  name=""
+                  id=""
+                  placeholder="Write Here"
+                  className="form-control mb-3 "
+                ></textarea>
+
+                <div className="flex justify-center">
+                  {" "}
+                  <button className="btn btn-success">
+                    <a href="#" className="text-white">
+                      Submit{" "}
+                    </a>
+                  </button>{" "}
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Modal   */}
+
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Pet Form
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div
+              class="modal-body"
+              style={{
+                backgroundColor: "#5badbdfa",
+              }}
+            >
+              <form action="" className="p-3">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="form-control mb-3 txt-dg"
+                />
+                <input
+                  type="file"
+                  placeholder="Photo"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="text"
+                  placeholder="Species"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="text"
+                  placeholder="Breeds"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="text"
+                  placeholder="Sizes"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="text"
+                  placeholder="Character"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="text"
+                  placeholder="Sex"
+                  className="form-control mb-3 txt_dg"
+                />
+                <input
+                  type="text"
+                  placeholder="Color"
+                  className="form-control mb-3 txt_dg"
+                />
                 <button className="btn btn-success">
                   <a href="#" className="text-white">
                     Submit{" "}
                   </a>
                 </button>{" "}
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

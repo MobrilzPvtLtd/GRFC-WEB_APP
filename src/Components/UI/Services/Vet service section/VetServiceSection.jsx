@@ -118,7 +118,7 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/descripservice">
                 <h5>Doctor</h5>
               </a>
             </div>
@@ -155,7 +155,7 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="descripservice">
+              <a href="/descripservice">
                 <h5>Hospital</h5>
               </a>
             </div>
@@ -173,7 +173,7 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="#">
+              <a href="/descripservice">
                 <h5>Transport</h5>
               </a>
             </div>

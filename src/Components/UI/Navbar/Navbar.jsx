@@ -1,21 +1,31 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
+import { useTranslation } from "react-i18next";
+// import './i18next'
 
+const Navbar = ({ getVisibity }) => {
+  const [visible, setVisible] = useState(true);
+  const [cartNumber, setCartNumber] = useState(0);
+  const context = useContext(ValueContext);
 
-const Navbar = ({getVisibity}) => {
-  const [visible , setVisible] = useState(true);
-  const [cartNumber , setCartNumber] = useState(0);
-  const context = useContext(ValueContext)
-  
-  const handleVisible = ()=>{
+  const handleVisible = () => {
     setVisible(!visible);
     getVisibity(visible);
-    console.log("visibiility check" , visible)
+    console.log("visibiility check", visible);
   };
-  let token = localStorage.getItem("token")
+  let token = localStorage.getItem("token");
 
- 
+  const lngs = [
+    { code: "en", native: "English" },
+    { code: "sp", native: "Spanish" },
+  ];
+
+  const { t, i18n } = useTranslation();
+
+  const handleTrans = (code) => {
+    i18n.changeLanguage(code);
+  };
   return (
     <div className="relative w-full bg-white">
       <header className="fixed top-0">
@@ -78,18 +88,41 @@ const Navbar = ({getVisibity}) => {
                     <a href="#">Shipping</a>
                     <div class="line"></div>
                     <a href="#">Returns</a>
+                    <div class="line"></div>
+
+                  
+                        <select
+                          defaultValue={"sp"}
+                          className="bg-slate-500"
+                          
+                        >  {lngs.map((lng, i) => {
+                          const { code, native } = lng;
+                          return (
+                          <option value={code} key={code}  onChange={() => handleTrans(code)}>{native}</option> );
+                        })}
+                        </select>
+                     
                   </div>
-                  {token ? 
-                  <div class="login">
-                   
-                    <button className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110" onClick={()=>{localStorage.removeItem("token");
-                      window.location.reload();
-                    }} > <i class="fa-solid fa-user"></i> Logout</button>
-                  </div> :
-                  <div class="login">
-                    <i class="fa-solid fa-user"></i>
-                    <Link to="/login-Register">Login / Register</Link>
-                  </div>}
+                  {token ? (
+                    <div class="login">
+                      <button
+                        className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110"
+                        onClick={() => {
+                          localStorage.removeItem("token");
+                          localStorage.removeItem("User_info");
+                          window.location.reload();
+                        }}
+                      >
+                        {" "}
+                        <i class="fa-solid fa-user"></i> Logout
+                      </button>
+                    </div>
+                  ) : (
+                    <div class="login">
+                      <i class="fa-solid fa-user"></i>
+                      <Link to="/login-Register">Login / Register</Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -186,7 +219,7 @@ const Navbar = ({getVisibity}) => {
                 <i class="fa-regular fa-heart"></i>
               </a>
               <div onClick={handleVisible} class="hamburger-icon">
-                <div class="donation" >
+                <div class="donation">
                   <Link to="JavaScript:void(0)" class="mx-0 relative" id="show">
                     <svg
                       enable-background="new 0 0 512 512"
@@ -197,7 +230,9 @@ const Navbar = ({getVisibity}) => {
                         <path d="m452 120h-60.946c-7.945-67.478-65.477-120-135.054-120s-127.109 52.522-135.054 120h-60.946c-11.046 0-20 8.954-20 20v352c0 11.046 8.954 20 20 20h392c11.046 0 20-8.954 20-20v-352c0-11.046-8.954-20-20-20zm-196-80c47.484 0 87.019 34.655 94.659 80h-189.318c7.64-45.345 47.175-80 94.659-80zm176 432h-352v-312h40v60c0 11.046 8.954 20 20 20s20-8.954 20-20v-60h192v60c0 11.046 8.954 20 20 20s20-8.954 20-20v-60h40z"></path>
                       </g>
                     </svg>
-                    <span className="top-[-1rem] right-[-1.3rem] bg-black rounded-[50%] w-7 flex justify-center items-center text-white p-1 text-xs absolute">{context.Cart_num}</span>
+                    <span className="top-[-1rem] right-[-1.3rem] bg-black rounded-[50%] w-7 flex justify-center items-center text-white p-1 text-xs absolute">
+                      {context.Cart_num}
+                    </span>
                   </Link>
                 </div>
               </div>
@@ -207,7 +242,7 @@ const Navbar = ({getVisibity}) => {
         <div
           class="mobile-nav hmburger-menu"
           id="mobile-nav"
-          style={{display:"block"}}
+          style={{ display: "block" }}
         >
           <div class="res-log">
             <a href="index.html">
@@ -279,7 +314,7 @@ const Navbar = ({getVisibity}) => {
                   <a href="product-details.html">product details</a>
                 </li>
                 <li>
-                  <a href="shop-cart.html" >shop cart</a>
+                  <a href="shop-cart.html">shop cart</a>
                 </li>
                 <li>
                   <a href="cart-checkout.html">cart checkout</a>

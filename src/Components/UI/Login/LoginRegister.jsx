@@ -56,6 +56,8 @@ const LoginRegister = () => {
         setLoading(false);
         navigate("/");
         localStorage.setItem("token", response.data.data.token)
+        const User_info = JSON.stringify(credentials);
+        localStorage.setItem("User_info", User_info);
        window.location.reload();
       },1000)
     } else {
@@ -88,7 +90,11 @@ const LoginRegister = () => {
         toast.success(register.data.message);
 
         const token = register.data.data.token;
+        const User_info = JSON.stringify(credentials);
+        console.log('kghjk',credentials)
+
         localStorage.setItem("authToken", token);
+        localStorage.setItem("User_info", User_info);
 
         handleOpen();
       },1000)
