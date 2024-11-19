@@ -56,6 +56,7 @@ const LoginRegister = () => {
         setLoading(false);
         navigate("/");
         localStorage.setItem("token", response.data.data.token)
+        localStorage.setItem("id", response.data.data.user_id)
         const User_info = JSON.stringify(credentials);
         localStorage.setItem("User_info", User_info);
        window.location.reload();

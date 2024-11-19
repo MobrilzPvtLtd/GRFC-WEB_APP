@@ -1,16 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ServiceBreadcrum from "../Service Breadcrum/ServiceBreadcrum";
 import bg from "../../../../images_new/background_2.png";
 import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
 import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import { ValueContext } from "../../../Context/Context_Hook";
+import axios from "axios";
 
 const Prescription_Form = () => {
   let token = localStorage.getItem("token");
+  let id = localStorage.getItem("id")
   const context = useContext(ValueContext);
-  // JSON.parse(localStorage.getItem("userInfo"))
+  let url = process.env.REACT_APP_BACKEND_BASE_URL
   let User_info = JSON.parse(localStorage.getItem("User_info"));
   console.log("object", context.credentials, User_info);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get(`${url}/user/${id}`, {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log("Response:", res.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []); 
   return (
     <>
       <section
@@ -104,14 +124,14 @@ const Prescription_Form = () => {
                   className="form-control mb-3 txt_dg"
                 />
                 <label>
-                <b>Pet Details </b>
-              </label>
-              <textarea
-                name=""
-                id=""
-                placeholder="Write Here"
-                className="form-control mb-3 "
-              ></textarea>
+                  <b>Pet Details </b>
+                </label>
+                <textarea
+                  name=""
+                  id=""
+                  placeholder="Write Here"
+                  className="form-control mb-3 "
+                ></textarea>
 
                 {/* <div className="flex justify-between mt-4">
                   <div>
@@ -222,7 +242,7 @@ const Prescription_Form = () => {
 
       {/* Modal   */}
 
-      <div
+      {/* <div
         class="modal fade"
         id="exampleModal"
         tabindex="-1"
@@ -298,7 +318,7 @@ const Prescription_Form = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
