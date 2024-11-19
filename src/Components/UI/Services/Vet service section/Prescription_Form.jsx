@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ServiceBreadcrum from "../Service Breadcrum/ServiceBreadcrum";
 import bg from "../../../../images_new/background_2.png";
 import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
@@ -8,29 +8,52 @@ import axios from "axios";
 
 const Prescription_Form = () => {
   let token = localStorage.getItem("token");
-  let id = localStorage.getItem("id")
+  const [userData, setUserData] = useState(null);
+  let id = localStorage.getItem("id");
   const context = useContext(ValueContext);
-  let url = process.env.REACT_APP_BACKEND_BASE_URL
-  let User_info = JSON.parse(localStorage.getItem("User_info"));
-  console.log("object", context.credentials, User_info);
+  let url = process.env.REACT_APP_BACKEND_BASE_URL;
 
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    time: "",
+    date: "",
+    pet_details: "",
+  });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const res = await axios.get(`${url}/user/${id}`, {
           headers: {
             Authorization: token,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
-        console.log("Response:", res.data);
+
+        setUserData(res.data.data);
+        setForm((prevForm) => ({
+          ...prevForm,
+          name: res.data.data[0].name,
+          email: res.data.data[0].email,
+          phone: res.data.data[0].phone,
+        }));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchUserData();
-  }, []); 
+  }, []);
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log("form submitted", form);
+  };
+  // console.log("Response:", userEmail , userName , userPhone);
+
   return (
     <>
       <section
@@ -94,46 +117,64 @@ const Prescription_Form = () => {
           >
             <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
             {token ? (
-              <form action="" className="p-3">
-                <input
-                  type="text"
-                  placeholder="username"
-                  className="form-control mb-3 txt-dg"
-                  value={User_info.name}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="form-control mb-3 txt_dg"
-                  value={User_info.email}
-                />
-                <input
-                  type="number"
-                  placeholder="Phone"
-                  className="form-control mb-3 txt_dg"
-                  value={User_info.phone}
-                />
-                <input
-                  type="time"
-                  placeholder="Pickup Time"
-                  className="form-control mb-3 txt_dg "
-                />
-                <input
-                  type="date"
-                  placeholder="Pickup Date"
-                  className="form-control mb-3 txt_dg"
-                />
-                <label>
-                  <b>Pet Details </b>
-                </label>
-                <textarea
-                  name=""
-                  id=""
-                  placeholder="Write Here"
-                  className="form-control mb-3 "
-                ></textarea>
+              <div>
+                {userData?.map((item, index) => (
+                  <form
+                    onSubmit={handleSubmitForm}
+                    action=""
+                    className="p-3"
+                    key={index}
+                  >
+                    <input
+                      type="text"
+                      placeholder="username"
+                      className="form-control mb-3 txt-dg"
+                      value={item?.name}
+                      // name = "name"
+                      // onChange={handleChange}
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="form-control mb-3 txt_dg"
+                      value={item?.email}
+                      // name = "email"
+                      // onChange={handleChange}
+                    />
+                    <input
+                      type="number"
+                      placeholder="Phone"
+                      className="form-control mb-3 txt_dg"
+                      value={item?.phone}
+                      // name = "phone"
+                      // onChange={handleChange}
+                    />
+                    <input
+                      type="time"
+                      placeholder="Pickup Time"
+                      className="form-control mb-3 txt_dg "
+                      name="time"
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="date"
+                      placeholder="Pickup Date"
+                      className="form-control mb-3 txt_dg"
+                      name="date"
+                      onChange={handleChange}
+                    />
+                    <label>
+                      <b>Pet Details </b>
+                    </label>
+                    <textarea
+                      name="pet_details"
+                      id=""
+                      placeholder="Write Here"
+                      className="form-control mb-3 "
+                      onChange={handleChange}
+                    ></textarea>
 
-                {/* <div className="flex justify-between mt-4">
+                    {/* <div className="flex justify-between mt-4">
                   <div>
                     {" "}
                     <b>Pet Details </b>
@@ -150,7 +191,7 @@ const Prescription_Form = () => {
                     </button>
                   </div>
                 </div> */}
-                {/* <table class="table-responsive w-100 mx-auto" >
+                    {/* <table class="table-responsive w-100 mx-auto" >
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -180,15 +221,15 @@ const Prescription_Form = () => {
                   </tbody>
                 </table> */}
 
-                <div className="flex justify-center">
-                  {" "}
-                  <button className="btn btn-success">
-                    <a href="#" className="text-white">
-                      Submit{" "}
-                    </a>
-                  </button>{" "}
-                </div>
-              </form>
+                    <div className="flex justify-center">
+                      {" "}
+                      <button type="submit" className="btn btn-success">
+                        Submit
+                      </button>{" "}
+                    </div>
+                  </form>
+                ))}
+              </div>
             ) : (
               <form action="" className="p-3">
                 <input
