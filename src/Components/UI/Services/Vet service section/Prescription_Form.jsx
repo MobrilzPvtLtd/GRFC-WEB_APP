@@ -48,11 +48,31 @@ const Prescription_Form = () => {
 
     fetchUserData();
   }, []);
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async(e) => {
+   
     console.log("form submitted", form);
+    try {
+      e.preventDefault();
+      const appointment_data = await axios.post(`${url}/apointment`, { headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      }},
+      {
+        
+        time: form.time,
+        date: form.date,
+        pet_details: form.pet_details,
+       
+      });
+      
+      console.log("Response_of_appnt:", appointment_data);
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
   };
-  // console.log("Response:", userEmail , userName , userPhone);
+  console.log("Response:", userData);
 
   return (
     <>

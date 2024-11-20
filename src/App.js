@@ -45,9 +45,9 @@ setVisible(state);
           <Route path="/our-products" element={<OurProduct/>} />
           <Route path="/contact-us" element={<Contact/>} />
           <Route path="/view-cart" element={<ShopCart/>} />
-          <Route path="/vetservice" element={<VetServicesSection/>} />
-          <Route path="/descripservice" element={<Descr_Page/>} />
-          <Route path="/prescription" element={<Prescription_Form/>} />
+          <Route path="/services/:servicename" element={<VetServicesSection/>} />
+          <Route path="/services/:servicename/:subservicename" element={<Descr_Page/>} />
+          <Route path="/services/:servicename/:subservicename/:prescription" element={<Prescription_Form/>} />
           <Route path="/petform" element={<Pet_Form/>} />
         </Routes>
         {/* <SliderBanner/> */}
