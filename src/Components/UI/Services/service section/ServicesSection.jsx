@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import primare_care from "../../../../images_new/lila-in-primary-care.gif"
 import doctor from "../../../../images_new/doctor2000011111.png"
 import cardiology from "../../../../images_new/cardiology.png"
 import feline from "../../../../images_new/preventive-care-cats-720px.jpg"
 import vet from "../../../../images_new/DSC_0332.jpg"
 import dog from "../../../../images_new/top-20-small-dog-breeds.jpeg"
+import axios from 'axios';
+
 
 const ServicesSection = () => {
+
+  let url = process.env.REACT_APP_BACKEND_BASE_URL;
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const res = await axios.get(`${url}/category`);
+
+        console.log(res)
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
   return (
     <section className="gap no-bottom">
       <div className="container">
@@ -24,8 +42,8 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/vetservice">
-                <h5>ICU</h5>
+              <a href="/services/farmacia">
+                <h5>Farmacia</h5>
               </a>
             </div>
           </div>
@@ -43,8 +61,8 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/vetservice">
-                <h5>Doctor</h5>
+              <a href="/services/VetUCI">
+                <h5>Vet UCI</h5>
               </a>
             </div>
           </div>
@@ -62,8 +80,8 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/vetservice">
-                <h5>Cardio</h5>
+              <a href="/services/Medi+cotas">
+                <h5>Medi+cotas</h5>
               </a>
             </div>
           </div>
@@ -80,8 +98,8 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/vetservice">
-                <h5>Feline vet center</h5>
+              <a href="/services/VetCardiología">
+                <h5>Vet Cardiología</h5>
               </a>
             </div>
           </div>
@@ -98,8 +116,8 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/vetservice">
-                <h5>vet hotel</h5>
+              <a href="/services/VetCentroFelino">
+                <h5>Vet Centro Felino</h5>
               </a>
             </div>
           </div>
@@ -116,8 +134,8 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/vetservice">
-                <h5>dog</h5>
+              <a href="/services/VetHotel">
+                <h5>Vet Hotel</h5>
               </a>
             </div>
           </div>

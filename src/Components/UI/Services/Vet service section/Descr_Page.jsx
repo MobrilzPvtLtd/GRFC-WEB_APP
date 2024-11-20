@@ -83,7 +83,7 @@ const Descr_Page = () => {
             <div className="flex justify-center">
               {" "}
               <button className="btn btn-success">
-                <a href="/prescription" className="text-white">
+                <a href="/services/icu/doctor/booknow" className="text-white">
                   Book Now{" "}
                 </a>
               </button>{" "}

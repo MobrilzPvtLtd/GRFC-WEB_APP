@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import bg from "../../../images_new/background_2.png"
 import banner_1 from "../../../images_new/banner-img-1-1.jpg"
 import banner_2 from "../../../images_new/banner-img-2.jpg"
 
 const Pet_Form = () => {
+  const [petdata,setPetdata] = useState()
+  const handleChange = (e) => {
+    setPetdata({ ...petdata, [e.target.name]: e.target.value });
+  };
+
+  const handlePetform = (e)=>{
+        e.preventDefault()
+        console.log('344567',petdata)
+  }
   return (
    <>  
     <section
@@ -68,53 +77,120 @@ const Pet_Form = () => {
           >
            
             <h1 className="text-4xl py-4 text-center">Pet Form</h1>
-            <form action="" className="p-3">
+            <form onSubmit={handlePetform} action="" className="p-3">
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="OnwerID"
                 className="form-control mb-3 txt-dg"
+                onChange={handleChange}
+                name='ownerId'
+              />
+              
+              <input
+                type="text"
+                placeholder="Pet Name"
+                className="form-control mb-3 txt-dg"
+                 onChange={handleChange}
+                name='name'
               />
               <input
-                type="file"
-                placeholder="Photo"
-                className="form-control mb-3 txt_dg"
+                type="text"
+                placeholder="petCode"
+                className="form-control mb-3 txt-dg"
+                 onChange={handleChange}
+                name='petCode'
               />
+              <input
+                type="text"
+                placeholder="status"
+                className="form-control mb-3 txt-dg"
+                 onChange={handleChange}
+                name='status'
+              />
+              <input
+                type="text"
+                placeholder="weight"
+                className="form-control mb-3 txt-dg"
+                 onChange={handleChange}
+                name='weight'
+              />
+              
               <input
                 type="text"
                 placeholder="Species"
                 className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='species'
               />
               <input
                 type="text"
                 placeholder="Breeds"
                 className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='breeds'
               />
               <input
                 type="text"
                 placeholder="Sizes"
                 className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='size'
               />
               <input
                 type="text"
                 placeholder="Character"
                 className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='character'
               />
               <input
                 type="text"
                 placeholder="Sex"
                 className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='sex'
+              /> 
+              <input
+                type="date"
+                placeholder="dob"
+                className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='dob'
               /> 
               
               <input
                 type="text"
                 placeholder="Color"
                 className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='color'
+              />
+              <input
+                type="text"
+                placeholder="size_record_data"
+                className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='size_record_data'
+              />
+              <input
+                type="text"
+                placeholder="ownerSizeRecrd"
+                className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='ownerSizeRecrd'
+              />
+              <input
+                type="file"
+                placeholder="Photo"
+                className="form-control mb-3 txt_dg"
+                 onChange={handleChange}
+                name='files'
               />
           
-                <button className="btn btn-success">
-                  <a href="#" className="text-white">
-                    Submit{" "}
-                  </a>
+                <button className="btn btn-success" type='submit'>
+                
+                    Submit
+                  
                 </button>{" "}
 
                 </form>

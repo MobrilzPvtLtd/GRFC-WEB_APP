@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Pet_Form from "../Petform/Pet_Form";
 
 const Otp = ({ handleCancel, email }) => {
   const [otp, setOtp] = useState();
@@ -9,6 +10,10 @@ const Otp = ({ handleCancel, email }) => {
   let token = localStorage.getItem("authToken");
   let navigate = useNavigate();
   console.log("token aa raha hai ki nhi", token);
+
+const[petvalue, setValue]= useState(0)
+
+
   const handleChange = (newValue) => {
     newValue.preventDefault();
     setOtp((prevotp) => ({
@@ -34,6 +39,8 @@ const Otp = ({ handleCancel, email }) => {
       }
     );
     if (OtpValidate==200){
+      setValue(1)
+      
       navigate("/");
     } else {
       alert("Invalid OTP");
@@ -47,6 +54,7 @@ const Otp = ({ handleCancel, email }) => {
     console.log(handleCancel(false));
   };
   return (
+    <>   
     <div className="d-flex w-25 flex-column justify-content-center align-items-center py-5 bg-white container shadow rounded my-4 ">
       <div className="d-flex flex-column justify-content-center align-items-center">
         <div className="d-flex">
@@ -60,6 +68,7 @@ const Otp = ({ handleCancel, email }) => {
         <div className="" style={{ width: "90%", height: "15%" }}>
           <MuiOtpInput value={otp} onChange={handleChange} />
         </div>
+
         <div className="d-flex gap-2">
           <button
             onClick={handleOtp}
@@ -78,6 +87,8 @@ const Otp = ({ handleCancel, email }) => {
         </div>
       </div>
     </div>
+
+    </>
   );
 };
 export default Otp;

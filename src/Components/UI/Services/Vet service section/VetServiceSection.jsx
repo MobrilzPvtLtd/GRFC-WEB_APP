@@ -99,8 +99,8 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/descripservice">
-                <h5>Urgencies</h5>
+              <a href="/services/farmica/urgencies">
+                <h5>Urgencias</h5>
               </a>
             </div>
           </div>
@@ -118,8 +118,8 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/descripservice">
-                <h5>Doctor</h5>
+              <a href="/services/icu/Consultas">
+                <h5>Consultas</h5>
               </a>
             </div>
           </div>
@@ -137,8 +137,8 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/descripservice">
-                <h5>Consultancy</h5>
+              <a href="/services/icu/Cirugias">
+                <h5>Cirugias</h5>
               </a>
             </div>
           </div>
@@ -155,8 +155,8 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/descripservice">
-                <h5>Hospital</h5>
+              <a href="/services/icu/Hospitalization">
+                <h5>Hospitalization</h5>
               </a>
             </div>
           </div>
@@ -173,8 +173,8 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/descripservice">
-                <h5>Transport</h5>
+              <a href="/services/icu/Transports">
+                <h5>Transports</h5>
               </a>
             </div>
           </div>
@@ -191,8 +191,8 @@ const VetServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/descripservice">
-                <h5>Examine</h5>
+              <a href="/services/icu/Examenee">
+                <h5>Examenee</h5>
               </a>
             </div>
           </div>

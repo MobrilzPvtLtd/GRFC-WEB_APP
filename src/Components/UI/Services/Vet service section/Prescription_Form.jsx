@@ -41,6 +41,7 @@ const Prescription_Form = () => {
           email: res.data.data[0].email,
           phone: res.data.data[0].phone,
         }));
+        console.log('object',res)
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -72,7 +73,7 @@ const Prescription_Form = () => {
     }
     
   };
-  console.log("Response:", userData);
+   console.log("Response:", userData );
 
   return (
     <>
