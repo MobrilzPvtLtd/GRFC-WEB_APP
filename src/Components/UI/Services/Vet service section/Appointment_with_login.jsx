@@ -6,11 +6,8 @@ import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import { ValueContext } from "../../../Context/Context_Hook";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Appointment_with_login from "./Appointment_with_login";
-import Appointment_without_login from "./Appointment_without_login";
-import Pet_Form from "../../Petform/Pet_Form";
 
-const Prescription_Form = () => {
+const Appointment_with_login = () => {
   let token = localStorage.getItem("token");
   const [userData, setUserData] = useState();
   let id = localStorage.getItem("id");
@@ -24,9 +21,8 @@ const Prescription_Form = () => {
     time: "",
     date: "",
     pet_details: "",
-    
   });
-  const[id_data,setId_Data] =useState()
+  const [id_data, setId_Data] = useState();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -40,23 +36,20 @@ const Prescription_Form = () => {
           },
         });
 
-         setUserData([res.data.data]);
+        setUserData([res.data.data]);
         setForm((prevForm) => ({
           ...prevForm,
           name: res.data.data.name,
           email: res.data.data.email,
           phone: res.data.data.phone,
-
-          
         }));
-        
-        setId_Data(
-         {
-         id: res.data.data.id,
-         owner_id:res.data.data.owner_id,
-      });
-     
-        console.log('object',res ,form )
+
+        setId_Data({
+          id: res.data.data.id,
+          owner_id: res.data.data.owner_id,
+        });
+
+        console.log("object", res, form);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -64,56 +57,50 @@ const Prescription_Form = () => {
 
     fetchUserData();
   }, []);
-  const handleSubmitForm = async(e) => {
-   
+  const handleSubmitForm = async (e) => {
     console.log("form submitted", form);
-    
+
     try {
       e.preventDefault();
-      const appointment_data = await axios.post(`${url}/apointment`, 
+      const appointment_data = await axios.post(
+        `${url}/apointment`,
         {
+          appointment_time: form.time,
+          appointment_date: form.date,
+          disease_description: form.pet_details,
+          pet_id: id_data.id,
+          owner_id: id_data.owner_id,
+        },
 
-        appointment_time: form.time,
-        appointment_date: form.date,
-        disease_description: form.pet_details,
-        pet_id:id_data.id,
-        owner_id:id_data.owner_id,
-      } ,
-      
-      { headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (appointment_data.status == 200) {
+        toast.success("Appointment Book Successfully");
+        setForm({
+          name: " ",
+          email: " ",
+          phone: " ",
+          time: " ",
+          date: " ",
+          pet_details: " ",
+        });
       }
-    }
 
-    
-     );
-     if (appointment_data.status == 200) {
-      toast.success('Appointment Book Successfully');
-      setForm({
-        name: " ",
-        email: " ",
-        phone: " ",
-        time: " ",
-        date: " ",
-        pet_details: " ",
-
-      })
-
-     }
-      
       console.log("Response_of_appnt:", appointment_data);
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    
   };
-   console.log("Response:", userData , 'dfghj id ka data',id_data);
+  console.log("Response:", userData, "dfghj id ka data", id_data);
 
   return (
     <>
-      <section
+      {/* <section
         className="banner"
         style={{ backgroundColor: "#fff", backgroundImage: `url(${bg})` }}
       >
@@ -162,8 +149,8 @@ const Prescription_Form = () => {
             </div>
           </div>
         </div>
-      </section>
-           
+      </section> */}
+
       <div className="container my-4">
         <div className="row">
           <div
@@ -172,15 +159,76 @@ const Prescription_Form = () => {
               backgroundColor: "#5badbdfa",
             }}
           >
-            
-            {token ? <Appointment_with_login/>  : <Pet_Form/> }
+            <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
+            {userData?.map((item, index) => (
+              <form
+                onSubmit={handleSubmitForm}
+                action=""
+                className="p-3"
+                key={index}
+              >
+                <input
+                  type="text"
+                  placeholder="username"
+                  className="form-control mb-3 txt-dg"
+                  value={item?.name}
+                  // name = "name"
+                  // onChange={handleChange}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="form-control mb-3 txt_dg"
+                  value={item?.email}
+                  // name = "email"
+                  // onChange={handleChange}
+                />
+                <input
+                  type="number"
+                  placeholder="Phone"
+                  className="form-control mb-3 txt_dg"
+                  value={item?.phone}
+                  // name = "phone"
+                  // onChange={handleChange}
+                />
+                <input
+                  type="time"
+                  placeholder="Pickup Time"
+                  className="form-control mb-3 txt_dg "
+                  name="time"
+                  onChange={handleChange}
+                />
+                <input
+                  type="date"
+                  placeholder="Pickup Date"
+                  className="form-control mb-3 txt_dg"
+                  name="date"
+                  onChange={handleChange}
+                />
+                <label>
+                  <b>Pet Details </b>
+                </label>
+                <textarea
+                  name="pet_details"
+                  id=""
+                  placeholder="Write Here"
+                  className="form-control mb-3 "
+                  onChange={handleChange}
+                ></textarea>
+
+                <div className="flex justify-center">
+                  {" "}
+                  <button type="submit" className="btn btn-success">
+                    Submit
+                  </button>{" "}
+                </div>
+              </form>
+            ))}
           </div>
         </div>
       </div>
-
-    
     </>
   );
 };
 
-export default Prescription_Form;
+export default Appointment_with_login;

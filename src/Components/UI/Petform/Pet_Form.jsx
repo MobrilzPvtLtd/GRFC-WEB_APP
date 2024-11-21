@@ -2,20 +2,81 @@ import React, { useState } from 'react';
 import bg from "../../../images_new/background_2.png"
 import banner_1 from "../../../images_new/banner-img-1-1.jpg"
 import banner_2 from "../../../images_new/banner-img-2.jpg"
+import Appointment_without_login from '../Services/Vet service section/Appointment_without_login';
+import axios from 'axios';
+
 
 const Pet_Form = () => {
-  const [petdata,setPetdata] = useState()
+  const [petdata,setPetdata] = useState({
+    ownerId:"",
+    name:"",
+    petCode:"",
+    status:"",
+    weight:"",
+    species:"",
+    breeds:"",
+    size:"",
+    character:"",
+    sex:"",
+    dob:"",
+    color:"",
+    size_record_data:"",
+    ownerSizeRecrd:"",
+    files:null
+
+
+  })
+  const[petcount , setpetCount] =useState(false);
+
+
+
+  let url = process.env.REACT_APP_BACKEND_BASE_URL;
+
   const handleChange = (e) => {
     setPetdata({ ...petdata, [e.target.name]: e.target.value });
   };
 
-  const handlePetform = (e)=>{
-        e.preventDefault()
+  const handlePetform = async(e)=>{
+      //  e.preventDefault()
+       // setpetCount(true)
         console.log('344567',petdata)
+        try {
+          e.preventDefault();
+          const pet_info = await axios.post(
+            `${url}/pet`,
+            {
+              ownerId:petdata.ownerId,
+              name:petdata.name,
+              petCode:petdata.petCode,
+              status:petdata.status,
+              weight:petdata.weight,
+              species:petdata.species,
+              breeds:petdata.breeds,
+              size:petdata.size,
+              character:petdata.character,
+              sex:petdata.sex,
+              dob:petdata.dob,
+              color:petdata.color,
+              size_record_data:petdata.size_record_data,
+              ownerSizeRecrd:petdata.ownerSizeRecrd,
+              files:petdata.files
+            },
+    
+            // {
+            //   headers: {
+            //     Authorization: token,
+            //     "Content-Type": "application/json",
+            //   },
+            // }
+          );
+          console.log('object',pet_info)
+        } catch (error) {
+          
+        }
   }
   return (
    <>  
-    <section
+    {/* <section
     className="banner"
     style={{ backgroundColor: "#fff", backgroundImage: `url(${bg})` }}
   >
@@ -64,9 +125,10 @@ const Pet_Form = () => {
         </div>
       </div>
     </div>
-  </section>
-
-    <div className='container mt-4'>
+  </section> */}
+  {petcount?
+   ( <Appointment_without_login/> ): 
+   (<div className='container mt-4'>
         <div className="row">
             
             <div
@@ -198,9 +260,9 @@ const Pet_Form = () => {
            
           </div>
           
-        </div>
+        </div>)
 
-      
+          }
     
     </>
   )
