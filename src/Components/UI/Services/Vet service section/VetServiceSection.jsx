@@ -11,17 +11,27 @@ import bg from "../../../../images_new/background_2.png"
 import banner_1 from "../../../../images_new/banner-img-1-1.jpg"
 import banner_2 from "../../../../images_new/banner-img-2.jpg"
 import axios from 'axios';
+import { Skeleton } from 'antd';
 
 
 const VetServicesSection = () => {
+  const [categoryId , setCategoryId] = useState(null)
+  const [loader ,setLoader] = useState()
   
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
-  const[subcategory_data, setSubCategory_data]= useState()
+  const[subcategory_data, setSubCategory_data]= useState();
+  setTimeout(()=>{
+
+    setCategoryId (localStorage.getItem("category_id"));
+  },1000) 
+   console.log('yyyyy',categoryId)
+
   useEffect(() => {
     const fetchSubCategoryData = async () => {
       try {
-        const res = await axios.get(`${url}/subcategory`);
+        const res = await axios.get(`${url}/subcategory/${categoryId}`);
         setSubCategory_data(res.data.data)
+        setLoader(true)
         // console.log(res)
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -29,7 +39,7 @@ const VetServicesSection = () => {
     };
 
     fetchSubCategoryData();
-  }, []);
+  }, [categoryId]);
   return (
 
 <> 
@@ -79,7 +89,7 @@ const VetServicesSection = () => {
   </section>
 
 
-
+{loader ? <Skeleton/> : 
 <section className="gap no-bottom">
       <div className="container mt-6">
         <div className="row">
@@ -233,7 +243,7 @@ const VetServicesSection = () => {
           </div> */}
         </div>
       </div>
-    </section>
+    </section>}
     </>
   );
 };

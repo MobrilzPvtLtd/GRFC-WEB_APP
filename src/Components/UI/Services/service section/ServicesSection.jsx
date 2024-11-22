@@ -27,6 +27,10 @@ const ServicesSection = () => {
 
     fetchCategoryData();
   }, []);
+  const handleCategoryId =(id)=>{
+    localStorage.setItem("category_id" , id)
+    console.log("category_id" , id)
+  }
   console.log('1111111111',category_data)
   return (
     <section className="gap no-bottom">
@@ -49,7 +53,7 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/services/farmacia">
+              <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
                 <h5><b>{item?.name} </b></h5>
               </a>
             </div>

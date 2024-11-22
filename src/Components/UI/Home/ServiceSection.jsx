@@ -19,6 +19,10 @@ const ServiceSection = () => {
 
     fetchCategoryData();
   }, []);
+  const handleCategoryId =(id)=>{
+    localStorage.setItem("category_id" , id)
+    console.log("category_id" , id)
+  }
   console.log('object899', category_data)
   return (
     <div className="py-4">
@@ -47,7 +51,7 @@ const ServiceSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a href="/services/farmacia">
+              <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
                 <h5><b>{item?.name} </b></h5>
               </a>
             </div>

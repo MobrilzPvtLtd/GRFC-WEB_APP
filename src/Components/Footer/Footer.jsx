@@ -1,4 +1,6 @@
 import React from "react";
+import logo from '../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png';
+import headphone from '../../assets/img/hadphon.png'
 
 const Footer = () => {
   return (
@@ -17,7 +19,7 @@ const Footer = () => {
               <a href="index.html">
                 <img
                   class="flogo001"
-                  src="assets/images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png"
+                  src={logo}
                   alt="logo"
                 />
               </a>
@@ -146,7 +148,7 @@ const Footer = () => {
                     Sunday<span>08AM - 10PM</span>
                   </h6>
                   <div class="call-us">
-                    <img src="assets/img/hadphon.png" alt="hadphon" />
+                    <img src={headphone} alt="hadphon" />
                     <div>
                       <a href="#">+021 01283492</a>
                       <span>Got Questions? Call us 24/7</span>

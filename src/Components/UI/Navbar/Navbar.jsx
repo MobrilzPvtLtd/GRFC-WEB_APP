@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
 import { useTranslation } from "react-i18next";
+import logo from '../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png'
 // import './i18next'
 
 const Navbar = ({ getVisibity }) => {
@@ -133,7 +134,7 @@ const Navbar = ({ getVisibity }) => {
             <a href="index.html">
               <img
                 class="logo001"
-                src="assets/images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png"
+                src={logo}
                 alt="logo"
               />
             </a>
