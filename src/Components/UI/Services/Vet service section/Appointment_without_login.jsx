@@ -7,11 +7,12 @@ import { ValueContext } from "../../../Context/Context_Hook";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Pet_Form from "../../Petform/Pet_Form";
+import { useNavigate } from "react-router-dom";
 
-const Appointment_without_login = () => {
-  let token = localStorage.getItem("token");
+const Appointment_without_login = ({Id_data}) => {
+  let token = sessionStorage.getItem("token");
   const [userData, setUserData] = useState();
-  let id = localStorage.getItem("id");
+  let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
   
@@ -25,8 +26,8 @@ const Appointment_without_login = () => {
     pet_details: "",
     
   });
-  const[id_data,setId_Data] =useState()
-
+  // const[id_data,setId_Data] =useState()
+ console.log('id ka data ',Id_data)
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -65,37 +66,38 @@ const Appointment_without_login = () => {
 
 //     fetchUserData();
 //   }, []);
-
+const navigate =useNavigate();
 
   const handleSubmitForm = async(e) => {
-    e.preventDefault();
+   
     console.log("form submitted", form);
     
     try {
-     
-    //   const appointment_data = await axios.post(`${url}/apointment`, 
-    //     {
+      e.preventDefault();
+      const appointment_data = await axios.post(`${url}/apointment`, 
+        {
 
-    //     appointment_time: form.time,
-    //     appointment_date: form.date,
-    //     disease_description: form.pet_details,
-    //     pet_id:id_data.id,
-    //     owner_id:id_data.owner_id,
-    //   } ,
+        appointment_time: form.time,
+        appointment_date: form.date,
+        disease_description: form.pet_details,
+        pet_id:Id_data.pet_id,
+        owner_id:Id_data.owner_id,
+      } ,
       
-    //   { headers: {
-    //     Authorization: token,
-    //     "Content-Type": "application/json",
-    //   }
-    // }
-    //  );
-    //  if (appointment_data.status == 200) {
+      { headers: {
+        // Authorization: token,
+        "Content-Type": "application/json",
+      }
+    }
+     );
+     if (appointment_data.status == 200) {
        
-    //     toast.success('Appointment Book Successfully');
+        toast.success('Appointment Book Successfully');
+        navigate('/')
    
-    //  }
+     }
       
-    //   console.log("Response_of_appnt:", appointment_data);
+      console.log("Response_of_appnt:", appointment_data);
       
     } catch (error) {
       console.log(error)
@@ -219,10 +221,10 @@ const Appointment_without_login = () => {
 
                 <div className="flex justify-center">
                   {" "}
-                  <button className="btn btn-success">
-                    <a href="#" className="text-white">
-                      Submit{" "}
-                    </a>
+                  <button className="btn btn-success" type="submit">
+                    
+                      Submit
+                   
                   </button>{" "}
                 </div>
               </form>

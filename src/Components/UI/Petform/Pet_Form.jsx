@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Appointment_without_login from "../Services/Vet service section/Appointment_without_login";
+import { toast } from "react-toastify";
+import { changeLanguage } from "i18next";
 
 const Pet_Form = () => {
   const [petdata, setPetdata] = useState({
@@ -22,9 +24,11 @@ const Pet_Form = () => {
     size_record_data: "",
     ownerSizeRecrd: "",
   });
-let token  = localStorage.getItem("token")
+let token  = sessionStorage.getItem("token")
   const [petimage, setPetimage] = useState(null);
   const [petcount, setPetCount] = useState(false);
+  const [ID_data, setID_data] = useState();
+
   const [imagePreview, setImagePreview] = useState(null);
 
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -53,6 +57,7 @@ let token  = localStorage.getItem("token")
     const formData = new FormData();
     Object.keys(petdata).forEach((key) => {
       formData.append(key, petdata[key]);
+      console.log('object09999',formData)
     });
     if (petimage) {
       // formData.append("file", petimage);
@@ -66,11 +71,13 @@ let token  = localStorage.getItem("token")
       });
 
       if (response.data.success) {
+        const Id_data= response.data.data
+        setID_data(Id_data)
         if (!token) {
           setPetCount(true);
         }
         
-        alert("Pet created successfully!");
+        toast.success("Pet Data Filled Successfully");
         
       }
     } catch (error) {
@@ -81,11 +88,12 @@ let token  = localStorage.getItem("token")
       alert("An error occurred while creating the pet.");
     }
   };
-
+  
+console.log('2222222222222',ID_data)
   return (
     <>
       {petcount ? (
-        <Appointment_without_login />
+        <Appointment_without_login Id_data={ID_data}  />
       ) : (
         <div className="container mt-4">
           <div className="row">
@@ -209,13 +217,13 @@ let token  = localStorage.getItem("token")
                   onChange={handleChange}
                   name="ownerSizeRecrd"
                 />
-                <input
+                {/* <input
                   type="file"
                   accept="image/*"
                   className="form-control mb-3"
                   onChange={handleImage}
                   name="files"
-                />
+                /> */}
                 <button className="btn btn-success" type="submit">
                   Continue
                 </button>

@@ -7,7 +7,7 @@ import Pet_Form from "../Petform/Pet_Form";
 const Otp = ({ handleCancel, email }) => {
   const [otp, setOtp] = useState();
   let url = "https://grfc.mobrilz.digital/api";
-  let token = localStorage.getItem("authToken");
+  let token = sessionStorage.getItem("authToken");
   let navigate = useNavigate();
   console.log("token aa raha hai ki nhi", token);
 

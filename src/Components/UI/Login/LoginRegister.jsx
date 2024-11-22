@@ -55,10 +55,9 @@ const LoginRegister = () => {
         toast.success(response.data.message);
         setLoading(false);
         navigate("/");
-        localStorage.setItem("token", response.data.data.token)
-        localStorage.setItem("id", response.data.data.user_id)
+        sessionStorage.setItem("token", response.data.data.token)
+        sessionStorage.setItem("id", response.data.data.user_id)
         const User_info = JSON.stringify(credentials);
-        localStorage.setItem("User_info", User_info);
        window.location.reload();
       },1000)
     } else {
@@ -94,8 +93,8 @@ const LoginRegister = () => {
         const User_info = JSON.stringify(credentials);
         console.log('kghjk',credentials)
 
-        localStorage.setItem("authToken", token);
-        localStorage.setItem("User_info", User_info);
+        sessionStorage.setItem("authToken", token);
+        sessionStorage.setItem("User_info", User_info);
 
         handleOpen();
       },1000)

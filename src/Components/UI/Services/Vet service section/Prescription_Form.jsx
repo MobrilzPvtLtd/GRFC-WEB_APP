@@ -11,9 +11,9 @@ import Appointment_without_login from "./Appointment_without_login";
 import Pet_Form from "../../Petform/Pet_Form";
 
 const Prescription_Form = () => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   const [userData, setUserData] = useState();
-  let id = localStorage.getItem("id");
+  let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
 

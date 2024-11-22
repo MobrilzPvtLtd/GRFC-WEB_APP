@@ -32,7 +32,7 @@ const ServiceSection = () => {
                     />
                   </svg>
                 </div>
-                <a href="/vetservice">
+                <a href="/service/ICU">
                   <h5>ICU</h5>
                 </a>
                 {/* <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p> --> */}
@@ -59,7 +59,7 @@ const ServiceSection = () => {
                     />
                   </svg>
                 </div>
-                <a href="/vetservice">
+                <a href="/service/Doctor">
                   <h5>Doctor</h5>
                 </a>
                 {/* <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p> --> */}
@@ -83,7 +83,7 @@ const ServiceSection = () => {
                     />
                   </svg>
                 </div>
-                <a href="/vetservice">
+                <a href="/service/Cardio">
                   <h5>Cardio</h5>
                 </a>
                 {/* <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p> --> */}
@@ -119,7 +119,7 @@ const ServiceSection = () => {
                     />
                   </svg>
                 </div>
-                <a href="/vetservice">
+                <a href="/service/Docter">
                   <h5>Doctor</h5>
                 </a>
                 {/* <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p> --> */}
@@ -143,7 +143,7 @@ const ServiceSection = () => {
                     />
                   </svg>
                 </div>
-                <a href="/vetservice">
+                <a href="/service/Cardio">
                   <h5>Cardio</h5>
                 </a>
                 {/* <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p> --> */}

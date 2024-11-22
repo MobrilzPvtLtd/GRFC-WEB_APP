@@ -6,11 +6,12 @@ import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import { ValueContext } from "../../../Context/Context_Hook";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Appointment_with_login = () => {
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   const [userData, setUserData] = useState();
-  let id = localStorage.getItem("id");
+  let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -23,6 +24,9 @@ const Appointment_with_login = () => {
     pet_details: "",
   });
   const [id_data, setId_Data] = useState();
+
+const navigate = useNavigate();
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -81,14 +85,8 @@ const Appointment_with_login = () => {
       );
       if (appointment_data.status == 200) {
         toast.success("Appointment Book Successfully");
-        setForm({
-          name: " ",
-          email: " ",
-          phone: " ",
-          time: " ",
-          date: " ",
-          pet_details: " ",
-        });
+        navigate('/')
+        
       }
 
       console.log("Response_of_appnt:", appointment_data);

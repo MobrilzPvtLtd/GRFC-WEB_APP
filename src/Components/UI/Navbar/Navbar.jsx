@@ -14,7 +14,7 @@ const Navbar = ({ getVisibity }) => {
     getVisibity(visible);
     console.log("visibiility check", visible);
   };
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
 
   const lngs = [
     { code: "en", native: "English" },
@@ -108,7 +108,7 @@ const Navbar = ({ getVisibity }) => {
                       <button
                         className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110"
                         onClick={() => {
-                          localStorage.removeItem("token");
+                          sessionStorage.removeItem("token");
                           localStorage.removeItem("User_info");
                           window.location.reload();
                         }}
