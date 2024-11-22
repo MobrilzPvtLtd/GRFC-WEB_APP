@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
+import Appointment_without_login from "../Services/Vet service section/Appointment_without_login";
 
 const Pet_Form = () => {
   const [petdata, setPetdata] = useState({
+    owner_id: "",
     name: "",
     petCode: "",
     owner_name: "",
@@ -20,7 +22,7 @@ const Pet_Form = () => {
     size_record_data: "",
     ownerSizeRecrd: "",
   });
-
+let token  = localStorage.getItem("token")
   const [petimage, setPetimage] = useState(null);
   const [petcount, setPetCount] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
@@ -53,22 +55,29 @@ const Pet_Form = () => {
       formData.append(key, petdata[key]);
     });
     if (petimage) {
-      formData.append("file", petimage); 
+      // formData.append("file", petimage);
     }
 
     try {
       const response = await axios.post(`${url}/pets`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data", 
+          "Content-Type": "multipart/form-data",
         },
       });
 
       if (response.data.success) {
-        setPetCount(false);
+        if (!token) {
+          setPetCount(true);
+        }
+        
         alert("Pet created successfully!");
+        
       }
     } catch (error) {
-      console.error("Error submitting the form:", error.response || error.message);
+      console.error(
+        "Error submitting the form:",
+        error.response || error.message
+      );
       alert("An error occurred while creating the pet.");
     }
   };
@@ -76,7 +85,7 @@ const Pet_Form = () => {
   return (
     <>
       {petcount ? (
-        <div>Form submitted successfully!</div>
+        <Appointment_without_login />
       ) : (
         <div className="container mt-4">
           <div className="row">
