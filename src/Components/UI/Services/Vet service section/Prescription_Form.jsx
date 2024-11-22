@@ -52,6 +52,7 @@ const Prescription_Form = () => {
     e.preventDefault();
     console.log("form submitted", form);
   };
+  // console.log("Response:", userEmail , userName , userPhone);
 
   return (
     <>
