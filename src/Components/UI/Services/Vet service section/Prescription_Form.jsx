@@ -5,10 +5,14 @@ import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
 import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import { ValueContext } from "../../../Context/Context_Hook";
 import axios from "axios";
+import { toast } from "react-toastify";
+import Appointment_with_login from "./Appointment_with_login";
+import Appointment_without_login from "./Appointment_without_login";
+import Pet_Form from "../../Petform/Pet_Form";
 
 const Prescription_Form = () => {
   let token = localStorage.getItem("token");
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState();
   let id = localStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -20,7 +24,9 @@ const Prescription_Form = () => {
     time: "",
     date: "",
     pet_details: "",
+    
   });
+  const[id_data,setId_Data] =useState()
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -34,13 +40,23 @@ const Prescription_Form = () => {
           },
         });
 
-        setUserData(res.data.data);
+         setUserData([res.data.data]);
         setForm((prevForm) => ({
           ...prevForm,
-          name: res.data.data[0].name,
-          email: res.data.data[0].email,
-          phone: res.data.data[0].phone,
+          name: res.data.data.name,
+          email: res.data.data.email,
+          phone: res.data.data.phone,
+
+          
         }));
+        
+        setId_Data(
+         {
+         id: res.data.data.id,
+         owner_id:res.data.data.owner_id,
+      });
+     
+        console.log('object',res ,form )
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -48,11 +64,52 @@ const Prescription_Form = () => {
 
     fetchUserData();
   }, []);
-  const handleSubmitForm = (e) => {
-    e.preventDefault();
+  const handleSubmitForm = async(e) => {
+   
     console.log("form submitted", form);
+    
+    try {
+      e.preventDefault();
+      const appointment_data = await axios.post(`${url}/apointment`, 
+        {
+
+        appointment_time: form.time,
+        appointment_date: form.date,
+        disease_description: form.pet_details,
+        pet_id:id_data.id,
+        owner_id:id_data.owner_id,
+      } ,
+      
+      { headers: {
+        Authorization: token,
+        "Content-Type": "application/json",
+      }
+    }
+
+    
+     );
+     if (appointment_data.status == 200) {
+      toast.success('Appointment Book Successfully');
+      setForm({
+        name: " ",
+        email: " ",
+        phone: " ",
+        time: " ",
+        date: " ",
+        pet_details: " ",
+
+      })
+
+     }
+      
+      console.log("Response_of_appnt:", appointment_data);
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
   };
-  // console.log("Response:", userEmail , userName , userPhone);
+   console.log("Response:", userData , 'dfghj id ka data',id_data);
 
   return (
     <>
@@ -106,7 +163,7 @@ const Prescription_Form = () => {
           </div>
         </div>
       </section>
-
+           
       <div className="container my-4">
         <div className="row">
           <div
@@ -115,251 +172,13 @@ const Prescription_Form = () => {
               backgroundColor: "#5badbdfa",
             }}
           >
-            <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
-            {token ? (
-              <div>
-                {userData?.map((item, index) => (
-                  <form
-                    onSubmit={handleSubmitForm}
-                    action=""
-                    className="p-3"
-                    key={index}
-                  >
-                    <input
-                      type="text"
-                      placeholder="username"
-                      className="form-control mb-3 txt-dg"
-                      value={item?.name}
-                      // name = "name"
-                      // onChange={handleChange}
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      className="form-control mb-3 txt_dg"
-                      value={item?.email}
-                      // name = "email"
-                      // onChange={handleChange}
-                    />
-                    <input
-                      type="number"
-                      placeholder="Phone"
-                      className="form-control mb-3 txt_dg"
-                      value={item?.phone}
-                      // name = "phone"
-                      // onChange={handleChange}
-                    />
-                    <input
-                      type="time"
-                      placeholder="Pickup Time"
-                      className="form-control mb-3 txt_dg "
-                      name="time"
-                      onChange={handleChange}
-                    />
-                    <input
-                      type="date"
-                      placeholder="Pickup Date"
-                      className="form-control mb-3 txt_dg"
-                      name="date"
-                      onChange={handleChange}
-                    />
-                    <label>
-                      <b>Pet Details </b>
-                    </label>
-                    <textarea
-                      name="pet_details"
-                      id=""
-                      placeholder="Write Here"
-                      className="form-control mb-3 "
-                      onChange={handleChange}
-                    ></textarea>
-
-                    {/* <div className="flex justify-between mt-4">
-                  <div>
-                    {" "}
-                    <b>Pet Details </b>
-                  </div>{" "}
-                  <div>
-                    {" "}
-                    <button
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      type="button"
-                      class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    >
-                      Add Pets
-                    </button>
-                  </div>
-                </div> */}
-                    {/* <table class="table-responsive w-100 mx-auto" >
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
-                </table> */}
-
-                    <div className="flex justify-center">
-                      {" "}
-                      <button type="submit" className="btn btn-success">
-                        Submit
-                      </button>{" "}
-                    </div>
-                  </form>
-                ))}
-              </div>
-            ) : (
-              <form action="" className="p-3">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  className="form-control mb-3 txt-dg"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="number"
-                  placeholder="Phone"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="time"
-                  placeholder="Pickup Time"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="date"
-                  placeholder="Pickup Date"
-                  className="form-control mb-3 txt_dg"
-                />
-                <label>
-                  <b>Pet Details </b>
-                </label>
-                <textarea
-                  name=""
-                  id=""
-                  placeholder="Write Here"
-                  className="form-control mb-3 "
-                ></textarea>
-
-                <div className="flex justify-center">
-                  {" "}
-                  <button className="btn btn-success">
-                    <a href="#" className="text-white">
-                      Submit{" "}
-                    </a>
-                  </button>{" "}
-                </div>
-              </form>
-            )}
+            
+            {token ? <Appointment_with_login/>  : <Pet_Form/> }
           </div>
         </div>
       </div>
 
-      {/* Modal   */}
-
-      {/* <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Pet Form
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div
-              class="modal-body"
-              style={{
-                backgroundColor: "#5badbdfa",
-              }}
-            >
-              <form action="" className="p-3">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="form-control mb-3 txt-dg"
-                />
-                <input
-                  type="file"
-                  placeholder="Photo"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="text"
-                  placeholder="Species"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="text"
-                  placeholder="Breeds"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="text"
-                  placeholder="Sizes"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="text"
-                  placeholder="Character"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="text"
-                  placeholder="Sex"
-                  className="form-control mb-3 txt_dg"
-                />
-                <input
-                  type="text"
-                  placeholder="Color"
-                  className="form-control mb-3 txt_dg"
-                />
-                <button className="btn btn-success">
-                  <a href="#" className="text-white">
-                    Submit{" "}
-                  </a>
-                </button>{" "}
-              </form>
-            </div>
-          </div>
-        </div>
-      </div> */}
+    
     </>
   );
 };
