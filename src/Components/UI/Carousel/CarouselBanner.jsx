@@ -60,15 +60,15 @@ const CarouselBanner = () => {
       <Slider {...settings}>
         {banners.map((banner, index) => (
           <div key={index}>
-            <div className="flex w-full h-full justify-center items-center">
-              <div className="h-full w-1/2 flex flex-col justify-center gap-2 lg:gap-5">
-                <h1 className=" lg:text-6xl font-bold">
+            <div className="flex w-full h-full justify-center items-center px-4">
+              <div className="h-full w-1/2 flex flex-col justify-center gap-2 lg:gap-5 ms-11">
+                <h1 className=" lg:text-6xl font-bold ">
                   {banner.heading.slice(0, 11)}
                   <br></br>
                   {banner.heading.slice(11)}
                 </h1>
-                <p className=" lg:w-1/3 font-bold">{banner.description}</p>
-                <button className="w-fit h-fit bg-primary-btn text-white px-3 py-1 rounded-lg font-semibold text-xl">View Services</button>
+                <p className=" lg:w-1/3 font-bold ">{banner.description}</p>
+                <button className="w-fit h-fit text-white bg-orange-600  px-3 py-1 rounded-lg font-semibold text-xl">View Services</button>
               </div>
               <img
                 src={banner.image}

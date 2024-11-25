@@ -8,6 +8,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Pet_Form from "../../Petform/Pet_Form";
 import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 
 const Appointment_without_login = ({Id_data}) => {
   let token = sessionStorage.getItem("token");
@@ -27,6 +34,17 @@ const Appointment_without_login = ({Id_data}) => {
     pet_details: "",
     
   });
+
+  
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   // const[id_data,setId_Data] =useState()
  console.log('id ka data ',Id_data)
   const handleChange = (e) => {
@@ -226,6 +244,48 @@ useEffect(() => {
       </div> 
       
     
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        
+      >
+        <DialogTitle id="alert-dialog-title">
+        
+          <span className="text-center text-6xl">Booking Confirm</span>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {Object.values(form)?.map((item,index)=>(    
+            <form action="" key={index}>
+              <div className="container">
+                <div className="row">
+                  <div className="col-6"><label htmlFor="">Name</label><span>{item.name}</span></div>
+                  <div className="col-6"><label htmlFor="">Email</label><span>{item.email}</span></div>
+                </div>
+                <div className="row">
+                  <div className="col-6"><label htmlFor="">Phone</label><span>{item.phone}</span></div>
+                  <div className="col-6"><label htmlFor="">Time</label><span>{item.time}</span></div>
+                </div>
+                <div className="row">
+                  <div className="col-6"><label htmlFor="">Date</label><span>{item.date}</span></div>
+                  <div className="col-6"><label htmlFor="">Pet Details</label><span>{item.pet_details}</span></div>
+                </div>
+              </div>
+            </form>))}
+            
+            
+
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Canel</Button>
+          <Button onClick={handleClose} autoFocus>
+            Done
+          </Button>
+        </DialogActions>
+      </Dialog>
 
      
 

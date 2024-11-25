@@ -8,6 +8,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "antd";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Appointment_with_login = () => {
   let token = sessionStorage.getItem("token");
@@ -16,6 +22,17 @@ const Appointment_with_login = () => {
   let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
+
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const [form, setForm] = useState({
     name: "",
@@ -218,7 +235,7 @@ const Appointment_with_login = () => {
                 </div>
                 <div className="flex justify-center">
                   {" "}
-                  <button type="submit" className="btn btn-success" >
+                  <button type="submit" onClick={handleClickOpen} className="btn btn-success" >
                     Submit
                   </button>{" "}
                 </div>
@@ -231,7 +248,51 @@ const Appointment_with_login = () => {
       {/* modal */}
     
     
-       
+      {/* <Button variant="outlined" onClick={handleClickOpen}>
+        Open alert dialog
+      </Button> */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        
+      >
+        <DialogTitle id="alert-dialog-title">
+        
+          <span className="text-center text-6xl">Booking Confirm</span>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {Object.values(form)?.map((item,index)=>(    
+            <form action="" key={index}>
+              <div className="container">
+                <div className="row">
+                  <div className="col-6"><label htmlFor="">Name</label><span>{item.name}</span></div>
+                  <div className="col-6"><label htmlFor="">Email</label><span>{item.email}</span></div>
+                </div>
+                <div className="row">
+                  <div className="col-6"><label htmlFor="">Phone</label><span>{item.phone}</span></div>
+                  <div className="col-6"><label htmlFor="">Time</label><span>{item.time}</span></div>
+                </div>
+                <div className="row">
+                  <div className="col-6"><label htmlFor="">Date</label><span>{item.date}</span></div>
+                  <div className="col-6"><label htmlFor="">Pet Details</label><span>{item.pet_details}</span></div>
+                </div>
+              </div>
+            </form>))}
+            
+            
+
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Canel</Button>
+          <Button onClick={handleClose} autoFocus>
+            Done
+          </Button>
+        </DialogActions>
+      </Dialog>
 
      
      

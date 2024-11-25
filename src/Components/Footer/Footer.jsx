@@ -14,7 +14,7 @@ const Footer = () => {
     >
       <div class="container">
         <div class="row">
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-4 col-lg-4">
             <div class="logo">
               <a href="index.html">
                 <img
@@ -103,7 +103,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-4 col-lg-4">
             <div class="widget-title">
               <h3>Quick Links</h3>
               <div class="boder"></div>
@@ -135,7 +135,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-4 col-lg-4">
             <div class="working-hours">
               <div class="widget-title">
                 <h3>working hours</h3>
