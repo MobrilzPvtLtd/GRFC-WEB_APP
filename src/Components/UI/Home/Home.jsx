@@ -6,6 +6,7 @@ import Newsletter from './Newsletter'
 import ServiceSection from './ServiceSection'
 import CarouselBanner from '../Carousel/CarouselBanner'
 import TestimonialCarousel from '../Testimonial/TestimonialCarousel'
+import ServicesSection from '../Services/service section/ServicesSection'
 
 const Home = () => {
   return (
@@ -14,7 +15,7 @@ const Home = () => {
 
 {/* workable component start here */}
         <CarouselBanner/>
-        <ServiceSection/>
+        <ServicesSection/>
         <ProductSection/>
         <TestimonialCarousel/>
 

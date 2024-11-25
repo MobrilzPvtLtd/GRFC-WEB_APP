@@ -32,40 +32,7 @@ const Appointment_without_login = ({Id_data}) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-//   useEffect(() => {
-//     const fetchUserData = async () => {
-//       try {
-//         const res = await axios.get(`${url}/user/${id}`, {
-//           headers: {
-//             Authorization: token,
-//             "Content-Type": "application/json",
-//           },
-//         });
 
-//         //  setUserData([res.data.data]);
-//         // setForm((prevForm) => ({
-//         //   ...prevForm,
-//         //   name: res.data.data.name,
-//         //   email: res.data.data.email,
-//         //   phone: res.data.data.phone,
-
-          
-//         // }));
-        
-//         setId_Data(
-//          {
-//          id: res.data.data.id,
-//          owner_id:res.data.data.owner_id,
-//       });
-     
-        
-//       } catch (error) {
-//         console.error("Error fetching user data:", error);
-//       }
-//     };
-
-//     fetchUserData();
-//   }, []);
 const navigate =useNavigate();
 
   const handleSubmitForm = async(e) => {

@@ -84,11 +84,11 @@ const Navbar = ({ getVisibity }) => {
               <div>
                 <div class="time">
                   <div class="ordering">
-                    <a href="#">Ordering</a>
+                    {/* <a href="#">Ordering</a>
                     <div class="line"></div>
                     <a href="#">Shipping</a>
                     <div class="line"></div>
-                    <a href="#">Returns</a>
+                    <a href="#">Returns</a> */}
                     <div class="line"></div>
 
                   

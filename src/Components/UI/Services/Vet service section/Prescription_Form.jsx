@@ -62,8 +62,10 @@ const Prescription_Form = () => {
       }
     };
 
-    fetchUserData();
-  }, []);
+    if(id && token){
+      fetchUserData();
+    }
+  }, [id,token]);
   const handleSubmitForm = async(e) => {
    
     console.log("form submitted", form);

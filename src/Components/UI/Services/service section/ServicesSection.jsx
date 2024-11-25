@@ -6,12 +6,14 @@ import feline from "../../../../images_new/preventive-care-cats-720px.jpg"
 import vet from "../../../../images_new/DSC_0332.jpg"
 import dog from "../../../../images_new/top-20-small-dog-breeds.jpeg"
 import axios from 'axios';
+import { Skeleton } from 'antd';
 
 
 const ServicesSection = () => {
 
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
   const[category_data,setCategory_data] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
@@ -19,6 +21,7 @@ const ServicesSection = () => {
       try {
         const res = await axios.get(`${url}/category`);
         setCategory_data(res.data.data)
+        setLoading(false);
         // console.log(res)
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -28,7 +31,8 @@ const ServicesSection = () => {
     fetchCategoryData();
   }, []);
   const handleCategoryId =(id)=>{
-    localStorage.setItem("category_id" , id)
+    localStorage.setItem("category_id" , id )
+    // localStorage.setItem("category_name" , name)
     console.log("category_id" , id)
   }
   console.log('1111111111',category_data)
@@ -36,7 +40,8 @@ const ServicesSection = () => {
     <section className="gap no-bottom">
       <div className="container">
         <div className="row">
-          { category_data?.map((item,index)=>(
+          
+          { loading ? <Skeleton/> : category_data?.map((item,index)=>(
               
             
             <div  className="col-lg-4 col-md-6" key={index}>
