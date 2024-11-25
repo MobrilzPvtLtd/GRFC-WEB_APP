@@ -139,7 +139,7 @@ const Navbar = ({ getVisibity }) => {
             </a>
             <nav class="navbar">
               <ul class="navbar-links">
-                <li class="navbar-dropdown ">
+                <li class="navbar-dropdown mx-4">
                   <Link to="/">
                     <i>
                       {/* <!-- <img alt="home" src="assets/img/home.png"> --> */}
@@ -152,39 +152,40 @@ const Navbar = ({ getVisibity }) => {
                         <a href="index-3.html">home 3</a> -->
                       <!-- </div> --> */}
                 </li>
-                <li class="navbar-dropdown">
+                <li class="navbar-dropdown mx-4">
                   <Link to="/about-us">About</Link>
                 </li>
-                <li class="navbar-dropdown ">
-                  <Link  className=" dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" to='/service'>Services</Link>
-                  <ul class="dropdown-menu" id="dropdown" >
-                    <li>
-                      <Link class="dropdown-item" to="#">
+                <li class="navbar-dropdown mx-4 ">
+                  <Link  className=" dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" to='/'>Services</Link>
+
+                  <ul class="dropdown-menu border-0 shadow-lg text-center  p-1" id="dropdown" >
+                    <li className="">
+                      <Link class="dropdown-item" to="/services/Farmica">
                         Farmica
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="#">
+                      <Link class="dropdown-item" to="/services/VetUCI">
                         VetUCI
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="#">
+                      <Link class="dropdown-item" to="/services/Medi+cotas">
                         Medi+cotas
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="#">
+                      <Link class="dropdown-item" to="/services/Vet Cardiologia">
                         Vet Cardiologia
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="#">
+                      <Link class="dropdown-item" to="/services/Vet Centro Felino">
                         Vet Centro Felino
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="#">
+                      <Link class="dropdown-item" to="/services/Vet Hotel">
                         Vet Hotel
                       </Link>
                     </li>
@@ -205,7 +206,7 @@ const Navbar = ({ getVisibity }) => {
                         <a href="login.html">login</a>
                       </div>
                     </li> --> */}
-                <li class="navbar-dropdown ">
+                <li class="navbar-dropdown mx-4">
                   <Link to="/our-products">Products</Link>
                   {/* <!-- <div class="dropdown">
                         <a href="our-products.html">our products</a>
@@ -221,7 +222,7 @@ const Navbar = ({ getVisibity }) => {
                         <a href="blog-details.html">blog details</a>
                       </div>
                     </li> --> */}
-                <li class="navbar-dropdown">
+                <li class="navbar-dropdown mx-4">
                   <Link to="/contact-us">Contact</Link>
                 </li>
               </ul>

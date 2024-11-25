@@ -402,11 +402,11 @@ header {
   list-style-type: none;
   display: flex;
 }
-.navbar-links li {
+/* .navbar-links li {
     padding: 20px 30px;
     padding-left: 0;
     padding-right: 50px;
-}
+} */
 .navbar-links li a {
     display: block;
     text-decoration: none;

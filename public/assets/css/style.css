@@ -402,17 +402,23 @@ header {
   list-style-type: none;
   display: flex;
 }
-.navbar-links li {
+/* .navbar-links li {
     padding: 20px 30px;
     padding-left: 0;
-    padding-right: 50px;
-}
+    padding-right: 0px;
+} */
 .navbar-links li a {
     display: block;
     text-decoration: none;
     color: #707070;
     transition: 0.4s all;
     padding-left: 0;
+}
+.drp_css{
+    /* padding: 20px 30px; */
+    /* padding-left: 0; */
+    padding-right: 0px !important;
+
 }
 li.menu-item-children > a{
     position: relative;
