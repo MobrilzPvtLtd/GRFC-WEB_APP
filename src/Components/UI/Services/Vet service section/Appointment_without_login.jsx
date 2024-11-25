@@ -186,6 +186,55 @@ const navigate =useNavigate();
                   className="form-control mb-3 "
                 ></textarea>
 
+                 {/* <div className="table-responsive mb-3">
+                  <table class="table  table-striped ">
+                    <thead >
+                      <tr className="bg-success-subtle">
+                        <th>Owner Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Owner Size Record</th>
+                        <th>Pet Name</th>
+                        <th>Pet Code</th>
+                        <th>Status</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Size</th>
+                        <th>Coat</th>
+                        <th>Character</th>
+                        <th>Sex</th>
+                        <th>Color</th>
+                        <th>DOB</th>
+                        <th>Weight Kg</th>
+                        <th>Size record date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                       
+                        <td>{item.name}</td>
+                        <td>{item.phone}</td>
+                        <td>{item.email}</td>
+                        <td>{item.owner_size_rec}</td>
+                        <td>{item.pet_code}</td>
+                        <td>{item.pet_code}</td>
+                        <td>{item.status_ID}</td>
+                        <td>{item.species_id}</td>
+                        <td>{item.breed_id}</td>
+                        <td>{item.size_id}</td>
+                        <td>{item.coat_id}</td>
+                        <td>{item.character_id}</td>
+                        <td>{item.sex_id}</td>
+                        <td>{item.color_id}</td>
+                        <td>{item.birth_date}</td>
+                        <td>{item.weight}</td>
+                        
+                        <td>{item.size_record_date}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> */}
+
                 <div className="flex justify-center">
                   {" "}
                   <button className="btn btn-success" type="submit">

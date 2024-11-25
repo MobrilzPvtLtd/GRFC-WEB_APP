@@ -44,8 +44,8 @@ const ServicesSection = () => {
           { loading ? <Skeleton/> : category_data?.map((item,index)=>(
               
             
-            <div  className="col-lg-4 col-md-6" key={index}>
-            <div className="we-provide">
+            <div  className="col-lg-4 col-md-6 my-4" key={index}>
+            {/* <div className="we-provide"> */}
               <div className="we-provide-img a01 flex justify-center my-5">
                 
                 <img className="w-60 aspect-square" src={item?.image_link} alt="we-provide-1" />
@@ -59,10 +59,10 @@ const ServicesSection = () => {
                 </svg>
               </div>
               <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
-                <h5><b>{item?.name} </b></h5>
+                <h5 className="text-center"><b>{item?.name} </b></h5>
               </a>
             </div>
-           </div>  
+          //  </div>  
             ))}
           
         </div>

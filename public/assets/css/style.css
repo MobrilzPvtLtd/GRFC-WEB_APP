@@ -4913,7 +4913,7 @@ table.table {
     border:none !important;
 }
 .table>:not(caption)>*>* {
-    padding: 16px 1.5rem;
+    padding: 8px 1rem;
 }
 ul.reviews li {
     display: flex;

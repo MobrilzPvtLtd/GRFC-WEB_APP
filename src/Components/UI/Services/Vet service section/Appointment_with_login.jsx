@@ -7,10 +7,12 @@ import { ValueContext } from "../../../Context/Context_Hook";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Skeleton } from "antd";
 
 const Appointment_with_login = () => {
   let token = sessionStorage.getItem("token");
   const [userData, setUserData] = useState();
+  const [loader, setLoader] = useState(true);
   let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -25,7 +27,7 @@ const Appointment_with_login = () => {
   });
   const [id_data, setId_Data] = useState();
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -41,6 +43,7 @@ const navigate = useNavigate();
         });
 
         setUserData([res.data.data]);
+        setLoader(false)
         setForm((prevForm) => ({
           ...prevForm,
           name: res.data.data.name,
@@ -58,9 +61,10 @@ const navigate = useNavigate();
         console.error("Error fetching user data:", error);
       }
     };
-
-    fetchUserData();
-  }, []);
+    if (id && token) {
+      fetchUserData();
+    }
+  }, [id, token]);
   const handleSubmitForm = async (e) => {
     console.log("form submitted", form);
 
@@ -85,8 +89,7 @@ const navigate = useNavigate();
       );
       if (appointment_data.status == 200) {
         toast.success("Appointment Book Successfully");
-        navigate('/')
-        
+        navigate("/");
       }
 
       console.log("Response_of_appnt:", appointment_data);
@@ -98,8 +101,6 @@ const navigate = useNavigate();
 
   return (
     <>
-     
-
       <div className="container my-4">
         <div className="row">
           <div
@@ -109,7 +110,7 @@ const navigate = useNavigate();
             }}
           >
             <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
-            {userData?.map((item, index) => (
+            {loader ? <Skeleton/>: userData?.map((item, index) => (
               <form
                 onSubmit={handleSubmitForm}
                 action=""
@@ -146,6 +147,7 @@ const navigate = useNavigate();
                   className="form-control mb-3 txt_dg "
                   name="time"
                   onChange={handleChange}
+                  required={true}
                 />
                 <input
                   type="date"
@@ -153,6 +155,7 @@ const navigate = useNavigate();
                   className="form-control mb-3 txt_dg"
                   name="date"
                   onChange={handleChange}
+                  required={true}
                 />
                 <label>
                   <b>Pet Details </b>
@@ -163,8 +166,56 @@ const navigate = useNavigate();
                   placeholder="Write Here"
                   className="form-control mb-3 "
                   onChange={handleChange}
+                  required={true}
                 ></textarea>
-
+                <div className="table-responsive mb-3">
+                  <table class="table  table-striped ">
+                    <thead >
+                      <tr className="bg-success-subtle">
+                        <th>Owner Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Owner Size Record</th>
+                        <th>Pet Name</th>
+                        <th>Pet Code</th>
+                        <th>Status</th>
+                        <th>Species</th>
+                        <th>Breed</th>
+                        <th>Size</th>
+                        <th>Coat</th>
+                        <th>Character</th>
+                        <th>Sex</th>
+                        <th>Color</th>
+                        <th>DOB</th>
+                        <th>Weight Kg</th>
+                        <th>Size record date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                       
+                        <td>{item.name}</td>
+                        <td>{item.phone}</td>
+                        <td>{item.email}</td>
+                        <td>{item.owner_size_rec}</td>
+                        <td>{item.pet_code}</td>
+                        <td>{item.pet_code}</td>
+                        <td>{item.status_ID}</td>
+                        <td>{item.species_id}</td>
+                        <td>{item.breed_id}</td>
+                        <td>{item.size_id}</td>
+                        <td>{item.coat_id}</td>
+                        <td>{item.character_id}</td>
+                        <td>{item.sex_id}</td>
+                        <td>{item.color_id}</td>
+                        <td>{item.birth_date}</td>
+                        <td>{item.weight}</td>
+                        
+                        <td>{item.size_record_date}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 <div className="flex justify-center">
                   {" "}
                   <button type="submit" className="btn btn-success">

@@ -110,6 +110,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Pet Name"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="name"
                 />
                 <input
@@ -117,6 +118,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Pet Code"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="petCode"
                 />
                 <input
@@ -124,6 +126,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Owner Name"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="owner_name"
                 />
                 <input
@@ -131,6 +134,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Email"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="email"
                 />
                 <input
@@ -138,6 +142,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Phone"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="phone"
                 />
                 <input
@@ -145,6 +150,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Status"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="status"
                 />
                 <input
@@ -152,6 +158,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Weight"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="weight"
                 />
                 <input
@@ -159,6 +166,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Species"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="species"
                 />
                 <input
@@ -166,6 +174,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Breeds"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="breeds"
                 />
                 <input
@@ -173,6 +182,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Size"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="size"
                 />
                 <input
@@ -180,6 +190,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Character"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="character"
                 />
                 <input
@@ -187,6 +198,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Sex"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="sex"
                 />
                 <input
@@ -194,6 +206,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Date of Birth"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="dob"
                 />
                 <input
@@ -201,6 +214,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Color"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="color"
                 />
                 <input
@@ -208,6 +222,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Size Record Data"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="size_record_data"
                 />
                 <input
@@ -215,6 +230,7 @@ console.log('2222222222222',ID_data)
                   placeholder="Owner Size Record"
                   className="form-control mb-3"
                   onChange={handleChange}
+                  required={true}
                   name="ownerSizeRecrd"
                 />
                 {/* <input

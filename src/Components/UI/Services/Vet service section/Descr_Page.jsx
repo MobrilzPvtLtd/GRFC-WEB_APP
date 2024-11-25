@@ -7,6 +7,7 @@ import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import dog_pic from "../../../../images_new/pet-walking.jpg";
 
 const Descr_Page = () => {
+  const urlparam =  window.location.pathname
   return (
     <>
       <section
@@ -83,7 +84,7 @@ const Descr_Page = () => {
             <div className="flex justify-center">
               {" "}
               <button className="btn btn-success">
-                <a href="/services/icu/doctor/booknow" className="text-white">
+                <a href={`${urlparam}/booknow`} className="text-white">
                   Book Now{" "}
                 </a>
               </button>{" "}
