@@ -7,7 +7,7 @@ const ServiceBreadcrum = () => {
   return (
     <section
     className="banner"
-    style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})` }}
+    style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})`, backgroundPosition:`center` }}
   >
     <div className="container">
       <div className="row align-items-center">

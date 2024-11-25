@@ -11,6 +11,7 @@ const ShopCartBreadcrum = () => {
       style={{
         backgroundColor: "#fff8e5",
         backgroundImage: `url(${bannerImg1})`,
+         backgroundPosition:`center`
       }}
     >
       <div className="container">

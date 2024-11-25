@@ -1618,7 +1618,7 @@ i.quote {
 footer {
     position: relative;
     background-position: bottom;
-    padding-top: 140px;
+    padding-top: 95px;
     background-repeat: no-repeat;
 }
 footer .phone {
@@ -1723,7 +1723,7 @@ footer .phone i {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 80px;
+    margin-top: 42px;
     padding-bottom: 30px;
 }
 footer img.img-3 {

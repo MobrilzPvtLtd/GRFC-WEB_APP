@@ -49,7 +49,7 @@ const ServicesSection = () => {
               <div className="we-provide-img a01 flex justify-center my-5">
                 
                 <img className="w-60 aspect-square" src={item?.image_link} alt="we-provide-1" />
-                <svg width="326" height="326" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
+                <svg width="300" height="300" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"

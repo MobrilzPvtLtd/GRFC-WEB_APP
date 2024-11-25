@@ -5,7 +5,7 @@ import banner_2 from "../../../../../images_new/banner-img-2.jpg"
 
 const ProductBreadcrum = () => {
   return (
-    <section className="banner" style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})` }}>
+    <section className="banner" style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})` , backgroundPosition:`center`}}>
     <div className="container">
       <div className="row align-items-center">
         <div className="col-lg-6">

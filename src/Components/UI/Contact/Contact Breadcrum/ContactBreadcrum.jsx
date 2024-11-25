@@ -11,6 +11,7 @@ const ContactBreadcrum = () => {
       style={{
         backgroundColor: '#fff',
         backgroundImage: `url(${bg_image})`,
+        backgroundPosition:`center`,
       }}
     >
       <div className="container">
