@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 const Appointment_without_login = ({Id_data}) => {
   let token = sessionStorage.getItem("token");
   const [userData, setUserData] = useState();
+  const [petData, setPetData] = useState();
   let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -34,6 +35,29 @@ const Appointment_without_login = ({Id_data}) => {
 
 
 const navigate =useNavigate();
+
+
+
+useEffect(() => {
+  const fetchPetsData = async () => {
+    try {
+      const res = await axios.get(`${url}/pets/${Id_data.owner_id}`, {
+        
+      });
+
+      setPetData(res.data.data);
+      // setLoader(false)
+     
+
+      console.log("object", petData);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+  if (id ) {
+    fetchPetsData();
+  }
+}, [id]);
 
   const handleSubmitForm = async(e) => {
    
@@ -71,7 +95,7 @@ const navigate =useNavigate();
     }
     
   };
-   console.log("Response:",form );
+   console.log("Response:",form ,);
 
   return (
     <>
@@ -186,7 +210,7 @@ const navigate =useNavigate();
                   className="form-control mb-3 "
                 ></textarea>
 
-                 {/* <div className="table-responsive mb-3">
+                 <div className="table-responsive mb-3">
                   <table class="table  table-striped ">
                     <thead >
                       <tr className="bg-success-subtle">
@@ -210,7 +234,8 @@ const navigate =useNavigate();
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      {petData?.map((item,index)=>(  
+                      <tr key={index}>
                        
                         <td>{item.name}</td>
                         <td>{item.phone}</td>
@@ -231,9 +256,10 @@ const navigate =useNavigate();
                         
                         <td>{item.size_record_date}</td>
                       </tr>
+                      ))}
                     </tbody>
                   </table>
-                </div> */}
+                </div>
 
                 <div className="flex justify-center">
                   {" "}

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
 import { useTranslation } from "react-i18next";
-import logo from '../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png'
+import logo from "../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png";
 // import './i18next'
 
 const Navbar = ({ getVisibity }) => {
@@ -91,18 +91,21 @@ const Navbar = ({ getVisibity }) => {
                     <a href="#">Returns</a> */}
                     <div class="line"></div>
 
-                  
-                        <select
-                          defaultValue={"sp"}
-                          className="bg-slate-500"
-                          
-                        >  {lngs.map((lng, i) => {
-                          const { code, native } = lng;
-                          return (
-                          <option value={code} key={code}  onChange={() => handleTrans(code)}>{native}</option> );
-                        })}
-                        </select>
-                     
+                    <select defaultValue={"sp"} className="bg-slate-500">
+                      {" "}
+                      {lngs.map((lng, i) => {
+                        const { code, native } = lng;
+                        return (
+                          <option
+                            value={code}
+                            key={code}
+                            onChange={() => handleTrans(code)}
+                          >
+                            {native}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
                   {token ? (
                     <div class="login">
@@ -132,11 +135,7 @@ const Navbar = ({ getVisibity }) => {
         <div class="container">
           <div class="bottom-bar">
             <a href="index.html">
-              <img
-                class="logo001"
-                src={logo}
-                alt="logo"
-              />
+              <img class="logo001" src={logo} alt="logo" />
             </a>
             <nav class="navbar">
               <ul class="navbar-links">
@@ -157,9 +156,39 @@ const Navbar = ({ getVisibity }) => {
                   <Link to="/about-us">About</Link>
                 </li>
                 <li class="navbar-dropdown ">
-                  <Link to="/services">
-                    <i></i>services
-                  </Link>
+                  <Link  className=" dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" to='/service'>Services</Link>
+                  <ul class="dropdown-menu" id="dropdown" >
+                    <li>
+                      <Link class="dropdown-item" to="#">
+                        Farmica
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" to="#">
+                        VetUCI
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" to="#">
+                        Medi+cotas
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" to="#">
+                        Vet Cardiologia
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" to="#">
+                        Vet Centro Felino
+                      </Link>
+                    </li>
+                    <li>
+                      <Link class="dropdown-item" to="#">
+                        Vet Hotel
+                      </Link>
+                    </li>
+                  </ul>
                   {/* <!-- <div class="dropdown">
                         <a href="services.html">services</a>
                         <a href="service-details.html">service details</a>

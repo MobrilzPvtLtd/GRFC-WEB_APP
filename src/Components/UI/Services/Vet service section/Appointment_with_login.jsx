@@ -227,6 +227,8 @@ const Appointment_with_login = () => {
           </div>
         </div>
       </div>
+
+      {/* modal */}
     </>
   );
 };
