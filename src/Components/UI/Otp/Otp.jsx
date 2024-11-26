@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+<<<<<<< Updated upstream
 import Pet_Form from "../Petform/Pet_Form";
 
 const Otp = ({ handleCancel, email }) => {
@@ -19,9 +20,27 @@ const[petvalue, setValue]= useState(0)
     setOtp((prevotp) => ({
       ...prevotp,
       [newValue.target.name]: newValue.target.value,
+=======
+import OtpInput from 'react-otp-input';
+
+const Otp = ({ handleCancel, email }) => {
+  const [otp, setOtp] = useState("");
+  let url =process.env.REACT_APP_BACKEND_BASE_URL;
+  let token = localStorage.getItem("authToken");
+  
+  let navigate = useNavigate();
+  // console.log("token aa raha hai ki nhi", token);
+  const handleChange = (e) => {
+    e.preventDefault();
+    setOtp((prevOtp) => ({
+      ...prevOtp,
+      // Update the otp with the new value
+      [e.target.name] : e.targe.value ,
+>>>>>>> Stashed changes
     }));
-    // setOtp(newValue);
   };
+  console.log("otp ki value" , otp)
+
   const handleOtp = async () => {
     try {
       
@@ -53,6 +72,8 @@ const[petvalue, setValue]= useState(0)
   const handleProp = () => {
     console.log(handleCancel(false));
   };
+
+  
   return (
     <>   
     <div className="d-flex w-25 flex-column justify-content-center align-items-center py-5 bg-white container shadow rounded my-4 ">
@@ -66,7 +87,8 @@ const[petvalue, setValue]= useState(0)
           <br /> on this <b>{email}</b>
         </p>
         <div className="" style={{ width: "90%", height: "15%" }}>
-          <MuiOtpInput value={otp} onChange={handleChange} />
+          <MuiOtpInput value={otp} onChange={setOtp} />
+        
         </div>
 
         <div className="d-flex gap-2">
