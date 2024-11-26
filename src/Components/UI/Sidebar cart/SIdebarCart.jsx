@@ -36,7 +36,7 @@ const SidebarCart = ({ visible }) => {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (!isVisible) return null;
-
+  console.log('123456',context.dataArray)
   return (
     <div id="lightbox" className="lightbox clearfix">
       <div className="white_content">

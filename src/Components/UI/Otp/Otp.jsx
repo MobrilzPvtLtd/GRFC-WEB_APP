@@ -36,10 +36,11 @@ const Otp = ({ handleCancel, email }) => {
           },
         }
       );
-      if (OtpValidate == 200) {
+      if (OtpValidate.data.success) {
         setValue(1);
 
-        navigate("/");
+        // navigate("/");
+        window.location.href = OtpValidate.data.payment_link;
       } else {
         alert("Invalid OTP");
       }

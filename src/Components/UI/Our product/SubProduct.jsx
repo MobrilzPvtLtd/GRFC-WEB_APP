@@ -2,25 +2,27 @@ import React, { useContext, useState } from 'react';
 
 import tshirt from '../../../assets/images_new/tshirt_front.png';
 import { ValueContext } from '../../Context/Context_Hook';
+import { changeLanguage } from 'i18next';
 
 const SubProduct = () => {
-    const[count, setCount]= useState(1)
+    const context = useContext(ValueContext)
+    const[quantity, setQuantity]= useState(context.Cart_num +1)
     const[name, setTitle_name]= useState('TShirt')
     const[price,setPrice]=useState(19)
     const[proddata, setProduct]=useState({
-        name, price 
+        name, price, quantity
         
     })
     // const[setcartvalue, setCartvalue]= useState(count)
-    const context = useContext(ValueContext)
     
-    console.log('count11', count, 'jdhakd',context.Cart_num)
+    console.log('count11', quantity, 'jdhakd',context.Cart_num)
 
     const handlecart = (array)=>{
-        context.setCart_num(count)
+        context.setCart_num(quantity)
         context.setDataArray((prev) => [...prev, array]);
     }
     // 
+    console.log('datattt',proddata)
   return (
     <>
     <div className="container mt-64">
@@ -34,7 +36,7 @@ const SubProduct = () => {
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
     </p>
     <div className="flex items-center space-x-2">
-        <button type="button" className="bg-green-400 rounded-full px-4 py-2 text-white font-medium">4.3</button>
+        <button type="button" className="bg-green-400 rounded-full px-4 py-2 text-white font-medium">4.3 </button>
         <span className="text-gray-600">2367 ratings and 45 reviews</span>
     </div>
 
@@ -51,16 +53,16 @@ const SubProduct = () => {
       <button
         className="bg-gray-300 rounded-2xl px-6 py-2 text-2xl text-white"
         onClick={() => (
-             setCount(count - 1)  ,setPrice(price-19))
+             setQuantity(quantity - 1)  ,setPrice(price-19))
     } 
-        disabled={count <= 1} 
+        disabled={quantity <= 1} 
       >
         -
       </button>
-      <span className="text-2xl font-semibold">{count}</span>
+      <span className="text-2xl font-semibold">{quantity}</span>
       <button
         className="bg-gray-300 rounded-2xl px-6 py-2 text-2xl text-white"
-        onClick={() =>( setCount(count + 1 ), setPrice((count+1)*19))} 
+        onClick={() =>( setQuantity(quantity + 1 ), setPrice((quantity+1)*19))} 
       >
         +
       </button>

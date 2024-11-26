@@ -21,6 +21,7 @@ import Descr_Page from './Components/UI/Services/Vet service section/Descr_Page'
 import Prescription_Form from './Components/UI/Services/Vet service section/Prescription_Form';
 import Pet_Form from './Components/UI/Petform/Pet_Form';
 import SubProduct from './Components/UI/Our product/SubProduct';
+import Forgotpassword from './Components/UI/Forgot/Forgotpassword';
 
 
 function App() {
@@ -51,6 +52,7 @@ setVisible(state);
           <Route path="/services/:servicename/:subservicename/:prescription" element={<Prescription_Form/>} />
           <Route path="/petform" element={<Pet_Form/>} />
           <Route path="/subproduct" element={<SubProduct/>} />
+          <Route path="/forgot" element={<Forgotpassword/>} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer/>
