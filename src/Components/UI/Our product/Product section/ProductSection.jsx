@@ -4,52 +4,39 @@ import product2 from "../../../../images_new/p53x73.png";
 import axios from "axios";
 import { ValueContext } from "../../../Context/Context_Hook";
 
-
 const ProductSection = () => {
   const context = useContext(ValueContext);
-  // console.log('object', context)
-  // const [dataArray , setDataArray] = useState([]);
 
-  // const[dataProduct, setdataProduct] = useState([]);
-  // const[id, setId] = useState([ ]);
+  const [productvalue, setProductvalue] = useState(0);
 
- 
+
   let token = localStorage.getItem("token");
- // console.log("kkkkkkkkkk", token);
+  // console.log("kkkkkkkkkk", token);
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
-  
+
   useEffect(() => {
     const productData = () => {
       try {
         axios
-          .get(`${url}/product/1`, 
-          
-        )
-          .then((res) =>
-            
-           context.setdataProduct(res.data.data) )
+          .get(`${url}/product/${productvalue}`)
+          .then((res) => context.setdataProduct(res.data.data))
           .catch((err) => console.error(err));
-       
       } catch (error) {
         console.error(error);
       }
     };
 
     productData();
-  }, []);
- const handleAddCartValue = ( array)=>{
-  context.setCart_num(context.Cart_num + 1)
+  }, [productvalue]);
+  const handleAddCartValue = (array) => {
+    context.setCart_num(context.Cart_num + 1);
 
-  context.setDataArray((prev)=>[...prev , array])
+    context.setDataArray((prev) => [...prev, array]);
+  };
 
-  
-}
+  console.log("kjhgf", context.Cart_num, "all product24",productvalue);
 
- const handleProps = ()=>{
- // setCart_num(value)
-    
- }
- console.log('kjhgf', context.Cart_num)
+
   return (
     <section className="gap products-section">
       <div className="container">
@@ -60,22 +47,22 @@ const ProductSection = () => {
               <div className="boder-bar"></div>
               <ul className="category">
                 <li>
-                  <a href="#">
+                  <a  onClick={() => setProductvalue(0)} >
                     All Product<span>32</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a  onClick={() => setProductvalue(2)}>
                     Dog Supplies<span>12</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a  onClick={() => setProductvalue(1)}>
                     Medicine<span>14</span>
                   </a>
                 </li>
                 <li className="end">
-                  <a href="#">
+                  <a  onClick={() => setProductvalue(3)}>
                     Accessories<span>32</span>
                   </a>
                 </li>
@@ -149,11 +136,15 @@ const ProductSection = () => {
               </div>
             </div>
             <div className="row">
-              { (context.dataProduct).map((items, index) => (
+              {context.dataProduct.map((items, index) => (
                 <div className="col-md-4 col-sm-6" key={index}>
                   <div className="healthy-product">
                     <div className="healthy-product-img">
-                      <img src={items.product_img} className="w-fit h-fit aspect-square" alt="food" />
+                      <img
+                        src={items.product_img}
+                        className="w-fit h-fit aspect-square"
+                        alt="food"
+                      />
                       {/* <ul className="star">
                         {[...Array(5)].map((_, starIndex) => (
                           <li key={starIndex}>
@@ -162,11 +153,13 @@ const ProductSection = () => {
                         ))}
                       </ul> */}
                       <div className="add-to-cart">
-                      <a href="#"
-                       onClick={()=>handleAddCartValue(items)} 
-                      //  onClick={handleArray}
-                       
-                       >Add to Cart</a>   
+                        <a
+                          href="#"
+                          onClick={() => handleAddCartValue(items)}
+                          //  onClick={handleArray}
+                        >
+                          Add to Cart
+                        </a>
                         <a href="#" className="heart-wishlist">
                           <i className="fa-regular fa-heart"></i>
                         </a>
@@ -184,7 +177,8 @@ const ProductSection = () => {
                   </div>
                 </div>
               ))}
-              <ul className="pagination m-auto">
+
+              {/* <ul className="pagination m-auto">
                 <li className="prev">
                   <a href="#">
                     <i className="fa-solid fa-arrow-left"></i>
@@ -207,7 +201,7 @@ const ProductSection = () => {
                     <i className="fa-solid fa-arrow-right"></i>
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>
