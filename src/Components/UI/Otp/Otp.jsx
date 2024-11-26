@@ -2,32 +2,14 @@ import React, { useState } from "react";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-<<<<<<< Updated upstream
-import Pet_Form from "../Petform/Pet_Form";
-
-const Otp = ({ handleCancel, email }) => {
-  const [otp, setOtp] = useState();
-  let url = "https://grfc.mobrilz.digital/api";
-  let token = sessionStorage.getItem("authToken");
-  let navigate = useNavigate();
-  console.log("token aa raha hai ki nhi", token);
-
-const[petvalue, setValue]= useState(0)
-
-
-  const handleChange = (newValue) => {
-    newValue.preventDefault();
-    setOtp((prevotp) => ({
-      ...prevotp,
-      [newValue.target.name]: newValue.target.value,
-=======
-import OtpInput from 'react-otp-input';
+import OtpInput from "react-otp-input";
 
 const Otp = ({ handleCancel, email }) => {
   const [otp, setOtp] = useState("");
-  let url =process.env.REACT_APP_BACKEND_BASE_URL;
+  const [value, setValue] = useState();
+  let url = process.env.REACT_APP_BACKEND_BASE_URL;
   let token = localStorage.getItem("authToken");
-  
+
   let navigate = useNavigate();
   // console.log("token aa raha hai ki nhi", token);
   const handleChange = (e) => {
@@ -35,81 +17,73 @@ const Otp = ({ handleCancel, email }) => {
     setOtp((prevOtp) => ({
       ...prevOtp,
       // Update the otp with the new value
-      [e.target.name] : e.targe.value ,
->>>>>>> Stashed changes
+      [e.target.name]: e.targe.value,
     }));
   };
-  console.log("otp ki value" , otp)
+  console.log("otp ki value", otp);
 
   const handleOtp = async () => {
     try {
-      
-    
-    const OtpValidate = await axios.put(
-      `${url}/verify`,
-      {
-        otp: otp,
-      },
-      {
-        headers: {
-          "Authorization": token,
-          "Content-Type": "application/json",
+      const OtpValidate = await axios.put(
+        `${url}/verify`,
+        {
+          otp: otp,
         },
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (OtpValidate == 200) {
+        setValue(1);
+
+        navigate("/");
+      } else {
+        alert("Invalid OTP");
       }
-    );
-    if (OtpValidate==200){
-      setValue(1)
-      
-      navigate("/");
-    } else {
-      alert("Invalid OTP");
-    }
-  } catch (error) {
-      
-  }
+    } catch (error) {}
   };
 
   const handleProp = () => {
     console.log(handleCancel(false));
   };
 
-  
   return (
-    <>   
-    <div className="d-flex w-25 flex-column justify-content-center align-items-center py-5 bg-white container shadow rounded my-4 ">
-      <div className="d-flex flex-column justify-content-center align-items-center">
-        <div className="d-flex">
-          {" "}
-          <h2>OTP Verification</h2>{" "}
-        </div>
-        <p className="text-center">
-          we will send you an one time password
-          <br /> on this <b>{email}</b>
-        </p>
-        <div className="" style={{ width: "90%", height: "15%" }}>
-          <MuiOtpInput value={otp} onChange={setOtp} />
-        
-        </div>
+    <>
+      <div className="d-flex w-25 flex-column justify-content-center align-items-center py-5 bg-white container shadow rounded my-4 ">
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <div className="d-flex">
+            {" "}
+            <h2>OTP Verification</h2>{" "}
+          </div>
+          <p className="text-center">
+            we will send you an one time password
+            <br /> on this <b>{email}</b>
+          </p>
+          <div className="" style={{ width: "90%", height: "15%" }}>
+            <MuiOtpInput value={otp} onChange={setOtp} />
+          </div>
 
-        <div className="d-flex gap-2">
-          <button
-            onClick={handleOtp}
-            type="submit"
-            className="my-4 py-3 px-5 rounded-5 primary-color-bg $white text-white font-semibold transition-transform hover:scale-105"
-          >
-            Submit
-          </button>
-          <button
-            type="button"
-            className="my-4 py-3 px-5 rounded-5 danger-color-bg $white"
-            onClick={handleProp}
-          >
-            cancel
-          </button>
+          <div className="d-flex gap-2">
+            <button
+              onClick={handleOtp}
+              type="submit"
+              className="my-4 py-3 px-5 rounded-5 primary-color-bg $white text-white font-semibold transition-transform hover:scale-105"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              className="my-4 py-3 px-5 rounded-5 danger-color-bg $white"
+              onClick={handleProp}
+            >
+              cancel
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
     </>
   );
 };
