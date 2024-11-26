@@ -22,9 +22,9 @@ const ProductSection = () => {
     const productData = () => {
       try {
         axios
-          .get(`${url}/product/1`, {
-            headers: {  "Authorization" : token },
-          })
+          .get(`${url}/product/1`, 
+          
+        )
           .then((res) =>
             
            context.setdataProduct(res.data.data) )
@@ -61,7 +61,7 @@ const ProductSection = () => {
               <ul className="category">
                 <li>
                   <a href="#">
-                    Cat Supplies<span>32</span>
+                    All Product<span>32</span>
                   </a>
                 </li>
                 <li>
@@ -71,7 +71,7 @@ const ProductSection = () => {
                 </li>
                 <li>
                   <a href="#">
-                    Animal Feed<span>14</span>
+                    Medicine<span>14</span>
                   </a>
                 </li>
                 <li className="end">

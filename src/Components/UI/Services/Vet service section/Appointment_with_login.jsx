@@ -8,12 +8,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "antd";
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const Appointment_with_login = () => {
   let token = sessionStorage.getItem("token");
@@ -22,7 +22,6 @@ const Appointment_with_login = () => {
   let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
-
 
   const [open, setOpen] = useState(false);
 
@@ -60,7 +59,7 @@ const Appointment_with_login = () => {
         });
 
         setUserData([res.data.data]);
-        setLoader(false)
+        setLoader(false);
         setForm((prevForm) => ({
           ...prevForm,
           name: res.data.data.name,
@@ -127,163 +126,179 @@ const Appointment_with_login = () => {
             }}
           >
             <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
-            {loader ? <Skeleton/>: userData?.map((item, index) => (
-              <form
-                onSubmit={handleSubmitForm}
-                action=""
-                className="p-3"
-                key={index}
-              >
-                <input
-                  type="text"
-                  placeholder="username"
-                  className="form-control mb-3 txt-dg"
-                  value={item?.name}
-                  // name = "name"
-                  // onChange={handleChange}
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="form-control mb-3 txt_dg"
-                  value={item?.email}
-                  // name = "email"
-                  // onChange={handleChange}
-                />
-                <input
-                  type="number"
-                  placeholder="Phone"
-                  className="form-control mb-3 txt_dg"
-                  value={item?.phone}
-                  // name = "phone"
-                  // onChange={handleChange}
-                />
-                <input
-                  type="time"
-                  placeholder="Pickup Time"
-                  className="form-control mb-3 txt_dg "
-                  name="time"
-                  onChange={handleChange}
-                  required={true}
-                />
-                <input
-                  type="date"
-                  placeholder="Pickup Date"
-                  className="form-control mb-3 txt_dg"
-                  name="date"
-                  onChange={handleChange}
-                  required={true}
-                />
-                <label>
-                  <b>Pet Details </b>
-                </label>
-                <textarea
-                  name="pet_details"
-                  id=""
-                  placeholder="Write Here"
-                  className="form-control mb-3 "
-                  onChange={handleChange}
-                  required={true}
-                ></textarea>
-                <div className="table-responsive mb-3">
-                  <table class="table  table-striped ">
-                    <thead >
-                      <tr className="bg-success-subtle">
-                        <th>Owner Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Owner Size Record</th>
-                        <th>Pet Name</th>
-                        <th>Pet Code</th>
-                        <th>Status</th>
-                        <th>Species</th>
-                        <th>Breed</th>
-                        <th>Size</th>
-                        <th>Coat</th>
-                        <th>Character</th>
-                        <th>Sex</th>
-                        <th>Color</th>
-                        <th>DOB</th>
-                        <th>Weight Kg</th>
-                        <th>Size record date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                       
-                        <td>{item.name}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.email}</td>
-                        <td>{item.owner_size_rec}</td>
-                        <td>{item.pet_code}</td>
-                        <td>{item.pet_code}</td>
-                        <td>{item.status_ID}</td>
-                        <td>{item.species_id}</td>
-                        <td>{item.breed_id}</td>
-                        <td>{item.size_id}</td>
-                        <td>{item.coat_id}</td>
-                        <td>{item.character_id}</td>
-                        <td>{item.sex_id}</td>
-                        <td>{item.color_id}</td>
-                        <td>{item.birth_date}</td>
-                        <td>{item.weight}</td>
-                        
-                        <td>{item.size_record_date}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="flex justify-center">
-                  {" "}
-                  <button type="submit" onClick={handleClickOpen} className="btn btn-success" >
-                    Submit
-                  </button>{" "}
-                </div>
-              </form>
-            ))}
+            {loader ? (
+              <Skeleton />
+            ) : (
+              userData?.map((item, index) => (
+                <form
+                  onSubmit={handleSubmitForm}
+                  action=""
+                  className="p-3"
+                  key={index}
+                >
+                  <input
+                    type="text"
+                    placeholder="username"
+                    className="form-control mb-3 txt-dg"
+                    value={item?.name}
+                    // name = "name"
+                    // onChange={handleChange}
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    className="form-control mb-3 txt_dg"
+                    value={item?.email}
+                    // name = "email"
+                    // onChange={handleChange}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Phone"
+                    className="form-control mb-3 txt_dg"
+                    value={item?.phone}
+                    // name = "phone"
+                    // onChange={handleChange}
+                  />
+                  <input
+                    type="time"
+                    placeholder="Pickup Time"
+                    className="form-control mb-3 txt_dg "
+                    name="time"
+                    onChange={handleChange}
+                    required={true}
+                  />
+                  <input
+                    type="date"
+                    placeholder="Pickup Date"
+                    className="form-control mb-3 txt_dg"
+                    name="date"
+                    onChange={handleChange}
+                    required={true}
+                  />
+                  <label>
+                    <b>Pet Details </b>
+                  </label>
+                  <textarea
+                    name="pet_details"
+                    id=""
+                    placeholder="Write Here"
+                    className="form-control mb-3 "
+                    onChange={handleChange}
+                    required={true}
+                  ></textarea>
+                  <div className="table-responsive mb-3">
+                    <table class="table  table-striped ">
+                      <thead>
+                        <tr className="bg-success-subtle">
+                          <th>Owner Name</th>
+                          <th>Phone</th>
+                          <th>Email</th>
+                          <th>Owner Size Record</th>
+                          <th>Pet Name</th>
+                          <th>Pet Code</th>
+                          <th>Status</th>
+                          <th>Species</th>
+                          <th>Breed</th>
+                          <th>Size</th>
+                          <th>Coat</th>
+                          <th>Character</th>
+                          <th>Sex</th>
+                          <th>Color</th>
+                          <th>DOB</th>
+                          <th>Weight Kg</th>
+                          <th>Size record date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{item.name}</td>
+                          <td>{item.phone}</td>
+                          <td>{item.email}</td>
+                          <td>{item.owner_size_rec}</td>
+                          <td>{item.pet_code}</td>
+                          <td>{item.pet_code}</td>
+                          <td>{item.status_ID}</td>
+                          <td>{item.species_id}</td>
+                          <td>{item.breed_id}</td>
+                          <td>{item.size_id}</td>
+                          <td>{item.coat_id}</td>
+                          <td>{item.character_id}</td>
+                          <td>{item.sex_id}</td>
+                          <td>{item.color_id}</td>
+                          <td>{item.birth_date}</td>
+                          <td>{item.weight}</td>
+
+                          <td>{item.size_record_date}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="flex justify-center">
+                    {" "}
+                    <button
+                      type="submit"
+                      onClick={handleClickOpen}
+                      className="btn btn-success"
+                    >
+                      Submit
+                    </button>{" "}
+                  </div>
+                </form>
+              ))
+            )}
           </div>
         </div>
       </div>
 
       {/* modal */}
-    
-    
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
+
+   
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        
       >
         <DialogTitle id="alert-dialog-title">
-        
           <span className="text-center text-6xl">Booking Confirm</span>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {Object.values(form)?.map((item,index)=>(    
-            <form action="" key={index}>
+            <form action="">
               <div className="container">
                 <div className="row">
-                  <div className="col-6"><label htmlFor="">Name</label><span>{item.name}</span></div>
-                  <div className="col-6"><label htmlFor="">Email</label><span>{item.email}</span></div>
+                  <div className="col-6">
+                    <label htmlFor="">Name</label>
+                    <span>{form.name}</span>
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="">Email</label>
+                    <span>{form.email}</span>
+                  </div>
                 </div>
                 <div className="row">
-                  <div className="col-6"><label htmlFor="">Phone</label><span>{item.phone}</span></div>
-                  <div className="col-6"><label htmlFor="">Time</label><span>{item.time}</span></div>
+                  <div className="col-6">
+                    <label htmlFor="">Phone</label>
+                    <span>{form.phone}</span>
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="">Time</label>
+                    <span>{form.time}</span>
+                  </div>
                 </div>
                 <div className="row">
-                  <div className="col-6"><label htmlFor="">Date</label><span>{item.date}</span></div>
-                  <div className="col-6"><label htmlFor="">Pet Details</label><span>{item.pet_details}</span></div>
+                  <div className="col-6">
+                    <label htmlFor="">Date</label>
+                    <span>{form.date}</span>
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="">Pet Details</label>
+                    <span>{form.pet_details}</span>
+                  </div>
                 </div>
               </div>
-            </form>))}
-            
-            
-
+            </form>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -293,11 +308,6 @@ const Appointment_with_login = () => {
           </Button>
         </DialogActions>
       </Dialog>
-
-     
-     
-
-
     </>
   );
 };

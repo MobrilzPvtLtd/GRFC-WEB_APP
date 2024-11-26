@@ -1,20 +1,47 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { ValueContext } from '../../Context/Context_Hook';
+import axios from 'axios';
 
 const ProductSection = () => {
+
+  const[dataProduct, setdataProduct]=useState([])
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
+
+  useEffect(() => {
+    const productData = () => {
+      try {
+        axios
+          .get(`${url}/product/1`, 
+          
+        )
+          .then((res) =>
+            
+           setdataProduct(res.data.data) )
+          .catch((err) => console.error(err));
+       
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    productData();
+  }, []);
   return (
     <div>
       <section class="gap section-healthy-product" style={{backgroundColor: "#f5f5f5"}}>
     <div class="container">
         <div class="heading">
-            {/* <!-- <img src="assets/img/heading-img.png" alt="heading-img"> --> */}
+            
             <h6>Find Healthy Product</h6>
             <h2>Healthy Products</h2>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
+        { dataProduct.map((items, index) =>  ( 
+           
+            <div class="col-lg-3 col-md-4 col-sm-6" key={index}>
                 <div class="healthy-product">
                     <div class="healthy-product-img">
-                        <img src="assets/images_new/product1-min-305x350.png" alt="food"/>
+                        <img src={items.product_img}  alt="food"/>
                         <ul class="star">
                             <li><i class="fa-solid fa-star"></i></li>
                             <li><i class="fa-solid fa-star"></i></li>
@@ -29,106 +56,12 @@ const ProductSection = () => {
                           </a>
                         </div>
                     </div>
-                    <span>Animal Feed</span>
-                    <a href="our-products.html">Procan Adult Dog Food</a>
-                    <h6>$32.00</h6>
+                    <span>{items.title}</span>
+                    <a href="our-products.html">{items.description}</a>
+                    <h6>{items.price}</h6>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="healthy-product">
-                    <div class="healthy-product-img">
-                        <img src="assets/images_new/product1-min-305x350.png" alt="food"/>
-                        <ul class="star">
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <div class="add-to-cart">
-                          <a href="#">Add to Cart</a>
-                          <a href="#" class="heart-wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                          </a>
-                        </div>
-                        <h4>-24%</h4>
-                    </div>
-                    <span>Animal Feed</span>
-                    <a href="our-products.html">Best Organic Feeds</a>
-                    <h6><del>$32.00</del>$22.00</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="healthy-product">
-                    <div class="healthy-product-img">
-                        <img src="assets/images_new/product1-min-305x350.png" alt="food"/>
-                        <ul class="star">
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <div class="add-to-cart">
-                          <a href="#">Add to Cart</a>
-                          <a href="#" class="heart-wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                          </a>
-                        </div>
-                    </div>
-                    <span>Animal Feed</span>
-                    <a href="our-products.html">Green Papaya Fruit</a>
-                    <h6>$32.00</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="healthy-product">
-                    <div class="healthy-product-img">
-                        <img src="assets/images_new/product1-min-305x350.png" alt="food"/>
-                        <ul class="star">
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <div class="add-to-cart">
-                          <a href="#">Add to Cart</a>
-                          <a href="#" class="heart-wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                          </a>
-                        </div>
-                        <h4>-24%</h4>
-                    </div>
-                    <span>Animal Feed</span>
-                    <a href="our-products.html">KMR Pwdr 12oz</a>
-                    <h6><del>$32.00</del>$22.00</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="healthy-product mb-lg-0">
-                    <div class="healthy-product-img">
-                        <img src="assets/images_new/product1-min-305x350.png" alt="food"/>
-                        <ul class="star">
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                            <li><i class="fa-solid fa-star"></i></li>
-                        </ul>
-                        <div class="add-to-cart">
-                          <a href="#">Add to Cart</a>
-                          <a href="#" class="heart-wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                          </a>
-                        </div>
-                        <h4>-24%</h4>
-                    </div>
-                    <span>Animal Feed</span>
-                    <a href="our-products.html">Cattle Feed</a>
-                    <h6><del>$32.00</del>$22.00</h6>
-                </div>
-            </div>
+            </div>  ))}
+         
             <div class="col-lg-9">
                 <div class="deal-of-the-week">
                     <div class="healthy-product-img">
