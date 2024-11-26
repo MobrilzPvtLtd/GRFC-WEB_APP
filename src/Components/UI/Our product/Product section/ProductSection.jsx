@@ -140,23 +140,18 @@ const ProductSection = () => {
                 <div className="col-md-4 col-sm-6" key={index}>
                   <div className="healthy-product">
                     <div className="healthy-product-img">
-                      <img
+                      <a href="/subproduct"> <img
                         src={items.product_img}
                         className="w-fit h-fit aspect-square"
                         alt="food"
-                      />
-                      {/* <ul className="star">
-                        {[...Array(5)].map((_, starIndex) => (
-                          <li key={starIndex}>
-                            <i className="fa-solid fa-star"></i>
-                          </li>
-                        ))}
-                      </ul> */}
+                      />  </a>
+                     
+                      
                       <div className="add-to-cart">
                         <a
                           href="#"
                           onClick={() => handleAddCartValue(items)}
-                          //  onClick={handleArray}
+                          
                         >
                           Add to Cart
                         </a>
@@ -168,12 +163,7 @@ const ProductSection = () => {
                     <span>{items.title}</span>
                     <a href="product-details.html"> {items.description} </a>
                     <h6>{items.price}</h6>
-                    {/* {index % 2 === 1 && <h4>-24%</h4>}
-                    {index % 2 === 1 && (
-                      <h6>
-                        <del>$32.00</del>$22.00
-                      </h6>
-                    )} */}
+                   
                   </div>
                 </div>
               ))}

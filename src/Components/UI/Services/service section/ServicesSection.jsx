@@ -46,8 +46,8 @@ const ServicesSection = () => {
             
             <div  className="col-lg-4 col-md-6 my-4" key={index}>
             {/* <div className="we-provide"> */}
+              <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
               <div className="we-provide-img a01 flex justify-center my-5">
-                
                 <img className="w-40 aspect-square" src={item?.image_link} alt="we-provide-1" />
                 <svg width="250" height="250" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -58,9 +58,9 @@ const ServicesSection = () => {
                   ></path>
                 </svg>
               </div>
-              <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
                 <h5 className="text-center"><b>{item?.name} </b></h5>
               </a>
+              
             </div>
           //  </div>  
             ))}

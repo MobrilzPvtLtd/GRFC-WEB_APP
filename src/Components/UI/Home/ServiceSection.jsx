@@ -40,7 +40,7 @@ const ServiceSection = () => {
             <div  className="col-lg-4 col-md-6" key={index}>
             <div className="we-provide">
               <div className="we-provide-img a01 flex justify-center my-5">
-                
+              <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
                 <img className="w-60 aspect-square" src={item?.image_link} alt="we-provide-1" />
                 <svg className="" width="326" height="326" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -50,10 +50,10 @@ const ServiceSection = () => {
                     fill="#fedc4f"
                   ></path>
                 </svg>
-              </div>
-              <a onClick={()=>handleCategoryId(item.id)} href={`/services/${item.name}`}>
-                <h5><b>{item?.name} </b></h5>
+                <h5><b>{item?.name}</b></h5>
               </a>
+              </div>
+              
             </div>
            </div>  
             ))}
