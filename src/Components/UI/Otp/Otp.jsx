@@ -8,7 +8,7 @@ const Otp = ({ handleCancel, email }) => {
   const [otp, setOtp] = useState("");
   const [value, setValue] = useState();
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
-  let token = localStorage.getItem("authToken");
+  let token = sessionStorage.getItem("authToken");
 
   let navigate = useNavigate();
   // console.log("token aa raha hai ki nhi", token);
