@@ -18,11 +18,12 @@ const SidebarCart = ({ visible }) => {
     setIsVisible(visible);
   }, [visible]);
 
+  const subProductData = context.subproduct_data;
   useEffect(() => {
     // Transform context data to cartItems format
     const transformedItems = context.dataArray.reduce((acc, item) => {
       const existingItem = acc.find((i) => i.id === item.id);
-      console.log('object',existingItem)
+      
       if (existingItem) {
         existingItem.quantity += 1; 
       } else {
@@ -32,12 +33,17 @@ const SidebarCart = ({ visible }) => {
     }, []);
 
     setCartItems(transformedItems);
-  }, [context.dataArray]);
+  }, [context.dataArray , context.subproduct_data]);
+
+  // const mergeArray = (arr1 ,arr2)=>{
+  //   return [...arr1 , ...arr2]
+  // }
+  // const finalArray = mergeArray(context.dataArray , context.subproduct_data)
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (!isVisible) return null;
-  console.log('123456',context.dataArray ,'6555',cartItems,'iddd',)
+  console.log('123456',context.dataArray )
   return (
     <div id="lightbox" className="lightbox clearfix">
       <div className="white_content">
@@ -49,10 +55,10 @@ const SidebarCart = ({ visible }) => {
             {cartItems.map((item) => (
               <li key={item.id} className="d-flex align-items-center position-relative">
                 <div className="p-img light-bg">
-                  <img src={item.image || food1} alt="Product Image" />
+                  <img src={item.product_img} alt="Product Image" />
                 </div>
                 <div className="p-data">
-                  <h3 className="font-semi-bold">{item.name}</h3>
+                  <h3 className="font-semi-bold">{item.title}</h3>
                   <p className="theme-clr font-semi-bold">
                     ({item.quantity} x ${parseFloat(item.price).toFixed(2)})
                   </p>

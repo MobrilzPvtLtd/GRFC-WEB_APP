@@ -3,11 +3,14 @@ import product from "../../../../images_new/product1-min-305x350 (1)vngearhbwfje
 import product2 from "../../../../images_new/p53x73.png";
 import axios from "axios";
 import { ValueContext } from "../../../Context/Context_Hook";
+import { Link } from "react-router-dom";
+import { Skeleton } from "antd";
 
 const ProductSection = () => {
   const context = useContext(ValueContext);
 
   const [productvalue, setProductvalue] = useState(0);
+  const[loader, setLoader]= useState(true)
 
   let token = localStorage.getItem("token");
   // console.log("kkkkkkkkkk", token);
@@ -20,6 +23,7 @@ const ProductSection = () => {
           .get(`${url}/product/${productvalue}`)
           .then((res) => context.setdataProduct(res.data.data))
           .catch((err) => console.error(err));
+          setLoader(false)
       } catch (error) {
         console.error(error);
       }
@@ -33,8 +37,28 @@ const ProductSection = () => {
 
     context.setDataArray((prev) => [...prev, array]);
   };
+  const handleProps = (array) => {
+    // context.setCart_num(quantity);
+    context.setSubproduct_data(array);
+  };
 
-  console.log("kjhgf", context.Cart_num, "all product24", productvalue);
+
+  const Data_Product = context.dataProduct;
+  const Prod_price = (tabledata)=>{
+
+   return tabledata.filter((item) =>1235 < parseInt(item.price).toFixed(0) && parseInt(item.price).toFixed(0) < 2000);
+
+  }
+   const checkValue= Prod_price(Data_Product)
+    // console.log('wwwwwwwww', Data_Product.filter(Prod_price))
+const dataSort = Data_Product.sort((a, b)=>{
+return a.price - b.price
+})
+const largestArray = [...dataSort]
+const largestNum = largestArray[largestArray.length - 1].price
+const smallestNum = largestArray[0].price
+  
+  console.log("kjhgf", context.Cart_num, "all product24", productvalue,'adf',context.dataProduct,'ads', context.dataArray ,'99999999',Data_Product ,'2222',largestNum,smallestNum );
 
   return (
     <section className="gap products-section">
@@ -73,15 +97,15 @@ const ProductSection = () => {
               <div className="wrapper">
                 <fieldset className="filter-price">
                   <div className="price-wrap">
-                    <span className="price-title">Price</span>
+                    {/* <span className="price-title">Price</span> */}
                     <div className="price-wrap-1">
                       <input id="one" />
-                      <label htmlFor="one">$</label>
+                      <label htmlFor="one">${smallestNum}</label>
                     </div>
                     <div className="price-wrap_line">-</div>
                     <div className="price-wrap-2">
                       <input id="two" />
-                      <label htmlFor="two">$</label>
+                      <label htmlFor="two">${largestNum}</label>
                     </div>
                   </div>
                   <div className="price-field">
@@ -120,6 +144,7 @@ const ProductSection = () => {
               </ul>
             </div>
           </div>
+          {loader? <Skeleton active/>:
           <div className="col-lg-9">
             <div className="items-number">
               <span>Items 1-25 of 6133</span>
@@ -158,13 +183,13 @@ const ProductSection = () => {
                       </div>
                     </div>
                     <span>{items.title}</span>
-                    <a
-                      href={`/ourproduct/${items.description}`}
-                      onClick={() => handleAddCartValue(items)}
+                    <Link
+                      to={`/our-products/${items.description}`}
+                      onClick={() => handleProps(items)}
                     >
                       {" "}
                       {items.description}{" "}
-                    </a>
+                    </Link>
                     <h6>{items.price}</h6>
                   </div>
                 </div>
@@ -195,7 +220,7 @@ const ProductSection = () => {
                 </li>
               </ul> */}
             </div>
-          </div>
+          </div>}
         </div>
       </div>
     </section>

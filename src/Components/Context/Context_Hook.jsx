@@ -19,6 +19,7 @@ export const ValueProvider = ({ children }) => {
     address: "",
     phone: "",
   });
+  const [subproduct_data, setSubproduct_data] = useState([]);
 
   return (
     <ValueContext.Provider
@@ -35,6 +36,8 @@ export const ValueProvider = ({ children }) => {
         setCredentials,
         setTitle_name,
         titlename,
+        setSubproduct_data,
+        subproduct_data
       }}
     >
       {children}
