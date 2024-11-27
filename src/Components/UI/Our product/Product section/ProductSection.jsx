@@ -5,6 +5,7 @@ import axios from "axios";
 import { ValueContext } from "../../../Context/Context_Hook";
 import { Link } from "react-router-dom";
 import { Skeleton } from "antd";
+import InputRange from "react-input-range";
 
 const ProductSection = () => {
   const context = useContext(ValueContext);
@@ -43,23 +44,49 @@ const ProductSection = () => {
   };
 
 
-  const Data_Product = context.dataProduct;
-  const Prod_price = (tabledata)=>{
+   const Data_Product = context.dataProduct;
+//   const Prod_price = (tabledata)=>{
 
-   return tabledata.filter((item) =>1235 < parseInt(item.price).toFixed(0) && parseInt(item.price).toFixed(0) < 2000);
+//    return tabledata.filter((item) =>1235 < parseInt(item.price).toFixed(0) && parseInt(item.price).toFixed(0) < 2000);
 
-  }
-   const checkValue= Prod_price(Data_Product)
-    // console.log('wwwwwwwww', Data_Product.filter(Prod_price))
-const dataSort = Data_Product.sort((a, b)=>{
-return a.price - b.price
-})
-const largestArray = [...dataSort]
-const largestNum = largestArray[largestArray.length - 1].price
-const smallestNum = largestArray[0].price
+//   }
+//    const checkValue= Prod_price(Data_Product)
+//     // console.log('wwwwwwwww', Data_Product.filter(Prod_price))
+// const dataSort = Data_Product.sort((a, b)=>{
+// return a.price - b.price
+// })
+// const largestArray = [...dataSort]
+// const largestNum = largestArray[largestArray.length - 1].price
+// const smallestNum =  largestArray[0].price
+const Prod_price = (tabledata) => {
+  // Filter products based on price range (lower: 1235, upper: 2000)
+  return tabledata.filter((item) => {
+    const price = parseFloat(item.price); // Use parseFloat for proper comparison
+    return price >= 1235 && price <= 2000;
+  });
+};
+
+// Only filter products if data is available
+const checkValue = Data_Product ? Prod_price(context.dataProduct) : [];
+
+const dataSort = context.dataProduct ? context.dataProduct.sort((a, b) => a.price - b.price) : [];
+const largestArray = [...dataSort];
+const largestNum = largestArray[largestArray.length - 1]?.price || 0;
+const smallestNum = largestArray[0]?.price || 0;
   
-  console.log("kjhgf", context.Cart_num, "all product24", productvalue,'adf',context.dataProduct,'ads', context.dataArray ,'99999999',Data_Product ,'2222',largestNum,smallestNum );
+  console.log("kjhgf", context.Cart_num, "all product24", productvalue,'adf',context.dataProduct,'ads', context.dataArray ,'99999999',Data_Product ,'2222', checkValue);
+  const [lowerValue, setLowerValue] = useState(smallestNum);
+  const [upperValue, setUpperValue] = useState(largestNum);
 
+  const handleLowerChange = (event) => {
+    const value = Math.min(event.target.value, upperValue); 
+    setLowerValue(value)
+  };
+
+  const handleUpperChange = (event) => {
+    const value = Math.max(event.target.value, lowerValue);
+    setUpperValue(value);
+  };
   return (
     <section className="gap products-section">
       <div className="container">
@@ -71,22 +98,22 @@ const smallestNum = largestArray[0].price
               <ul className="category">
                 <li>
                   <a onClick={() => setProductvalue(0)}>
-                    All Product<span>32</span>
+                    All Product<span>7</span>
                   </a>
                 </li>
                 <li>
                   <a onClick={() => setProductvalue(2)}>
-                    Dog Supplies<span>12</span>
+                    Dog Supplies<span>1</span>
                   </a>
                 </li>
                 <li>
                   <a onClick={() => setProductvalue(1)}>
-                    Medicine<span>14</span>
+                    Medicine<span>6</span>
                   </a>
                 </li>
                 <li className="end">
                   <a onClick={() => setProductvalue(3)}>
-                    Accessories<span>32</span>
+                    Accessories<span>0</span>
                   </a>
                 </li>
               </ul>
@@ -95,46 +122,90 @@ const smallestNum = largestArray[0].price
               <h3>Price range</h3>
               <div className="boder-bar"></div>
               <div className="wrapper">
-                <fieldset className="filter-price">
-                  <div className="price-wrap">
-                    {/* <span className="price-title">Price</span> */}
-                    <div className="price-wrap-1">
-                      <input id="one" />
-                      <label htmlFor="one">${smallestNum}</label>
-                    </div>
-                    <div className="price-wrap_line">-</div>
-                    <div className="price-wrap-2">
-                      <input id="two" />
-                      <label htmlFor="two">${largestNum}</label>
-                    </div>
-                  </div>
-                  <div className="price-field">
-                    <input
-                      type="range"
-                      min="50"
-                      max="150"
-                      value="50"
-                      id="lower"
-                    />
-                    <input
-                      type="range"
-                      min="50"
-                      max="150"
-                      value="150"
-                      id="upper"
-                    />
-                  </div>
-                  <button className="w-100 button">Filter</button>
-                </fieldset>
+              {/* <fieldset className="filter-price">
+      <div className=" d-flex justify-between">
+        <div className=" price-wrap">
+         
+          <label htmlFor="one">${smallestNum}</label>
+        </div>
+
+       
+
+        <div className=" price-wrap">
+       
+          <label htmlFor="two">${largestNum}</label>
+        </div>
+      </div>
+
+    
+    
+      <div className="price-field">
+        <input
+          type="range"
+          min='20'
+          max='200'
+          value=''
+          id="lower"
+          // onChange={handleLowerChange}
+        />
+        <input
+          type="range"
+           min='20'
+          max='200'
+          value=''
+          id="upper"
+          // onChange={handleUpperChange}
+        />
+      </div>
+
+      <button className="w-100 button" >
+        Filter
+      </button>
+    </fieldset> */}
+
+<fieldset className="filter-price">
+        <div className="d-flex justify-between">
+          <div className="price-wrap">
+            <label htmlFor="one">${lowerValue}</label>
+          </div>
+          <div className="price-wrap">
+            <label htmlFor="two">${upperValue}</label>
+          </div>
+        </div>
+
+        {/* Range input to adjust the lower and upper values */}
+        <div className="price-field">
+          <input
+            type="range"
+            min='1234'
+            max='5000'
+            value={lowerValue}
+            id="lower"
+            onChange={handleLowerChange}
+          />
+          <input
+            type="range"
+           min='1234'
+            max='5000'
+            value={upperValue}
+            id="upper"
+            onChange={handleUpperChange}
+          />
+        </div>
+
+        <button className="w-100 button">
+          Filter
+        </button>
+      </fieldset>
               </div>
             </div>
             <div className="sidebar">
               <h3>Top Products</h3>
               <div className="boder-bar"></div>
               <ul className="top-products">
-                {[...Array(3)].map((_, index) => (
+                {context.dataProduct.slice(0,3).map((item, index) => (
                   <li key={index}>
-                    <img src={product2} alt="top-products" />
+                    <img src={item.product_img} alt="top-products" className="w-25"/>
                     <div>
                       <a href="#">Procan Adult Dog Food</a>
                       <span>$32.00</span>
