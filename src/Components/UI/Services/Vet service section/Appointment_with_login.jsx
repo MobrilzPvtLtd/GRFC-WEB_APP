@@ -19,6 +19,7 @@ const Appointment_with_login = () => {
   let token = sessionStorage.getItem("token");
   const [userData, setUserData] = useState();
   const [loader, setLoader] = useState(true);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   let id = sessionStorage.getItem("id");
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -113,12 +114,23 @@ const Appointment_with_login = () => {
       console.log(error);
     }
   };
+
+  
+  const handleConfirm = () => {
+   
+    navigate("/");
+  };
+
+  const handleCancel = () => {
+    setIsConfirmed(false); // Reset to form view
+  };
+
   console.log("Response:", userData, "dfghj id ka data", id_data);
 
   return (
     <>
       <div className="container my-4">
-        <div className="row">
+      {!isConfirmed ? (<div className="row">
           <div
             className="col-md-8  mx-auto rounded-xl"
             style={{
@@ -248,13 +260,54 @@ const Appointment_with_login = () => {
               ))
             )}
           </div>
+        </div> ):  (
+        // Confirmation Page
+        <div className="confirmation-container">
+          <h1 className="text-4xl py-4">Booking Confirmed</h1>
+          <div className="container">
+            <div className="row">
+              <div className="col-6">
+                <label>Name:</label> <span>{form.name}</span>
+              </div>
+              <div className="col-6">
+                <label>Email:</label> <span>{form.email}</span>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <label>Phone:</label> <span>{form.phone}</span>
+              </div>
+              <div className="col-6">
+                <label>Time:</label> <span>{form.time}</span>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <label>Date:</label> <span>{form.date}</span>
+              </div>
+              <div className="col-6">
+                <label>Pet Details:</label> <span>{form.pet_details}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="confirmation-buttons">
+            <button className="btn btn-danger mx-2" onClick={handleCancel}>
+              Cancel
+            </button>
+            <button className="btn btn-success" onClick={handleConfirm}>
+              Confirm
+            </button>
+          </div>
         </div>
+      ) 
+    }
       </div>
 
       {/* modal */}
 
    
-      <Dialog
+      {/* <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -307,7 +360,7 @@ const Appointment_with_login = () => {
             Done
           </Button>
         </DialogActions>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

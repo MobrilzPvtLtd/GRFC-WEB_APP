@@ -51,7 +51,7 @@ setVisible(state);
           <Route path="/services/:servicename/:subservicename" element={<Descr_Page/>} />
           <Route path="/services/:servicename/:subservicename/:prescription" element={<Prescription_Form/>} />
           <Route path="/petform" element={<Pet_Form/>} />
-          <Route path="/subproduct" element={<SubProduct/>} />
+          <Route path="/ourproduct/:id" element={<SubProduct/>} />
           <Route path="/forgot" element={<Forgotpassword/>} />
         </Routes>
         {/* <SliderBanner/> */}

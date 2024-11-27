@@ -22,10 +22,11 @@ const SidebarCart = ({ visible }) => {
     // Transform context data to cartItems format
     const transformedItems = context.dataArray.reduce((acc, item) => {
       const existingItem = acc.find((i) => i.id === item.id);
+      console.log('object',existingItem)
       if (existingItem) {
-        existingItem.quantity += 1; // Increment quantity if item already exists
+        existingItem.quantity += 1; 
       } else {
-        acc.push({ ...item, quantity: 1 }); // Initialize quantity as 1 for new items
+        acc.push({ ...item, quantity: 1 }); 
       }
       return acc;
     }, []);
@@ -36,7 +37,7 @@ const SidebarCart = ({ visible }) => {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (!isVisible) return null;
-  console.log('123456',context.dataArray)
+  console.log('123456',context.dataArray ,'6555',cartItems,'iddd',)
   return (
     <div id="lightbox" className="lightbox clearfix">
       <div className="white_content">

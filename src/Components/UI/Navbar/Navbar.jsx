@@ -156,9 +156,20 @@ const Navbar = ({ getVisibity }) => {
                   <Link to="/about-us">About</Link>
                 </li>
                 <li class="navbar-dropdown mx-4 ">
-                  <Link  className=" dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false" to='/'>Services</Link>
+                  <Link
+                    className=" dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    to=''
+                  >
+                    Services
+                  </Link>
 
-                  <ul class="dropdown-menu border-0 shadow-lg text-center  p-1" id="dropdown" >
+                  <ul
+                    class="dropdown-menu border-0 shadow-lg text-center  p-1"
+                    id="dropdown"
+                  >
                     <li className="">
                       <Link class="dropdown-item" to="/services/Farmica">
                         Farmica
@@ -175,17 +186,23 @@ const Navbar = ({ getVisibity }) => {
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="/services/Vet Cardiologia">
+                      <Link
+                        class="dropdown-item"
+                        to="/services/VetCardiologia"
+                      >
                         Vet Cardiologia
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="/services/Vet Centro Felino">
+                      <Link
+                        class="dropdown-item"
+                        to="/services/VetCentroFelino"
+                      >
                         Vet Centro Felino
                       </Link>
                     </li>
                     <li>
-                      <Link class="dropdown-item" to="/services/Vet Hotel">
+                      <Link class="dropdown-item" to="/services/VetHotel">
                         Vet Hotel
                       </Link>
                     </li>

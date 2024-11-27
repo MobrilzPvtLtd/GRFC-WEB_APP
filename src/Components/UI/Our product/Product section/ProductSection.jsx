@@ -9,7 +9,6 @@ const ProductSection = () => {
 
   const [productvalue, setProductvalue] = useState(0);
 
-
   let token = localStorage.getItem("token");
   // console.log("kkkkkkkkkk", token);
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -28,14 +27,14 @@ const ProductSection = () => {
 
     productData();
   }, [productvalue]);
+
   const handleAddCartValue = (array) => {
     context.setCart_num(context.Cart_num + 1);
 
     context.setDataArray((prev) => [...prev, array]);
   };
 
-  console.log("kjhgf", context.Cart_num, "all product24",productvalue);
-
+  console.log("kjhgf", context.Cart_num, "all product24", productvalue);
 
   return (
     <section className="gap products-section">
@@ -47,22 +46,22 @@ const ProductSection = () => {
               <div className="boder-bar"></div>
               <ul className="category">
                 <li>
-                  <a  onClick={() => setProductvalue(0)} >
+                  <a onClick={() => setProductvalue(0)}>
                     All Product<span>32</span>
                   </a>
                 </li>
                 <li>
-                  <a  onClick={() => setProductvalue(2)}>
+                  <a onClick={() => setProductvalue(2)}>
                     Dog Supplies<span>12</span>
                   </a>
                 </li>
                 <li>
-                  <a  onClick={() => setProductvalue(1)}>
+                  <a onClick={() => setProductvalue(1)}>
                     Medicine<span>14</span>
                   </a>
                 </li>
                 <li className="end">
-                  <a  onClick={() => setProductvalue(3)}>
+                  <a onClick={() => setProductvalue(3)}>
                     Accessories<span>32</span>
                   </a>
                 </li>
@@ -140,19 +139,17 @@ const ProductSection = () => {
                 <div className="col-md-4 col-sm-6" key={index}>
                   <div className="healthy-product">
                     <div className="healthy-product-img">
-                      <a href="/subproduct"> <img
-                        src={items.product_img}
-                        className="w-fit h-fit aspect-square"
-                        alt="food"
-                      />  </a>
-                     
-                      
+                      <a href="/subproduct">
+                        {" "}
+                        <img
+                          src={items.product_img}
+                          className="w-fit h-fit aspect-square"
+                          alt="food"
+                        />{" "}
+                      </a>
+
                       <div className="add-to-cart">
-                        <a
-                          href="#"
-                          onClick={() => handleAddCartValue(items)}
-                          
-                        >
+                        <a href="#" onClick={() => handleAddCartValue(items)}>
                           Add to Cart
                         </a>
                         <a href="#" className="heart-wishlist">
@@ -161,9 +158,14 @@ const ProductSection = () => {
                       </div>
                     </div>
                     <span>{items.title}</span>
-                    <a href="product-details.html"> {items.description} </a>
+                    <a
+                      href={`/ourproduct/${items.description}`}
+                      onClick={() => handleAddCartValue(items)}
+                    >
+                      {" "}
+                      {items.description}{" "}
+                    </a>
                     <h6>{items.price}</h6>
-                   
                   </div>
                 </div>
               ))}
