@@ -139,7 +139,7 @@ a{
 }
 h1{
     font-family: 'DynaPuff';
-    font-size: 76px;
+    /* font-size: 76px; */
     font-weight: 600;
 }
 h2 {
@@ -1157,7 +1157,7 @@ ul.star li {
 .deal-of-the-week {
     background-color: #940c69;
     padding: 20px;
-    display: flex;
+    /* display: flex; */
 }
 .deal-of-the-week .healthy-product {
     margin-left: 30px;
@@ -1191,7 +1191,7 @@ ul.star li {
     text-align: center;
     width: 90px;
     height: 90px;
-    padding: 21px;
+    padding: 18px;
     background-color: #9f2578;
     text-transform: uppercase;
     color: #fff;

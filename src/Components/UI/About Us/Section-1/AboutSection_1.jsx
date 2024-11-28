@@ -9,7 +9,7 @@ const AboutSection_1 = () => {
         <div className="row align-items-center">
           <div className="col-lg-6">
             <div className="heading two">
-              <h2 className='text-7xl font-bold'>Welcome to The Pet Care Company</h2>
+              <h2 className='text-4xl lg:text-7xl font-bold'>Welcome to The Pet Care Company</h2>
             </div>
             <div className="love-your-pets">
               <p>

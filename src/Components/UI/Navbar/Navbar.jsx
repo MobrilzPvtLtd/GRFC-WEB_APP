@@ -137,7 +137,9 @@ const Navbar = ({ getVisibity }) => {
             <a href="index.html">
               <img class="logo001" src={logo} alt="logo" />
             </a>
-            <nav class="navbar">
+
+          
+            <nav >
               <ul class="navbar-links">
                 <li class="navbar-dropdown mx-4">
                   <Link to="/">
@@ -287,7 +289,7 @@ const Navbar = ({ getVisibity }) => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           class="mobile-nav hmburger-menu"
           id="mobile-nav"
           style={{ display: "block" }}
@@ -406,7 +408,10 @@ const Navbar = ({ getVisibity }) => {
           </ul>
 
           <a href="JavaScript:void(0)" id="res-cross"></a>
-        </div>
+        </div> */}
+
+        {/* mobile navbar */}
+
       </header>
     </div>
   );

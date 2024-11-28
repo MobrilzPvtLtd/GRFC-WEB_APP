@@ -11,7 +11,7 @@ const PetCareService = () => {
           <img src="/assets/img/heading-img.png" alt="heading-img" />
           */}
           <h6>What We Provide</h6>
-          <h2 className='text-7xl font-bold'>Pet Care Services</h2>
+          <h2 className='text-4xl lg:text-7xl font-bold'>Pet Care Services</h2>
         </div>
         {/* Uncomment if needed
         <div className="row">

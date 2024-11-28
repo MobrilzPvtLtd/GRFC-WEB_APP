@@ -11,7 +11,7 @@ const PetCareMemories = () => {
         <img src="assets/img/heading-img.png" alt="heading-img" />
         */}
         <h6>Gallery Photos</h6>
-        <h2 className='text-7xl font-bold'>Pet Care Memories</h2>
+        <h2 className='text-4xl lg:text-7xl font-bold'>Pet Care Memories</h2>
       </div>
       <div className="row">
         <div className="col-lg-4 col-md-6">

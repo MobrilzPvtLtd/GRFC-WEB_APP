@@ -67,8 +67,8 @@ const CarouselBanner = () => {
                   <br></br>
                   {banner.heading.slice(11)}
                 </h1>
-                <p className=" lg:w-1/3 font-bold ">{banner.description}</p>
-                <button className="w-fit h-fit text-white bg-orange-600  px-3 py-1 rounded-lg font-semibold text-xl">View Services</button>
+                <p className=" lg:w-1/3 font-bold text-sm ">{banner.description}</p>
+                <button className="w-fit mh-fit text-white bg-orange-600  px-3 py-1 rounded-lg font-semibold text-sm">View Services</button>
               </div>
               <img
                 src={banner.image}
