@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 
-import tshirt from "../../../assets/images_new/tshirt_front.png";
 import { ValueContext } from "../../Context/Context_Hook";
 
 const SubProduct = () => {
@@ -9,27 +8,35 @@ const SubProduct = () => {
 
   const subproddata = [context.subproduct_data];
   const [price, setPrice] = useState(0);
-  
-
-  console.log("count11", quantity, "jdhakd", context.Cart_num, "naam", 'ads', context.dataArray ,context.subproduct_data);
+ 
+  console.log(
+    "count11",
+    quantity,
+    "jdhakd",
+    context.Cart_num,
+    "naam",
+    "ads",
+    context.dataArray,
+    context.subproduct_data
+  );
 
   const handlecart = (array) => {
     context.setCart_num(context.Cart_num + quantity);
     context.setDataArray((prev) => [...prev, array]);
   };
 
-  console.log("context ka data" , context.Cart_num)
+  console.log("context ka data", context.Cart_num ,quantity);
 
   return (
     <>
       <div className="container mt-64">
-        {subproddata?.map((item , index ,array)=>(
-            <div className="row" key={index}>
+        {subproddata?.map((item, index, array) => (
+          <div className="row" key={index}>
             <div className="col-md-4">
               <img src={item.product_img} alt="product" />
             </div>
             <div className="col-md-8">
-              <h2 className="text-3xl font-semibold mb-3">{item.name}</h2>
+              <h2 className="text-3xl font-semibold mb-3">{item.title}</h2>
               <p className="my-3 text-gray-600">{item.description}</p>
               <div className="flex items-center space-x-2">
                 <button
@@ -38,9 +45,11 @@ const SubProduct = () => {
                 >
                   4.3{" "}
                 </button>
-                <span className="text-gray-600">2367 ratings and 45 reviews</span>
+                <span className="text-gray-600">
+                  2367 ratings and 45 reviews
+                </span>
               </div>
-  
+
               <div className="flex justify-start mt-6 space-x-2">
                 <span className="text-xl font-medium pt-2">Size:</span>
                 <button className="bg-gray-300 rounded-full px-4 py-2 text-white">
@@ -59,7 +68,7 @@ const SubProduct = () => {
                   XXL
                 </button>
               </div>
-  
+
               <div className="flex items-center mt-6 space-x-4">
                 <button
                   className="bg-gray-300 rounded-2xl px-6 py-2 text-2xl text-white"
@@ -84,7 +93,7 @@ const SubProduct = () => {
                   <b>${price}</b>
                 </span> */}
               </div>
-  
+
               <div className="flex mt-6 space-x-4">
                 <button
                   onClick={() => handlecart(array[0])}
@@ -98,8 +107,7 @@ const SubProduct = () => {
               </div>
             </div>
           </div>
-          ))}
-        
+        ))}
       </div>
     </>
   );

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ValueContext } from '../../Context/Context_Hook';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const ProductSection = () => {
-
+  const context = useContext(ValueContext);
   const[dataProduct, setdataProduct]=useState([])
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -26,6 +27,16 @@ const ProductSection = () => {
 
     productData();
   }, []);
+
+  const handleAddCartValue = (array) => {
+    context.setCart_num(context.Cart_num + 1);
+
+    context.setDataArray((prev) => [...prev, array]);
+  };
+  const handleProps = (array) => {
+    // context.setCart_num(quantity);
+    context.setSubproduct_data(array);
+  };
   return (
     <div>
       <section class="gap section-healthy-product" style={{backgroundColor: "#f5f5f5"}}>
@@ -50,14 +61,16 @@ const ProductSection = () => {
                             <li><i class="fa-solid fa-star"></i></li>
                         </ul>
                         <div class="add-to-cart">
-                          <a href="#">Add to Cart</a>
+                        <Link  onClick={() => handleAddCartValue(items)}>
+                          Add to Cart
+                        </Link>
                           <a href="#" class="heart-wishlist">
                             <i class="fa-regular fa-heart"></i>
                           </a>
                         </div>
                     </div>
                     <span>{items.title}</span>
-                    <a href="our-products.html">{items.description}</a>
+                    <Link to={`/our-products/${items.description}`}  onClick={() => handleProps(items)} >{items.description}</Link>
                     <h6>{items.price}</h6>
                 </div>
             </div>  ))}

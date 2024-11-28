@@ -14,6 +14,7 @@ const ProductSection = () => {
   const[loader, setLoader]= useState(true)
 
   let token = localStorage.getItem("token");
+   
   // console.log("kkkkkkkkkk", token);
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -45,19 +46,7 @@ const ProductSection = () => {
 
 
    const Data_Product = context.dataProduct;
-//   const Prod_price = (tabledata)=>{
-
-//    return tabledata.filter((item) =>1235 < parseInt(item.price).toFixed(0) && parseInt(item.price).toFixed(0) < 2000);
-
-//   }
-//    const checkValue= Prod_price(Data_Product)
-//     // console.log('wwwwwwwww', Data_Product.filter(Prod_price))
-// const dataSort = Data_Product.sort((a, b)=>{
-// return a.price - b.price
-// })
-// const largestArray = [...dataSort]
-// const largestNum = largestArray[largestArray.length - 1].price
-// const smallestNum =  largestArray[0].price
+ 
 const Prod_price = (tabledata) => {
   // Filter products based on price range (lower: 1235, upper: 2000)
   return tabledata.filter((item) => {
@@ -235,19 +224,19 @@ const smallestNum = largestArray[0]?.price || 0;
                 <div className="col-md-4 col-sm-6" key={index}>
                   <div className="healthy-product">
                     <div className="healthy-product-img">
-                      <a href="/subproduct">
+                      <Link  to={`/our-products/${items.description}`}  onClick={() => handleProps(items)}>
                         {" "}
                         <img
                           src={items.product_img}
                           className="w-fit h-fit aspect-square"
                           alt="food"
                         />{" "}
-                      </a>
+                      </Link>
 
                       <div className="add-to-cart">
-                        <a href="#" onClick={() => handleAddCartValue(items)}>
+                        <Link  onClick={() => handleAddCartValue(items)}>
                           Add to Cart
-                        </a>
+                        </Link>
                         <a href="#" className="heart-wishlist">
                           <i className="fa-regular fa-heart"></i>
                         </a>
