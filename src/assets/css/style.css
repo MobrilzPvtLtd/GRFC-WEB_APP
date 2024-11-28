@@ -3852,8 +3852,8 @@ ol.breadcrumb li a{
 }
 .banner-img-1 svg {
     position: absolute;
-    top: -14px;
-    left: -14px;
+    top: -6px;
+    left: -4px;
 }
 .care-services .pet-grooming {
     background-color: #fff;
@@ -3872,8 +3872,8 @@ ol.breadcrumb li a{
 }
 .banner-img-2 svg {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -2px;
+    right: -2px;
 }
 /* 65. breadcrumb */
 .breadcrumb-item+.breadcrumb-item::before {

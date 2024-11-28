@@ -300,36 +300,37 @@ const ProductSection = () => {
     const productData = () => {
       try {
         axios
-          .get(`${url}/product/${productvalue}`)
-          .then((res) => context.setdataProduct(res.data.data))
-          .catch((err) => console.error(err));
+        .get(`${url}/product/${productvalue}`)
+        .then((res) => context.setdataProduct(res.data.data))
+        .catch((err) => console.error(err));
         setLoader(false);
       } catch (error) {
         console.error(error);
       }
     };
-
+    
     productData();
   }, [productvalue]);
-
+  
   const handleAddCartValue = (array) => {
     context.setCart_num(context.Cart_num + 1);
     context.setDataArray((prev) => [...prev, array]);
   };
-
+  
   const handleProps = (array) => {
     context.setSubproduct_data(array);
   };
-
+  
   // Filter products based on price range
   const filterByPrice = (products) => {
     return products.filter(
       (item) => parseFloat(item.price) >= priceRange.min && parseFloat(item.price) <= priceRange.max
     );
   };
-
+  
   const Data_Product = context.dataProduct;
-
+  
+  sessionStorage.setItem("data_subproduct",JSON.stringify(Data_Product));
   // If there are products available, filter them by price range
   const filteredProducts = Data_Product ? filterByPrice(Data_Product) : [];
 

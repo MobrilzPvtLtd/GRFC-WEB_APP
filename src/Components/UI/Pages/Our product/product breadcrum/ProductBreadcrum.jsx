@@ -5,25 +5,25 @@ import banner_2 from "../../../../../images_new/banner-img-2.jpg"
 
 const ProductBreadcrum = () => {
   return (
-    <section className="banner" style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})` , backgroundPosition:`center`}}>
+    <section className="banner" style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})` , backgroundPosition:`center`, backgroundSize: "cover"}}>
     <div className="container">
       <div className="row align-items-center">
-        <div className="col-lg-6">
+        <div className="col-lg-6 col-4">
           <div className="banner-text">
-            <h2 className='text-7xl font-bold'>Our Products</h2>
+            <h2 className='text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl'>Our Products</h2>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <a href="index.html">Home</a>
               </li>
-              <li className="breadcrumb-item active" aria-current="page">shop</li>
               <li className="breadcrumb-item active" aria-current="page">Our Products</li>
+              {/* <li className="breadcrumb-item active" aria-current="page">shop</li> */}
             </ol>
           </div>
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-6 col-8">
           <div className="banner-img">
             <div className="banner-img-1">
-              <svg width="260" height="260" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
+              <svg width="100%" height="100%" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -31,10 +31,10 @@ const ProductBreadcrum = () => {
                   fill="#fa441d"
                 ></path>
               </svg>
-              <img src={banner_1} alt="banner" />
+              <img src={banner_1} alt="banner" className='w-100 h-auto' />
             </div>
             <div className="banner-img-2">
-              <svg width="320" height="320" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
+              <svg width="100%" height="100%" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -42,7 +42,7 @@ const ProductBreadcrum = () => {
                   fill="#fa441d"
                 ></path>
               </svg>
-              <img src={banner_2} alt="banner" />
+              <img src={banner_2} alt="banner" className='w-100 h-auto ' />
             </div>
           </div>
         </div>

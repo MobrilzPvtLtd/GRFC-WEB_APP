@@ -5,7 +5,8 @@ import { ValueContext } from "../../Context/Context_Hook";
 const SubProduct = () => {
   const context = useContext(ValueContext);
   const [quantity, setQuantity] = useState(1);
-
+  let data_subproduct = sessionStorage.getItem("data_subproduct")
+ console.log('object222222222',data_subproduct)
   const subproddata = [context.subproduct_data];
   const [price, setPrice] = useState(0);
  
@@ -30,14 +31,14 @@ const SubProduct = () => {
   return (
     <>
       <div className="container mt-64">
-        {subproddata?.map((item, index, array) => (
+        {[data_subproduct]?.map((item, index, array) => (
           <div className="row" key={index}>
             <div className="col-md-4">
-              <img src={item.product_img} alt="product" />
+              <img src={item?.product_img} alt="product" />
             </div>
             <div className="col-md-8">
-              <h2 className="text-3xl font-semibold mb-3">{item.title}</h2>
-              <p className="my-3 text-gray-600">{item.description}</p>
+              <h2 className="text-3xl font-semibold mb-3">{item?.title}</h2>
+              <p className="my-3 text-gray-600">{item?.description}</p>
               <div className="flex items-center space-x-2">
                 <button
                   type="button"
