@@ -5,12 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ValueProvider } from './Components/Context/Context_Hook';
 import './i18Next'
-import { useTranslation } from 'react-i18next';
+
 import "./assets/css/style.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // t=useTranslation();
+  
   <React.StrictMode>
     <ValueProvider>  
 

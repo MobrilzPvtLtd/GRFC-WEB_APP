@@ -78,7 +78,7 @@ const ProductSection = () => {
             <div class="col-lg-9 ">
                 <div class="deal-of-the-week">
                     <div class="healthy-product-img">
-                        <h6>Deal of the Week</h6>
+                        <h6>Oferta de la semana</h6>
                         <img src="assets/images_new/product1-min-305x350.png" alt="food"/>
                         <ul class="star">
                             <li><i class="fa-solid fa-star"></i></li>
@@ -89,8 +89,8 @@ const ProductSection = () => {
                         </ul>
                     </div>
                     <div class="healthy-product">
-                        <span>Animal Feed</span>
-                        <a href="our-products.html">Healthy Dog Food Roaster Chicken</a>
+                        <span>alimento para animales</span>
+                        <a href="our-products.html">Comida Saludable Para Perros Pollo Asado</a>
                         <h6><del>$32.00</del>$22.00</h6>
                         <h5>up to 14% off</h5>
                         <div class="add-to-cart">

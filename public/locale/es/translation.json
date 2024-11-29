@@ -1,0 +1,14 @@
+{
+    "welcome": "Bienvenido",
+    "description": "Esta es una descripción en español",
+    "greeting": "Hola, ¿cómo estás?",
+    "Home":"Hogar",
+    "About":"Acerca de",
+    "Service":"Servicio",
+    "Products":"Producto",
+    "Contact":"Contacto",
+    "Login":"acceso",
+    "Register":"Registro"
+
+
+  }

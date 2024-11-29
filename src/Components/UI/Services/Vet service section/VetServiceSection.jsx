@@ -12,7 +12,7 @@ import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
 import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import axios from "axios";
 import { Skeleton } from "antd";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const VetServicesSection = () => {
   const [categoryId, setCategoryId] = useState(null);
@@ -24,6 +24,7 @@ const VetServicesSection = () => {
 
   setTimeout(() => {
     setCategoryId(localStorage.getItem("category_id"));
+    setCategoryName(localStorage.getItem("category_name"));
    
   }, 1000);
   console.log("yyyyy", categoryId);
@@ -122,9 +123,10 @@ const VetServicesSection = () => {
                       ></path>
                     </svg>
                   </div>
-                  <a href={`${urlparam}/${item?.name}`}>
+                  <Link to={`/services/${categoryName}/${(item?.name).toString().toLowerCase()}`}>
                     <h5>{item?.name}</h5>
-                  </a>
+                  </Link>
+                  
                 </div>
               </div>
             ))}

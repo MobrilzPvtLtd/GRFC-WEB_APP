@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import Otp from "../Otp/Otp";
 import loader_gif from '../../../images_new/loader.gif'
 import { toast } from "react-toastify";
+
 
 const LoginRegister = () => {
   const [loading , setLoading] = useState(false);
@@ -244,7 +245,7 @@ const LoginRegister = () => {
                           <label htmlFor="checkbox">Remember me</label>
                         </div>
                         <div className="second">
-                          <a href="javascript:void(0)">Forget a Password?</a>
+                          <Link to="/forget">Forget a Password?</Link>
                         </div>
                       </div>
                       {loading ? <img className="w-40" src={loader_gif} alt={loader_gif}></img> :

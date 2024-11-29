@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import doctor from "../../../../images_new/doctor2000011111.png";
 import ServiceBreadcrum from "../Service Breadcrum/ServiceBreadcrum";
 import bg from "../../../../images_new/background_2.png";
 import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
 import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import dog_pic from "../../../../images_new/pet-walking.jpg";
+import axios from "axios";
 
 const Descr_Page = () => {
   const urlparam =  window.location.pathname
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
+  const[description,setDescription]=useState()
+  
+  useEffect(() => {
+    const fetchCategory_descr = async () => {
+      try {
+        const res = await axios.get(`${url}/subcategory/2`);
+        setDescription(res.data.data);
+      
+      
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchCategory_descr();
+  }, []);
+
   return (
     <>
       <section
@@ -68,19 +87,13 @@ const Descr_Page = () => {
               <img src={dog_pic} alt="we" className="rounded-xl" />
             </div>
           </div>
-          <div className="col-lg-7 col-md-6  mb-4 mt-6">
-            <p className="p-5 text-xl">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Distinctio beatae quis dolores voluptates vitae tempora minus sunt
-              a illum similique quas nesciunt, praesentium numquam accusantium
-              sit aperiam? Illum, beatae ducimus!
-              <br /> <br />
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
-              magni dolorum aut? Eum eos fugiat cupiditate. Voluptatem
-              repellendus quos earum iure incidunt esse. Quam similique
-              molestiae rem a, eum esse!
+          <div className="col-lg-7 col-md-6  mb-2 mt-6">
+            {description?.map((item,index)=>(     
+            <p className="p-5 text-xl" key={index}>
+             {item?.description}
+             
             </p>
-
+             ))}
             <div className="flex justify-center">
               {" "}
               <button className="btn btn-success">
