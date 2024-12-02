@@ -396,6 +396,7 @@ const ProductSection = () => {
                     minValue={1200}
                     value={priceRange}
                     onChange={setPriceRange}
+                    formatLabel={() => ''}
                   />
                   <button className="w-100 button mt-3">Filter</button>
                 </fieldset>

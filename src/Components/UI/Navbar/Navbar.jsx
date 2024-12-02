@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Wishlist from "../Wishlist/Wishlist";
 
-// import './i18next'
 
 
 const Navbar = ({ getVisibity }) => {
@@ -182,9 +181,9 @@ const Navbar = ({ getVisibity }) => {
                   <li class="navbar-dropdown mx-4 ">
                     <Link
                       type="button" 
-                      data-bs-toggle="dropdown" 
-                      aria-expanded="false"
-                      to=""
+                      // data-bs-toggle="dropdown" 
+                      // aria-expanded="false"
+                      // to=""
                       className="dropdown-toggle"
                     >
                     Servicio
@@ -265,6 +264,19 @@ const Navbar = ({ getVisibity }) => {
               </div>
             </div>
           </div>
+          </header>
+        </div>
+        { context.wishlist_value === 1 ? <Wishlist/> :null}
+       
+  
+      </>
+    );
+  };
+  
+  export default Navbar;
+
+
+
           {/* <div
           class="mobile-nav hmburger-menu"
           id="mobile-nav"
@@ -387,13 +399,3 @@ const Navbar = ({ getVisibity }) => {
         </div> */}
 
           {/* mobile navbar */}
-        </header>
-      </div>
-      { context.wishlist_value === 1 ? <Wishlist/> :null}
-     
-
-    </>
-  );
-};
-
-export default Navbar;

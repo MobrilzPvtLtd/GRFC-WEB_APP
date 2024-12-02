@@ -7,6 +7,9 @@ import { ValueProvider } from './Components/Context/Context_Hook';
 import './i18Next'
 
 import "./assets/css/style.css"
+import 'bootstrap'; // Import Bootstrap JS
+import '@popperjs/core'; // Import Popper.js
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
