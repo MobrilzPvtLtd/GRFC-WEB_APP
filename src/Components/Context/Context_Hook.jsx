@@ -20,6 +20,9 @@ export const ValueProvider = ({ children }) => {
     phone: "",
   });
   const [subproduct_data, setSubproduct_data] = useState([]);
+  const [wishlist_value,setWishlist_value] =useState(0)
+  const [wishlist_count,setWishlist_count] =useState(0)
+  const [wishlist_data,setWishlist_Data] =useState([])
 
   return (
     <ValueContext.Provider
@@ -37,7 +40,13 @@ export const ValueProvider = ({ children }) => {
         setTitle_name,
         titlename,
         setSubproduct_data,
-        subproduct_data
+        subproduct_data,
+        wishlist_value,
+        setWishlist_value,
+        wishlist_data,
+        setWishlist_Data,
+        wishlist_count,
+        setWishlist_count
       }}
     >
       {children}

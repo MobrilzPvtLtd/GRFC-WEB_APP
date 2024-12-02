@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ValueContext } from '../../Context/Context_Hook';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ProductSection = () => {
   const context = useContext(ValueContext);
@@ -37,6 +38,18 @@ const ProductSection = () => {
     // context.setCart_num(quantity);
     context.setSubproduct_data(array);
   };
+ 
+
+  const handlewishlist_count = (product) => {
+    
+    if (!context.wishlist_data.some((item) => item.id === product.id)) {
+      context.setWishlist_Data((prev) => [...prev, product]);
+      context.setWishlist_count(context.wishlist_count + 1); // Increment count
+    } else {
+      toast.warn('Product already in wishlist!');
+    }
+    console.log('44444',context.wishlist_data,'count', context.wishlist_count) 
+  };
   return (
     <div>
       <section class="gap section-healthy-product" style={{backgroundColor: "#f5f5f5"}}>
@@ -64,9 +77,9 @@ const ProductSection = () => {
                         <Link  onClick={() => handleAddCartValue(items)}>
                           Add to Cart
                         </Link>
-                          <a href="#" class="heart-wishlist">
-                            <i class="fa-regular fa-heart"></i>
-                          </a>
+                          <Link to='' class="heart-wishlist">
+                            <i class="fa-regular fa-heart" onClick= {()=>handlewishlist_count(items)}></i>
+                          </Link>
                         </div>
                     </div>
                     <span>{items.title}</span>

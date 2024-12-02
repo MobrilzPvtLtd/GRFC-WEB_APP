@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
 import { useTranslation } from "react-i18next";
 import logo from "../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png";
+import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Wishlist from "../Wishlist/Wishlist";
+
 // import './i18next'
+
 
 const Navbar = ({ getVisibity }) => {
   const [visible, setVisible] = useState(true);
@@ -11,6 +18,9 @@ const Navbar = ({ getVisibity }) => {
   const [langCode , setLangCode] = useState("es")
   const context = useContext(ValueContext);
   const[langVal , setLangVal] = useState("")
+  const [category_data,setCategory_data] =useState([])
+  
+  let url = process.env.REACT_APP_BACKEND_BASE_URL;
 
 
   const handleVisible = () => {
@@ -42,6 +52,26 @@ const Navbar = ({ getVisibity }) => {
     setLangCode(selectedValue)
       
   }
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      try {
+        const res = await axios.get(`${url}/category`);
+        setCategory_data(res.data.data)
+        // setLoading(false);
+        // console.log(res)
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
+
+  const handlewislist = ()=>{
+    context.setWishlist_value(1||0)
+
+  }
   return (
     <>
       <div className="relative w-full bg-white">
@@ -70,7 +100,7 @@ const Navbar = ({ getVisibity }) => {
                           ></path>
                         </svg>
                       </i>
-                      <a href="mallto:username@domain.com">
+                      <a href="mallto:username@domain.com" class=" text-black">
                         username@domain.com
                       </a>
                      
@@ -94,7 +124,7 @@ const Navbar = ({ getVisibity }) => {
                           </g>
                         </svg>
                       </i>
-                      <a class="me-3" href="callto:+02101283492">
+                      <a class="me-3 text-black" href="callto:+02101283492">
                         +021 01283492
                       </a>
                     </div>
@@ -103,28 +133,7 @@ const Navbar = ({ getVisibity }) => {
                 <div>
                   <div class="time">
                     <div class="ordering">
-                      {/* <a href="#">Ordering</a>
-                    <div class="line"></div>
-                    <a href="#">Shipping</a>
-                    <div class="line"></div>
-                    <a href="#">Returns</a> */}
-                      <div class="line"></div>
-
-                      <select defaultValue={"es"} className="bg-slate-500" value={langCode} onChange={handleChange}>
-                        {" "}
-                        {lngs.map((lng, i) => (
-                         
-                            <option
-                              value={lng.code}
-                              key={lng.code}
-                              
-                            >
-                              {lng.native}
-                            </option>
-                          
-                        ))}
-                      </select>
-                    </div>
+                   
                     {token ? (
                       <div class="login">
                         <button
@@ -150,6 +159,7 @@ const Navbar = ({ getVisibity }) => {
               </div>
             </div>
           </div>
+           </div>
           <div class="container">
             <div class="bottom-bar">
               <a href="index.html">
@@ -160,9 +170,7 @@ const Navbar = ({ getVisibity }) => {
                 <ul class="navbar-links">
                   <li class="navbar-dropdown mx-4">
                     <Link to="/">
-                      <i>
-                        
-                      </i>
+                    
                       Hogar
 
                     </Link>
@@ -173,11 +181,11 @@ const Navbar = ({ getVisibity }) => {
                   </li>
                   <li class="navbar-dropdown mx-4 ">
                     <Link
-                      // className=" dropdown-toggle"
-                      // role="button"
-                      // data-bs-toggle="dropdown"
-                      // aria-expanded="false"
-                      // to=""
+                      type="button" 
+                      data-bs-toggle="dropdown" 
+                      aria-expanded="false"
+                      to=""
+                      className="dropdown-toggle"
                     >
                     Servicio
                     </Link>
@@ -186,42 +194,13 @@ const Navbar = ({ getVisibity }) => {
                       class="dropdown-menu border-0 shadow-lg text-center  p-1"
                       id="dropdown"
                     >
-                      {/* <li className="">
-                        <Link class="dropdown-item" to="/services/farmica">
-                          Farmica
+                      {category_data?.map((item,index)=>(  
+                      <li className="" key={index}>
+                        <Link class="dropdown-item" to={`/services/${item.name}`}>
+                          {item.name}
                         </Link>
-                      </li> */}
-                      {/* <li>
-                        <Link class="dropdown-item" to="/services/VetUCI">
-                          VetUCI
-                        </Link>
-                      </li>
-                      <li>
-                        <Link class="dropdown-item" to="/services/Medi+cotas">
-                          Medi+cotas
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          class="dropdown-item"
-                          to="/services/VetCardiologia"
-                        >
-                          Vet Cardiologia
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          class="dropdown-item"
-                          to="/services/VetCentroFelino"
-                        >
-                          Vet Centro Felino
-                        </Link>
-                      </li>
-                      <li>
-                        <Link class="dropdown-item" to="/services/VetHotel">
-                          Vet Hotel
-                        </Link>
-                      </li> */}
+                      </li> ))}
+                     
                     </ul>
                    
                   </li>
@@ -255,9 +234,12 @@ const Navbar = ({ getVisibity }) => {
                   </a>
                 </div>
                 <div class="line"></div>
-                <a href="#">
+                <Link  onClick={()=>handlewislist()} >
                   <i class="fa-regular fa-heart"></i>
-                </a>
+                  <span className="top-[1.5rem] right-[rem] bg-black rounded-[50%] w-5 flex justify-center items-center text-white p-1 text-xs absolute">
+                        {context.wishlist_count}
+                      </span>
+                </Link>
                 <div onClick={handleVisible} class="hamburger-icon">
                   <div class="donation">
                     <Link
@@ -407,6 +389,9 @@ const Navbar = ({ getVisibity }) => {
           {/* mobile navbar */}
         </header>
       </div>
+      { context.wishlist_value === 1 ? <Wishlist/> :null}
+     
+
     </>
   );
 };
