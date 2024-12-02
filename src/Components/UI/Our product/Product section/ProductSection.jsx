@@ -277,6 +277,7 @@ import { Skeleton } from "antd";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 const ProductSection = () => {
@@ -333,6 +334,17 @@ const ProductSection = () => {
   sessionStorage.setItem("data_subproduct",JSON.stringify(Data_Product));
   // If there are products available, filter them by price range
   const filteredProducts = Data_Product ? filterByPrice(Data_Product) : [];
+
+  const handlewishlist_count = (product) => {
+    
+    if (!context.wishlist_data.some((item) => item.id === product.id)) {
+      context.setWishlist_Data((prev) => [...prev, product]);
+      context.setWishlist_count(context.wishlist_count + 1); // Increment count
+    } else {
+      toast.warn('Product already in wishlist!');
+    }
+    console.log('44444',context.wishlist_data,'count', context.wishlist_count) 
+  };
 
   return (
     <section className="gap products-section">
@@ -445,9 +457,9 @@ const ProductSection = () => {
                           <Link onClick={() => handleAddCartValue(item)}>
                             Add to Cart
                           </Link>
-                          <a href="#" className="heart-wishlist">
-                            <i className="fa-regular fa-heart"></i>
-                          </a>
+                          <Link to='' className="heart-wishlist">
+                            <i className="fa-regular fa-heart" onClick= {()=>handlewishlist_count(item)}></i>
+                          </Link>
                         </div>
                       </div>
                       <span>{item.title}</span>
