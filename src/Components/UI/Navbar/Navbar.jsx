@@ -180,11 +180,11 @@ const Navbar = ({ getVisibity }) => {
                   </li>
                   <li class="navbar-dropdown mx-4 ">
                     <Link
-                      type="button" 
-                      // data-bs-toggle="dropdown" 
+                   
+                      data-bs-toggle="dropdown" 
                       // aria-expanded="false"
                       // to=""
-                      className="dropdown-toggle"
+                      // className="dropdown-toggle"
                     >
                     Servicio
                     </Link>

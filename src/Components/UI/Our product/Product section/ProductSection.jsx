@@ -279,71 +279,79 @@ import "react-input-range/lib/css/index.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const ProductSection = () => {
   const context = useContext(ValueContext);
 
   const [productvalue, setProductvalue] = useState(0);
   const [loader, setLoader] = useState(true);
-  
+
   let token = localStorage.getItem("token");
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
-  
+
   const dataSort = context.dataProduct
-  ? context.dataProduct.sort((a, b) => a.price - b.price)
-  : [];
+    ? context.dataProduct.sort((a, b) => a.price - b.price)
+    : [];
   const largestArray = [...dataSort];
   const largestNum = largestArray[largestArray.length - 1]?.price || 0;
   const smallestNum = largestArray[0]?.price || 0;
-  
-  const [priceRange, setPriceRange] = useState({ min: smallestNum, max: largestNum });
+
+  const [priceRange, setPriceRange] = useState({
+    min: smallestNum,
+    max: largestNum,
+  });
   useEffect(() => {
     const productData = () => {
       try {
         axios
-        .get(`${url}/product/${productvalue}`)
-        .then((res) => context.setdataProduct(res.data.data))
-        .catch((err) => console.error(err));
+          .get(`${url}/product/${productvalue}`)
+          .then((res) => context.setdataProduct(res.data.data))
+          .catch((err) => console.error(err));
         setLoader(false);
       } catch (error) {
         console.error(error);
       }
     };
-    
+
     productData();
   }, [productvalue]);
-  
+
   const handleAddCartValue = (array) => {
     context.setCart_num(context.Cart_num + 1);
     context.setDataArray((prev) => [...prev, array]);
   };
-  
+
   const handleProps = (array) => {
     context.setSubproduct_data(array);
   };
-  
+
   // Filter products based on price range
   const filterByPrice = (products) => {
     return products.filter(
-      (item) => parseFloat(item.price) >= priceRange.min && parseFloat(item.price) <= priceRange.max
+      (item) =>
+        parseFloat(item.price) >= priceRange.min &&
+        parseFloat(item.price) <= priceRange.max
     );
   };
-  
+
   const Data_Product = context.dataProduct;
-  
-  sessionStorage.setItem("data_subproduct",JSON.stringify(Data_Product));
+
+  sessionStorage.setItem("data_subproduct", JSON.stringify(Data_Product));
   // If there are products available, filter them by price range
   const filteredProducts = Data_Product ? filterByPrice(Data_Product) : [];
 
   const handlewishlist_count = (product) => {
-    
     if (!context.wishlist_data.some((item) => item.id === product.id)) {
       context.setWishlist_Data((prev) => [...prev, product]);
       context.setWishlist_count(context.wishlist_count + 1); // Increment count
     } else {
-      toast.warn('Product already in wishlist!');
+      toast.warn("Product already in wishlist!");
     }
-    console.log('44444',context.wishlist_data,'count', context.wishlist_count) 
+    console.log(
+      "44444",
+      context.wishlist_data,
+      "count",
+      context.wishlist_count
+    );
   };
 
   return (
@@ -356,24 +364,24 @@ const ProductSection = () => {
               <div className="boder-bar"></div>
               <ul className="category">
                 <li>
-                  <a onClick={() => setProductvalue(0)}>
+                  <Link onClick={() => setProductvalue(0)}>
                     All Products<span>7</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a onClick={() => setProductvalue(2)}>
+                  <Link onClick={() => setProductvalue(2)}>
                     Dog Supplies<span>1</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a onClick={() => setProductvalue(1)}>
+                  <Link onClick={() => setProductvalue(1)}>
                     Medicine<span>6</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="end">
-                  <a onClick={() => setProductvalue(3)}>
+                  <Link onClick={() => setProductvalue(3)}>
                     Accessories<span>0</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -390,13 +398,13 @@ const ProductSection = () => {
                       <label htmlFor="two">${priceRange.max}</label>
                     </div>
                   </div>
-                
+
                   <InputRange
                     maxValue={5000}
-                    minValue={1200}
+                    minValue={1000}
                     value={priceRange}
                     onChange={setPriceRange}
-                    formatLabel={() => ''}
+                    formatLabel={() => ""}
                   />
                   <button className="w-100 button mt-3">Filter</button>
                 </fieldset>
@@ -406,19 +414,21 @@ const ProductSection = () => {
               <h3>Top Products</h3>
               <div className="boder-bar"></div>
               <ul className="top-products">
-                {context.dataProduct.slice(0, 3).map((item, index) => (
-                  <li key={index}>
-                    <img
-                      src={item.product_img}
-                      alt="top-products"
-                      className="w-25"
-                    />
-                    <div>
-                      <a href="#">Procan Adult Dog Food</a>
-                      <span>$32.00</span>
-                    </div>
-                  </li>
-                ))}
+                {context.dataProduct
+                  .slice(0, 3)
+                  ?.map((item, index) => (
+                    <li key={index}>
+                      <img
+                        src={item.product_img}
+                        alt="top-products"
+                        className="w-25"
+                      />
+                      <div>
+                        <a href="#">Procan Adult Dog Food</a>
+                        <span>$32.00</span>
+                      </div>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -427,7 +437,10 @@ const ProductSection = () => {
           ) : (
             <div className="col-lg-9">
               <div className="items-number">
-                <span>Items {filteredProducts.length} of {context.dataProduct.length}</span>
+                <span>
+                  Items {filteredProducts.length} of{" "}
+                  {context.dataProduct.length}
+                </span>
                 <div className="d-flex align-items-center">
                   <span>Sort By</span>
                   <select className="nice-select Advice">
@@ -458,8 +471,11 @@ const ProductSection = () => {
                           <Link onClick={() => handleAddCartValue(item)}>
                             Add to Cart
                           </Link>
-                          <Link to='' className="heart-wishlist">
-                            <i className="fa-regular fa-heart" onClick= {()=>handlewishlist_count(item)}></i>
+                          <Link to="" className="heart-wishlist">
+                            <i
+                              className="fa-regular fa-heart"
+                              onClick={() => handlewishlist_count(item)}
+                            ></i>
                           </Link>
                         </div>
                       </div>
@@ -484,4 +500,3 @@ const ProductSection = () => {
 };
 
 export default ProductSection;
-

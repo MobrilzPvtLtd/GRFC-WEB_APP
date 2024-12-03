@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 const Wishlist = () => {
     const context = useContext(ValueContext);
     let token = sessionStorage.getItem("token");
-  const [isVisible, setIsVisible] = useState(true); // Popup is visible by default
+  const [isVisible, setIsVisible] = useState(true); 
   const[datawislist,set_datawishlist] =useState();
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -55,7 +55,7 @@ const Wishlist = () => {
  
         
        } catch (error) {
-         console.error("Error fetching user data:", error);
+         console.error("Error fetching  data:", error);
        }
      };
      if (token) {
@@ -63,14 +63,14 @@ const Wishlist = () => {
      }
    }, [token]);
 
-  if (!isVisible) return null; // Render nothing if the popup is closed
+  if (!isVisible) return null; 
  
  
   
 
   const handlewishlist_remove = async(id)=>{
     try {
-        // Send DELETE request to the server
+  
         const response = await axios.delete(`${url}/wishlist/${id}`,{
             headers: {
                 Authorization: token,
@@ -81,10 +81,10 @@ const Wishlist = () => {
         if (response.status === 200) {
           toast.success('Item removed successfully');
           
-          // Update wishlist in the context after successful deletion
+          
           context.setWishlist_Data((prev) => prev.filter((item) => item.id !== id));
           
-          // Decrease the wishlist count
+        
           context.setWishlist_count(context.wishlist_count - 1);
         } else {
           console.error('Failed to remove the item');
