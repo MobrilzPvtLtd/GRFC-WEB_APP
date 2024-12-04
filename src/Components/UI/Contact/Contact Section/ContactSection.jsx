@@ -1,45 +1,67 @@
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+
 
 const ContactSection = () => {
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
   const [formData, setFormData] = useState({
-    address: '',
-    name: '',
-    email: '',
-    service: '',
-    message: '',
-    petType: '',
+    first_name: "",
+    last_name: "",
+    email: "",
+    description: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [e.target.name]: e.target.value 
     });
   };
 
-  const handleRadioChange = (e) => {
-    setFormData({
-      ...formData,
-      petType: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission logic here
+   
     console.log(formData);
-  };
+    try {
+      const Contact_form = await axios.post(
+        `${url}/contactus`,
+        {
+          first_name: formData.first_name,
+          last_name: formData.last_name,
+          email: formData.email,
+          description: formData.description,
+         
+        }
+      );
 
+      if (Contact_form.status === 200) {
+        toast.success("Submit successfully!");
+        setFormData({
+          first_name: "",
+          last_name: "",
+          email: "",
+          description: "",
+        })
+       
+      }
+    } catch (error) {
+      toast.error("Failed: " );
+    }
+  };
+ 
   return (
-    <section className='mt-5'>
+    <section className="mt-5">
       <div className="container">
         <div className="row">
           <div className="col-lg-6">
             <div className="find-a-dog contact">
               <h2>Find a dog walker or pet care</h2>
-              <p>Place your trust in We Love Pets, an award-winning dog walking and pet care</p>
-              <form onSubmit={handleSubmit}>
+              <p>
+                Place your trust in We Love Pets, an award-winning dog walking
+                and pet care
+              </p>
+              {/* <form onSubmit={handleSubmit}>
                 <input
                   type="text"
                   name="address"
@@ -50,7 +72,7 @@ const ContactSection = () => {
                 <button type="submit" className="button">
                   Find Branch
                 </button>
-              </form>
+              </form> */}
               <div className="head-office">
                 <div className="d-flex align-items-center">
                   <i className="fa-solid fa-location-dot"></i>
@@ -71,7 +93,7 @@ const ContactSection = () => {
             <div className="looking position-relative contact">
               <form className="looking-form" onSubmit={handleSubmit}>
                 <h3>Book Your Place or Find out More</h3>
-                <ul>
+                {/* <ul>
                   <li>
                     <input
                       type="radio"
@@ -98,87 +120,48 @@ const ContactSection = () => {
                       <div className="inside"></div>
                     </div>
                   </li>
-                </ul>
+                </ul> */}
                 <div className="row">
                   <div className="col-lg-6">
                     <input
                       type="text"
-                      name="name"
-                      placeholder="Complete Name"
-                      value={formData.name}
+                      name="first_name"
+                      placeholder="First Name"
+                      value={formData.first_name}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="col-lg-6">
+                    <input
+                      type="text"
+                      name="last_name"
+                      placeholder="Last Name"
+                      value={formData.last_name}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="col-lg-6">
                     <input
-                      type="text"
+                      type="email"
                       name="email"
                       placeholder="Email Address"
                       value={formData.email}
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="col-lg-6">
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Complete Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="col-lg-6">
-                    <input
-                      type="text"
-                      name="email"
-                      placeholder="Email Address"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="col-lg-12">
-                    <select
-                      className="nice-select Advice"
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                    >
-                      <option value="">Select Service</option>
-                      <option value="service1">Services 1</option>
-                      <option value="service2">Services 2</option>
-                      <option value="service3">Services 3</option>
-                      <option value="service4">Services 4</option>
-                    </select>
-                  </div>
-                  <div className="col-lg-6">
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Complete Name"
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="col-lg-6">
-                    <input
-                      type="text"
-                      name="email"
-                      placeholder="Email Address"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="col-lg-12">
+
+                  <div className="col-lg-12 mt-3">
                     <textarea
-                      name="message"
-                      placeholder="Please let us know which day package you're interested"
-                      value={formData.message}
+                      name="description"
+                      placeholder="Write from here............"
+                      value={formData.description}
                       onChange={handleChange}
                     ></textarea>
                   </div>
                 </div>
                 <button type="submit" className="button">
-                  Submit Now
+                  Send
                 </button>
               </form>
             </div>

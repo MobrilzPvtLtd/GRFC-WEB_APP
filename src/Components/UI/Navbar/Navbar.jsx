@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Wishlist from "../Wishlist/Wishlist";
+import Dropdown from "../../Dropdown";
 
 
 
@@ -178,10 +179,10 @@ const Navbar = ({ getVisibity }) => {
                   <li class="navbar-dropdown mx-4">
                     <Link to="/about-us">Acerca de</Link>
                   </li>
-                  <li class="navbar-dropdown mx-4 ">
+                  {/* <li class="navbar-dropdown mx-4 ">
                     <Link
                    
-                      data-bs-toggle="dropdown" 
+                      // data-bs-toggle="dropdown" 
                       // aria-expanded="false"
                       // to=""
                       // className="dropdown-toggle"
@@ -202,7 +203,11 @@ const Navbar = ({ getVisibity }) => {
                      
                     </ul>
                    
-                  </li>
+                  </li> */}
+                  <ul>
+        {/* Passing "Servicio" as the label and category_data as items */}
+        <Dropdown label="Servicio" items={category_data} />
+      </ul>
                  
                   <li class="navbar-dropdown mx-4">
                     <Link to="/our-products">Producto</Link>
