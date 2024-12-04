@@ -4,24 +4,22 @@ import { ValueContext } from "../../Context/Context_Hook";
 import { useTranslation } from "react-i18next";
 import logo from "../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png";
 import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Wishlist from "../Wishlist/Wishlist";
 import Dropdown from "../../Dropdown";
 
 
-
 const Navbar = ({ getVisibity }) => {
   const [visible, setVisible] = useState(true);
   const [cartNumber, setCartNumber] = useState(0);
-  const [langCode , setLangCode] = useState("es")
+  const [langCode, setLangCode] = useState("es");
   const context = useContext(ValueContext);
-  const[langVal , setLangVal] = useState("")
-  const [category_data,setCategory_data] =useState([])
-  
-  let url = process.env.REACT_APP_BACKEND_BASE_URL;
+  const [langVal, setLangVal] = useState("");
+  const [category_data, setCategory_data] = useState([]);
 
+  let url = process.env.REACT_APP_BACKEND_BASE_URL;
 
   const handleVisible = () => {
     setVisible(!visible);
@@ -37,27 +35,24 @@ const Navbar = ({ getVisibity }) => {
 
   const { t, i18n } = useTranslation();
 
-  useEffect(()=>{
+  useEffect(() => {
     const handleTrans = () => {
       i18n.changeLanguage(langCode);
-      console.log("code " , langCode)
+      console.log("code ", langCode);
     };
-    handleTrans(langCode)
-  },[langCode])
-  
-  
+    handleTrans(langCode);
+  }, [langCode]);
 
-  const handleChange = async(e)=>{
+  const handleChange = async (e) => {
     const selectedValue = e.target.value;
-    setLangCode(selectedValue)
-      
-  }
+    setLangCode(selectedValue);
+  };
 
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
         const res = await axios.get(`${url}/category`);
-        setCategory_data(res.data.data)
+        setCategory_data(res.data.data);
         // setLoading(false);
         // console.log(res)
       } catch (error) {
@@ -68,10 +63,9 @@ const Navbar = ({ getVisibity }) => {
     fetchCategoryData();
   }, []);
 
-  const handlewislist = ()=>{
-    context.setWishlist_value(1||0)
-
-  }
+  const handlewislist = () => {
+    context.setWishlist_value(1 || 0);
+  };
   return (
     <>
       <div className="relative w-full bg-white">
@@ -103,7 +97,6 @@ const Navbar = ({ getVisibity }) => {
                       <a href="mallto:username@domain.com" class=" text-black">
                         username@domain.com
                       </a>
-                     
                     </div>
                     <div class="phone d-flex align-items-center">
                       <i>
@@ -133,33 +126,34 @@ const Navbar = ({ getVisibity }) => {
                 <div>
                   <div class="time">
                     <div class="ordering">
-                   
-                    {token ? (
-                      <div class="login">
-                        <button
-                          className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110"
-                          onClick={() => {
-                            sessionStorage.removeItem("token");
-                            localStorage.removeItem("User_info");
-                            window.location.reload();
-                          }}
-                        >
-                          {" "}
-                          <i class="fa-solid fa-user"></i> Logout
-                        </button>
-                      </div>
-                    ) : (
-                      <div class="login">
-                        <i class="fa-solid fa-user"></i>
-                        <Link to="/login-Register">Login / Register</Link>
-                      </div>
-                    )}
+                      {token ? (
+                        <div class="login">
+                          <button
+                            className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110"
+                            onClick={() => {
+                              sessionStorage.removeItem("token");
+                              localStorage.removeItem("User_info");
+                              window.location.reload();
+                            }}
+                          >
+                            {" "}
+                            <i class="fa-solid fa-user"></i> Logout
+                          </button>
+                        </div>
+                      ) : (
+                        <div class="login">
+                          <i class="fa-solid fa-user"></i>
+                          <Link to="/login-Register">Login / Register</Link>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
+  
+    
               </div>
             </div>
           </div>
-           </div>
           <div class="container">
             <div class="bottom-bar">
               <a href="index.html">
@@ -169,51 +163,21 @@ const Navbar = ({ getVisibity }) => {
               <nav>
                 <ul class="navbar-links">
                   <li class="navbar-dropdown mx-4">
-                    <Link to="/">
-                    
-                      Hogar
-
-                    </Link>
-                    
+                    <Link to="/">Hogar</Link>
                   </li>
                   <li class="navbar-dropdown mx-4">
                     <Link to="/about-us">Acerca de</Link>
                   </li>
-                  {/* <li class="navbar-dropdown mx-4 ">
-                    <Link
-                   
-                      // data-bs-toggle="dropdown" 
-                      // aria-expanded="false"
-                      // to=""
-                      // className="dropdown-toggle"
-                    >
-                    Servicio
-                    </Link>
 
-                    <ul
-                      class="dropdown-menu border-0 shadow-lg text-center  p-1"
-                      id="dropdown"
-                    >
-                      {category_data?.map((item,index)=>(  
-                      <li className="" key={index}>
-                        <Link class="dropdown-item" to={`/services/${item.name}`}>
-                          {item.name}
-                        </Link>
-                      </li> ))}
-                     
-                    </ul>
-                   
-                  </li> */}
                   <ul>
-        {/* Passing "Servicio" as the label and category_data as items */}
-        <Dropdown label="Servicio" items={category_data} />
-      </ul>
-                 
+                    {/* Passing "Servicio" as the label and category_data as items */}
+                    <Dropdown label="Servicio" items={category_data} />
+                  </ul>
+
                   <li class="navbar-dropdown mx-4">
                     <Link to="/our-products">Producto</Link>
-                    
                   </li>
-                 
+
                   <li class="navbar-dropdown mx-4">
                     <Link to="/contact-us">Contacto</Link>
                   </li>
@@ -238,11 +202,11 @@ const Navbar = ({ getVisibity }) => {
                   </a>
                 </div>
                 <div class="line"></div>
-                <Link  onClick={()=>handlewislist()} >
+                <Link onClick={() => handlewislist()}>
                   <i class="fa-regular fa-heart"></i>
                   <span className="top-[1.5rem] right-[rem] bg-black rounded-[50%] w-5 flex justify-center items-center text-white p-1 text-xs absolute">
-                        {context.wishlist_count}
-                      </span>
+                    {context.wishlist_count}
+                  </span>
                 </Link>
                 <div onClick={handleVisible} class="hamburger-icon">
                   <div class="donation">
@@ -269,20 +233,17 @@ const Navbar = ({ getVisibity }) => {
               </div>
             </div>
           </div>
-          </header>
-        </div>
-        { context.wishlist_value === 1 ? <Wishlist/> :null}
-       
-  
-      </>
-    );
-  };
-  
-  export default Navbar;
+        </header>
+      </div>
+      {context.wishlist_value === 1 ? <Wishlist /> : null}
+    </>
+  );
+};
 
+export default Navbar;
 
-
-          {/* <div
+{
+  /* <div
           class="mobile-nav hmburger-menu"
           id="mobile-nav"
           style={{ display: "block" }}
@@ -401,6 +362,9 @@ const Navbar = ({ getVisibity }) => {
           </ul>
 
           <a href="JavaScript:void(0)" id="res-cross"></a>
-        </div> */}
+        </div> */
+}
 
-          {/* mobile navbar */}
+{
+  /* mobile navbar */
+}
