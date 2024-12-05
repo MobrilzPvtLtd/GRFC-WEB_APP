@@ -1,15 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import food1 from '../../../images_new/img/food-categorie-1.png';
 import food2 from '../../../images_new/img/food-categorie-2.png';
 import { Link } from 'react-router-dom';
 import { ValueContext } from '../../Context/Context_Hook';
+import axios from 'axios';
 
 const SidebarCart = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [cartItems, setCartItems] = useState([]);
-  
+  const[api_cartitems, setApi_cartitems]= useState()
+  let token = sessionStorage.getItem('token')
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
+  const sidebarRef = useRef(null); // Ref for sidebar element
+
   const context = useContext(ValueContext);
 
   const closePopup = () => setIsVisible(false);
@@ -19,6 +24,9 @@ const SidebarCart = ({ visible }) => {
   }, [visible]);
 
   const subProductData = context.subproduct_data;
+ 
+
+
   useEffect(() => {
     // Transform context data to cartItems format
     const transformedItems = context.dataArray.reduce((acc, item) => {
@@ -35,36 +43,84 @@ const SidebarCart = ({ visible }) => {
     setCartItems(transformedItems);
   }, [context.dataArray , context.subproduct_data]);
 
-  // const mergeArray = (arr1 ,arr2)=>{
-  //   return [...arr1 , ...arr2]
-  // }
-  // const finalArray = mergeArray(context.dataArray , context.subproduct_data)
+  useEffect(()=>{
+    if(isVisible){
 
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      Fetch_cartdata()
+    }
+   
+  },[token,isVisible])
 
+  const Fetch_cartdata = async()=> {  
+    const data_api = await axios.get(`${url}/cart`,  {
+      headers: {
+         Authorization: token,
+        "Content-Type": "application/json",
+      },
+    })
+    // console.log('dasdad',data_api)
+    setApi_cartitems(data_api.data.data)
+  }
+
+  //  console.log('dlkasjk')
+
+  const total = api_cartitems?.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const handleCartRemove = async(id)=>{
+    console.log('remove cart item', id)
+     
+        const removedata= await axios.delete(`${url}/cart/${id}`,{
+          headers: {
+             Authorization: token,
+            "Content-Type": "application/json",
+          },
+        })
+        Fetch_cartdata()
+       console.log('sdsd',removedata)
+        // setCartItems(removedata)
+       
+      }
+     
+    // Close the sidebar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsVisible(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+  
   if (!isVisible) return null;
-  console.log('123456',context.dataArray )
+  console.log('123456',context.dataArray, 'cartuiop',cartItems , 'api dataa', api_cartitems)
   return (
-    <div id="lightbox" className="lightbox clearfix">
-      <div className="white_content">
+    <div id="lightbox" className="lightbox clearfix" >
+      <div className="white_content" ref={sidebarRef}>
+
         <button className="textright" onClick={closePopup}>
           <FontAwesomeIcon icon={faCircleXmark} />
         </button>
         <div className="cart-popup">
           <ul>
-            {cartItems.map((item) => (
+            {api_cartitems?.map((item) => (
               <li key={item.id} className="d-flex align-items-center position-relative">
                 <div className="p-img light-bg">
-                  <img src={item.product_img} alt="Product Image" />
+                  <img src={item?.product_img} alt="Product Image" />
                 </div>
                 <div className="p-data">
-                  <h3 className="font-semi-bold">{item.title}</h3>
+                  <h3 className="font-semi-bold">{item?.title}</h3>
                   <p className="theme-clr font-semi-bold">
-                    ({item.quantity} x ${parseFloat(item.price).toFixed(2)})
+                    ({item.quantity} x ${parseFloat(item.price)?.toFixed(2)})
                   </p>
                 </div>
                 <button
-                  onClick={() => alert(`Remove ${item.name} from cart`)} 
+                  onClick={() =>handleCartRemove(item.id) } 
                   className="remove-btn"
                 >
                   <FontAwesomeIcon icon={faCircleXmark} />
@@ -75,7 +131,7 @@ const SidebarCart = ({ visible }) => {
 
           <div className="cart-total d-flex align-items-center justify-content-between">
             <span className="font-semi-bold">Total:</span>
-            <span className="font-semi-bold">${total.toFixed(2)}</span>
+            <span className="font-semi-bold">${total?.toFixed(2)}</span>
           </div>
 
           <div className="cart-btns d-flex align-items-center justify-content-between">

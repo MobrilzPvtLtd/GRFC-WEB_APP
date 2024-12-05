@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const ProductSection = () => {
+  let token = sessionStorage.getItem('token')
   const context = useContext(ValueContext);
   const[dataProduct, setdataProduct]=useState([])
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -29,10 +30,36 @@ const ProductSection = () => {
     productData();
   }, []);
 
-  const handleAddCartValue = (array) => {
+  const handleAddCartValue = async(array) => {
+    
+    try {
+      
+      const cartvalue_api = await axios.post(`${url}/cart`,  {
+        product_id:array.id,
+        quantity: context.Cart_num + 1
+       
+      },{
+        headers: {
+           Authorization: token,
+          "Content-Type": "application/json",
+        },
+      })
+      if (cartvalue_api.status === 200) {
+        toast.success("insert in a cart successfully!", {
+          autoClose: 1000,
+          });
+
+        context.setDataArray((prev) => [...prev, array]);
+      }
+      console.log('carrtvalue_api',cartvalue_api) 
+    } catch (error) {
+      console.log(error)
+      
+    }
     context.setCart_num(context.Cart_num + 1);
 
-    context.setDataArray((prev) => [...prev, array]);
+   
+
   };
   const handleProps = (array) => {
     // context.setCart_num(quantity);
