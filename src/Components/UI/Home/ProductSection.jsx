@@ -31,7 +31,7 @@ const ProductSection = () => {
   }, []);
 
   const handleAddCartValue = async(array) => {
-    
+       
     try {
       
       const cartvalue_api = await axios.post(`${url}/cart`,  {
@@ -57,7 +57,7 @@ const ProductSection = () => {
       
     }
     context.setCart_num(context.Cart_num + 1);
-
+    
    
 
   };

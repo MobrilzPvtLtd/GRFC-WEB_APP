@@ -9,6 +9,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Wishlist from "../Wishlist/Wishlist";
 import Dropdown from "../../Dropdown";
+import UserDropdown from "../User_Dropdown";
 
 
 const Navbar = ({ getVisibity }) => {
@@ -123,7 +124,9 @@ const Navbar = ({ getVisibity }) => {
                     </div>
                   </div>
                 </div>
-                <div>
+                
+               
+                {/* <div>
                   <div class="time">
                     <div class="ordering">
                       {token ? (
@@ -147,10 +150,11 @@ const Navbar = ({ getVisibity }) => {
                         </div>
                       )}
                     </div>
+                   
                   </div>
-                </div>
+                </div> */}
   
-    
+                <UserDropdown/>
               </div>
             </div>
           </div>
