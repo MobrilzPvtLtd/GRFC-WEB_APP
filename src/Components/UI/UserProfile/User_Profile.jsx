@@ -236,7 +236,7 @@ const User_Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await axios.get(`${url}/user/${id}`, {
+        const res = await axios.get(`${url}/user`, {
           headers: {
             Authorization: token,
             "Content-Type": "application/json",
@@ -264,10 +264,10 @@ const User_Profile = () => {
     if (userData) {
       setUpdate_Form({
         name: userData.owner_name,
-        address: userData.address,
+        address: userData.owner_address,
         phone: userData.phone,
-        dob: userData.dob,
-        identif: userData.identif,
+        dob: userData.owner_dob,
+        identif: userData.owner_sex,
       });
     }
   };
@@ -299,10 +299,10 @@ const User_Profile = () => {
         setUserData((prev) => ({
           ...prev,
           owner_name: update_form.name,
-          address: update_form.address,
+          address: update_form.owner_address,
           phone: update_form.phone,
-          dob: update_form.dob,
-          identif: update_form.identif,
+          dob: update_form.owner_dob,
+          identif: update_form.owner_sex,
         }));
 
         // Close the modal programmatically
@@ -339,7 +339,7 @@ const User_Profile = () => {
               <label>
                 <b>Address -</b>{" "}
               </label>
-              <span>{userData?.address}</span>
+              <span>{userData?.owner_address}</span>
             </div>
           </div>
           <div className="row">
@@ -353,7 +353,7 @@ const User_Profile = () => {
               <label>
                 <b>Date of Birth -</b>
               </label>
-              <span>{userData?.dob}</span>
+              <span>{userData?.owner_dob}</span>
             </div>
           </div>
           <div className="row">
@@ -361,7 +361,7 @@ const User_Profile = () => {
               <label>
                 <b>Identif -</b>
               </label>
-              <span>{userData?.identif}</span>
+              <span>{userData?.owner_sex}</span>
             </div>
           </div>
         </div>
