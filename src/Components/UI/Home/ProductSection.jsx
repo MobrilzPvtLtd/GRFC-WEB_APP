@@ -31,35 +31,45 @@ const ProductSection = () => {
   }, []);
 
   const handleAddCartValue = async(array) => {
-       
-    try {
-      
-      const cartvalue_api = await axios.post(`${url}/cart`,  {
-        product_id:array.id,
-        quantity: context.Cart_num + 1
-       
-      },{
-        headers: {
-           Authorization: token,
-          "Content-Type": "application/json",
-        },
-      })
-      if (cartvalue_api.status === 200) {
-        toast.success("insert in a cart successfully!", {
-          autoClose: 1000,
-          });
-
-        context.setDataArray((prev) => [...prev, array]);
-      }
-      console.log('carrtvalue_api',cartvalue_api) 
-    } catch (error) {
-      console.log(error)
-      
-    }
-    context.setCart_num(context.Cart_num + 1);
+    if (token) {
+      try {
+        const cartvalue_api = await axios.post(
+          `${url}/cart`,
+          {
+            product_id: array.id,
+            quantity: context.Cart_num + 1,
+          },
+          {
+            headers: {
+              Authorization: token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
     
-   
-
+        if (cartvalue_api.status === 200) {
+          toast.success("Inserted into the cart successfully!", {
+            autoClose: 1000,
+          });
+    
+      
+          context.setDataArray((prev) => [...prev, array]);
+        }
+        console.log('cartvalue_api', cartvalue_api);
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    } else {
+    
+      console.warn("No token provided. Updating cart locally.");
+    
+      // Update cart locally
+      context.setCart_num(context.Cart_num + 1);
+      context.setDataArray((prev) => [...prev, array]);
+    }
+    
+    // Increment cart number
+    context.setCart_num(context.Cart_num + 1);
   };
   const handleProps = (array) => {
     // context.setCart_num(quantity);

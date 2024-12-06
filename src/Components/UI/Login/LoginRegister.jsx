@@ -59,8 +59,8 @@ const LoginRegister = () => {
         sessionStorage.setItem("token", response.data.data.token)
         sessionStorage.setItem("id", response.data.data.user_id)
         const User_info = JSON.stringify(credentials);
-       window.location.reload();
-      },1000)
+      //  window.location.reload();
+      },5000)
     } else {
       alert("Invalid Credentials");
       setLoading(false);
