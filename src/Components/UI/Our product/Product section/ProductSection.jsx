@@ -285,7 +285,7 @@ const ProductSection = () => {
   const [productvalue, setProductvalue] = useState(0);
   const [loader, setLoader] = useState(true);
 
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
   const dataSort = context.dataProduct
@@ -315,9 +315,47 @@ const ProductSection = () => {
     productData();
   }, [productvalue]);
 
-  const handleAddCartValue = (array) => {
+  const handleAddCartValue = async(array) => {
+    if (token) {
+      try {
+        const cartvalue_api = await axios.post(
+          `${url}/cart`,
+          {
+            product_id: array.id,
+            quantity: context.Cart_num + 1,
+          },
+          {
+            headers: {
+              Authorization: token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+    
+        if (cartvalue_api.status === 200) {
+          toast.success("Inserted into the cart successfully!", {
+            autoClose: 1000,
+          });
+    
+      
+          context.setDataArray((prev) => [...prev, array]);
+        }
+        console.log('cartvalue_api', cartvalue_api);
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    } else {
+    
+      console.warn("No token provided. Updating cart locally.");
+    
+      // Update cart locally
+      context.setCart_num(context.Cart_num + 1);
+      context.setDataArray((prev) => [...prev, array]);
+    }
+    
+    // Increment cart number
     context.setCart_num(context.Cart_num + 1);
-    context.setDataArray((prev) => [...prev, array]);
+   
   };
 
   const handleProps = (array) => {
@@ -339,13 +377,43 @@ const ProductSection = () => {
   // If there are products available, filter them by price range
   const filteredProducts = Data_Product ? filterByPrice(Data_Product) : [];
 
-  const handlewishlist_count = (product) => {
-    if (!context.wishlist_data.some((item) => item.id === product.id)) {
-      context.setWishlist_Data((prev) => [...prev, product]);
-      context.setWishlist_count(context.wishlist_count + 1); // Increment count
-    } else {
-      toast.warn("Product already in wishlist!");
+  const handlewishlist_count = async(product) => {
+
+    try {
+      const wislistvalue_api = await axios.post(
+        `${url}/wishlist`,
+        {
+          product_id: product.id,
+          
+        },
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      if (wislistvalue_api.status === 200) {
+        toast.success("Added Successfully", {
+          autoClose: 1000,
+        });
+  
+    
+        context.setWishlist_Data((prev) => [...prev, product]);
+      }
+      console.log('cartvalue_api', wislistvalue_api);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
     }
+
+    context.setWishlist_count(context.wishlist_count + 1);
+    // if (!context.wishlist_data.some((item) => item.id === product.id)) {
+    //   context.setWishlist_Data((prev) => [...prev, product]);
+    //   context.setWishlist_count(context.wishlist_count + 1); // Increment count
+    // } else {
+    //   toast.warn("Product already in wishlist!");
+    // }
     console.log(
       "44444",
       context.wishlist_data,
@@ -462,7 +530,7 @@ const ProductSection = () => {
                           onClick={() => handleProps(item)}
                         >
                           <img
-                            src={item.product_img}
+                            src={item.product_img || item.product_img_url}
                             className="w-fit h-fit aspect-square"
                             alt="food"
                           />

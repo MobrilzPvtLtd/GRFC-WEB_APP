@@ -140,7 +140,7 @@ const SidebarCart = ({ visible }) => {
                 className="d-flex align-items-center position-relative"
               >
                 <div className="p-img light-bg">
-                  <img src={item?.product_img} alt="Product Image" />
+                  <img src={item?.product_img_url} alt="Product Image" />
                 </div>
                 <div className="p-data">
                   <h3 className="font-semi-bold">{item?.title}</h3>

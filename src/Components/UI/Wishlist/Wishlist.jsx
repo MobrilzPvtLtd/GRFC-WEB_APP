@@ -33,10 +33,10 @@ const Wishlist = () => {
       return acc;
     }, []);
 
-    set_datawishlist(transformedItems);
+    // set_datawishlist(transformedItems);
   }, [context.wishlist_data]);
 
-   const total = datawislist?.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  //  const total = datawislist?.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
    useEffect(() => {
      const fetchWishlistData = async() => {
@@ -46,7 +46,7 @@ const Wishlist = () => {
              Authorization: token,
              "Content-Type": "application/json",
            },
-         }).then((res)=> console.log('dta555555555',res))
+         }).then((res)=> set_datawishlist(res.data.data))
            .catch((err)=>console.log(err));
 
            console.log('111111111111',res)
@@ -105,15 +105,13 @@ const Wishlist = () => {
           <ul>  <span className='text-3xl '>Wishlist <i className="fa-regular fa-heart"></i> </span>
             {datawislist?.map((item) => (
             
-              <li key={item.id} className="d-flex align-items-center position-relative">
+              <li key={item?.id} className="d-flex align-items-center position-relative">
                 <div className="p-img light-bg">
-                  <img src={item.product_img} alt="Product Image" />
+                  <img src={item?.product_img_url} alt="Product Image" />
                 </div>
                 <div className="p-data">
-                  <h3 className="font-semi-bold">{item.title}</h3>
-                  <p className="theme-clr font-semi-bold">
-                    ({item.quantity} x ${parseFloat(item.price).toFixed(2)})
-                  </p>
+                  <h3 className="font-semi-bold">{item?.title}</h3>
+                
                 </div>
                 <button
                   onClick={() => {handlewishlist_remove(item.id)}}
@@ -125,10 +123,7 @@ const Wishlist = () => {
             ))}
           </ul>
 
-          <div className="cart-total d-flex align-items-center justify-content-between">
-            <span className="font-semi-bold">Total:</span>
-            <span className="font-semi-bold">${total?.toFixed(2)}</span>
-          </div>
+         
 
           <div className="cart-btns d-flex align-items-center justify-content-between">
             <Link to="/view-cart" className="font-bold">
