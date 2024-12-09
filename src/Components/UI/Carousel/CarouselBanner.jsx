@@ -19,23 +19,23 @@ const CarouselBanner = () => {
     {
       image: banner1,
       alt: "Banner 1",
-      heading: "Take a Good Care of Pets",
+      heading: "Cuide bien a las mascotas",
       description:
-        "We are your local dog home boarding service giving you complete",
+        "Somos su servicio local de alojamiento para perros en casa y le brindamos una completa",
     },
     {
       image: banner1,
       alt: "Banner 2",
-      heading: "Take a Good Care of Pets",
+      heading: "Cuide bien a las mascotas",
       description:
-        "We are your local dog home boarding service giving you complete",
+        "Somos su servicio local de alojamiento para perros en casa y le brindamos una completa",
     },
     {
       image: banner1,
       alt: "Banner 3",
-      heading: "Take a Good Care of Pets",
+      heading: "Cuide bien a las mascotas",
       description:
-        "We are your local dog home boarding service giving you complete",
+        "Somos su servicio local de alojamiento para perros en casa y le brindamos una completa",
     },
   ];
 
@@ -68,7 +68,8 @@ const CarouselBanner = () => {
                   {banner.heading.slice(11)}
                 </h1>
                 <p className=" lg:w-1/3 font-bold text-sm ">{banner.description}</p>
-                <button className="w-fit mh-fit text-white bg-orange-600  px-3 py-1 rounded-lg font-semibold text-sm">View Services</button>
+                <button className="w-fit mh-fit text-white bg-orange-600  px-3 py-1 rounded-lg font-semibold text-sm">
+                Ver servicios</button>
               </div>
               <img
                 src={banner.image}
