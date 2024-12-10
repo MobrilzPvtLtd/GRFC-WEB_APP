@@ -78,7 +78,7 @@ const SidebarCart = ({ visible }) => {
   const handleCartRemove = async (id) => {
     if (token) {
       try {
-        console.log("Removing cart item via API:", id);
+        // console.log("Removing cart item via API:", id);
         await axios.delete(`${url}/cart/${id}`, {
           headers: {
             Authorization: token,

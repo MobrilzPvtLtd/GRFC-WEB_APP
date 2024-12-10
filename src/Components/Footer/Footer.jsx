@@ -14,7 +14,7 @@ const Footer = () => {
     >
       <div class="container">
         <div class="row">
-          <div class="col-xl-4 col-lg-4">
+          <div class="col-xl-4 col-lg-4 col-md-6">
             <div class="logo">
               <a href="index.html">
                 <img
@@ -23,7 +23,7 @@ const Footer = () => {
                   alt="logo"
                 />
               </a>
-              <p className="font-semibold w-96">
+              <p className="font-semibold ">
                 At vero eos et accusam justo duo dolo res et ea rebum. Stet
                 clita kasd guber gren. Aenean sollici tudin lorem qsben elit
                 clita.
@@ -103,7 +103,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-4">
+          <div class="col-xl-4 col-lg-4 col-md-6">
             <div class="widget-title">
               <h3>Quick Links</h3>
               <div class="boder"></div>
@@ -135,7 +135,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-4">
+          <div class="col-xl-4 col-lg-4 col-md-6 sm:mt-5">
             <div class="working-hours">
               <div class="widget-title">
                 <h3>working hours</h3>

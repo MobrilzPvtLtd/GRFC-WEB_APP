@@ -33,7 +33,7 @@ const Prescription_Form = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const res = await axios.get(`${url}/user/${id}`, {
+        const res = await axios.get(`${url}/user`, {
           headers: {
             Authorization: token,
             "Content-Type": "application/json",

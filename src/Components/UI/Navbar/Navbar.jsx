@@ -11,7 +11,6 @@ import Wishlist from "../Wishlist/Wishlist";
 import Dropdown from "../../Dropdown";
 import UserDropdown from "../User_Dropdown";
 
-
 const Navbar = ({ getVisibity }) => {
   const [visible, setVisible] = useState(true);
   const [cartNumber, setCartNumber] = useState(0);
@@ -19,6 +18,7 @@ const Navbar = ({ getVisibity }) => {
   const context = useContext(ValueContext);
   const [langVal, setLangVal] = useState("");
   const [category_data, setCategory_data] = useState([]);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
 
@@ -70,7 +70,7 @@ const Navbar = ({ getVisibity }) => {
   return (
     <>
       <div className="relative w-full bg-white">
-        <header className="fixed top-0">
+        <header className="fixed top-0 ">
           <div class="top-bar bg-white">
             <div class="container">
               <div class="top-bar-slid">
@@ -124,8 +124,7 @@ const Navbar = ({ getVisibity }) => {
                     </div>
                   </div>
                 </div>
-                
-               
+
                 {/* <div>
                   <div class="time">
                     <div class="ordering">
@@ -153,8 +152,8 @@ const Navbar = ({ getVisibity }) => {
                    
                   </div>
                 </div> */}
-  
-                <UserDropdown/>
+
+                <UserDropdown />
               </div>
             </div>
           </div>
@@ -238,6 +237,8 @@ const Navbar = ({ getVisibity }) => {
             </div>
           </div>
         </header>
+       
+        {/* </header> */}
       </div>
       {context.wishlist_value === 1 ? <Wishlist /> : null}
     </>

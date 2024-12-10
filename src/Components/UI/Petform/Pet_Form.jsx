@@ -6,7 +6,7 @@ import { changeLanguage } from "i18next";
 
 const Pet_Form = () => {
   const [petdata, setPetdata] = useState({
-    owner_id: "",
+    // owner_id: "",
     name: "",
     petCode: "",
     owner_name: "",
@@ -54,15 +54,15 @@ let token  = sessionStorage.getItem("token")
   const handlePetform = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    const formData = {};
     Object.keys(petdata).forEach((key) => {
-      formData.append(key, petdata[key]);
-      console.log('object09999',formData)
+      formData[key] = petdata[key];
     });
+
     if (petimage) {
       // formData.append("file", petimage);
     }
-
+    sessionStorage.setItem("Pet_data", JSON.stringify(formData));
     try {
       const response = await axios.post(`${url}/pets`, formData, {
         headers: {
