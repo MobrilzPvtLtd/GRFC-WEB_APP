@@ -56,15 +56,15 @@ const ContactBreadcrum = () => {
           <div className="row align-items-center">
             <div className="col-lg-6 col-4">
               <div className="banner-text">
-                <h2 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-                  Our Products
+                <h2 className="text-2xl font-bold sm:text-5xl md:text-6xl lg:text-5xl">
+                Nuestro contacto
                 </h2>
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="index.html">Hogar</a>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
-                    Our Products
+                  Nuestro contacto
                   </li>
                   {/* <li className="breadcrumb-item active" aria-current="page">shop</li> */}
                 </ol>

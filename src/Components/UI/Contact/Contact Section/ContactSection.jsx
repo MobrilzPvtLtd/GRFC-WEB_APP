@@ -56,10 +56,10 @@ const ContactSection = () => {
         <div className="row">
           <div className="col-lg-6">
             <div className="find-a-dog contact">
-              <h2>Find a dog walker or pet care</h2>
+              <h2>Encuentre un paseador de perros o cuidado de mascotas</h2>
               <p>
-                Place your trust in We Love Pets, an award-winning dog walking
-                and pet care
+              Confía en We Love Pets, un paseador de perros premiado
+              y cuidado de mascotas
               </p>
               {/* <form onSubmit={handleSubmit}>
                 <input
@@ -92,35 +92,8 @@ const ContactSection = () => {
           <div className="col-lg-6">
             <div className="looking position-relative contact">
               <form className="looking-form" onSubmit={handleSubmit}>
-                <h3>Book Your Place or Find out More</h3>
-                {/* <ul>
-                  <li>
-                    <input
-                      type="radio"
-                      id="f-option"
-                      name="petType"
-                      value="dog"
-                      checked={formData.petType === 'dog'}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="f-option">Dog</label>
-                    <div className="check"></div>
-                  </li>
-                  <li>
-                    <input
-                      type="radio"
-                      id="s-option"
-                      name="petType"
-                      value="cat"
-                      checked={formData.petType === 'cat'}
-                      onChange={handleRadioChange}
-                    />
-                    <label htmlFor="s-option">Cat</label>
-                    <div className="check">
-                      <div className="inside"></div>
-                    </div>
-                  </li>
-                </ul> */}
+                <h3>Reserva tu plaza o infórmate más</h3>
+               
                 <div className="row">
                   <div className="col-lg-6">
                     <input

@@ -91,7 +91,7 @@ const ProductSection = () => {
     <div>
       <section class="gap section-healthy-product" style={{backgroundColor: "#f5f5f5"}}>
     <div class="container">
-        <div class="heading mb-3">
+        <div class="heading mb-5">
             
           
             <h2>Productos Saludables</h2>
@@ -125,7 +125,7 @@ const ProductSection = () => {
                 </div>
             </div>  ))}
          
-            <div class="col-lg-9 ">
+            <div class="col-lg-12 ">
                 <div class="deal-of-the-week">
                     <div class="healthy-product-img">
                         <h6>Oferta de la semana</h6>

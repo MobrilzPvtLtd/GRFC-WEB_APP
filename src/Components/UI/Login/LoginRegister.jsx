@@ -152,16 +152,16 @@ const LoginRegister = () => {
               <div className="row align-items-center">
                 <div className="col-lg-6">
                   <div className="banner-text">
-                    <h2 className="text-7xl font-bold">Login</h2>
+                    <h2 className="text-7xl font-bold">Acceso</h2>
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <a href="index.html">Home</a>
+                        <a href="index.html">Hogar</a>
                       </li>
                       <li
                         className="breadcrumb-item active"
                         aria-current="page"
                       >
-                        Login
+                        Acceso
                       </li>
                     </ol>
                   </div>
@@ -217,7 +217,7 @@ const LoginRegister = () => {
               <div className="row">
                 <div className="col-lg-6">
                   <div className="box login">
-                    <h3>Log In Your Account</h3>
+                    <h3>Inicie sesión en su cuenta</h3>
                     <form onSubmit={handleLogin}>
                       <input
                         type="email"
@@ -242,10 +242,10 @@ const LoginRegister = () => {
                             name="checkbox"
                             id="checkbox"
                           />
-                          <label htmlFor="checkbox">Remember me</label>
+                          <label htmlFor="checkbox">Acuérdate de mí</label>
                         </div>
                         <div className="second">
-                          <Link to="/forget">Forget a Password?</Link>
+                          <Link to="/forget">¿Olvidó una contraseña?</Link>
                         </div>
                       </div>
                       {loading ? <img className="w-40" src={loader_gif} alt={loader_gif}></img> :
@@ -253,7 +253,7 @@ const LoginRegister = () => {
                         type="submit"
                         className="button"
                       >
-                        Login
+                        Acceso
                       </button>}
                     </form>
                   </div>
@@ -264,7 +264,7 @@ const LoginRegister = () => {
                       className="parallax"
                       style={{ backgroundImage: "url(assets/img/patron.jpg)" }}
                     ></div>
-                    <h3>Create Your Account</h3>
+                    <h3>Crea tu cuenta</h3>
                     <form onSubmit={handleRegister}>
                       {visible == 0 ? (
                         <div>
@@ -297,10 +297,10 @@ const LoginRegister = () => {
                             onChange={handleChange}
                           />
                           <p>
-                            Your personal data will be used to support your
-                            experience throughout this website, to manage access
-                            to your account, and for other purposes described in
-                            our privacy policy.
+                            Sus datos personales serán utilizados para respaldar su
+                            experiencia en este sitio web, para gestionar el acceso
+                            a su cuenta y para otros fines descritos en
+                            nuestra política de privacidad.
                           </p>
                           <button
                             type="button"

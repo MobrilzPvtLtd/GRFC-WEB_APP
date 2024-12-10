@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import userlogo from "../../assets/images_new/cardiology.png";
+import userlogo from "../../assets/images_new/user_logo24.png";
 import { Link } from "react-router-dom";
 
 const UserDropdown = () => {
@@ -32,7 +32,7 @@ const UserDropdown = () => {
   return (
     <div className="userdropdown" ref={dropdownRef}>
       <button onClick={toggleDropdown} className="userdropdown-btn">
-        <img src={userlogo} alt="User" className="user-logo" />
+        <img src={userlogo} alt="User" className="user-logo mt-1" />
       </button>
       {isOpen && (
         token ? (

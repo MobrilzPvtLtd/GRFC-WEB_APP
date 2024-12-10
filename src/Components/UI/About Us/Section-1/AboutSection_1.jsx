@@ -9,7 +9,7 @@ const AboutSection_1 = () => {
         <div className="row align-items-center">
           <div className="col-lg-6">
             <div className="heading two">
-              <h2 className='text-4xl lg:text-7xl font-bold'>Welcome to The Pet Care Company</h2>
+              <h2 className='text-4xl lg:text-6xl font-bold py-3'>Bienvenido a la empresa de cuidado de mascotas</h2>
             </div>
             <div className="love-your-pets">
               <p>
@@ -19,19 +19,20 @@ const AboutSection_1 = () => {
               <ul className="list">
                 <li>
                   <img src="/assets/img/list.png" alt="list" />
-                  Graceful goldfish, to small, cute kittens
+                  Desde elegantes peces dorados hasta gatitos pequeños y lindos
+
                 </li>
                 <li>
                   <img src="/assets/img/list.png" alt="list" />
-                  Feeders are either veterinary qualified staff
+                  Los comederos son personal veterinario cualificado.
                 </li>
                 <li>
                   <img src="/assets/img/list.png" alt="list" />
-                  Experienced pet owners and animal lovers
+                  Dueños de mascotas con experiencia y amantes de los animales.
                 </li>
                 <li>
                   <img src="/assets/img/list.png" alt="list" />
-                  Hungry horses: whatever the size of your pet
+                  Caballos hambrientos: sea cual sea el tamaño de tu mascota
                 </li>
               </ul>
 

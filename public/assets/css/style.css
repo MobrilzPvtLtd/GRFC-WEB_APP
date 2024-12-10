@@ -1717,7 +1717,7 @@ footer .phone i {
     margin-right: 20px;
 }
 .call-us a {
-    font-size: 26px;
+    font-size: 25px;
     display: block;
     font-weight: bold;
 }
@@ -4156,7 +4156,7 @@ ul.pd-imgs li a img {
 .about-gallery-img {
     position: relative;
     margin-bottom: 49px;
-    width: 94%;
+    width: 100%;
 }
 .about-gallery-img:hover i{
     opacity: 1;

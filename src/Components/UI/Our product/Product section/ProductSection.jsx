@@ -428,33 +428,34 @@ const ProductSection = () => {
         <div className="row">
           <div className="col-lg-3">
             <div className="sidebar">
-              <h3>Category</h3>
+              <h3>Categoría</h3>
               <div className="boder-bar"></div>
               <ul className="category">
                 <li>
                   <Link onClick={() => setProductvalue(0)}>
-                    All Products<span>7</span>
+                  Todos los productos<span>7</span>
                   </Link>
                 </li>
                 <li>
                   <Link onClick={() => setProductvalue(2)}>
-                    Dog Supplies<span>1</span>
+                    
+Suministros para perros<span>1</span>
                   </Link>
                 </li>
                 <li>
                   <Link onClick={() => setProductvalue(1)}>
-                    Medicine<span>6</span>
+                  Medicamento<span>6</span>
                   </Link>
                 </li>
                 <li className="end">
                   <Link onClick={() => setProductvalue(3)}>
-                    Accessories<span>0</span>
+                  Accesorios<span>0</span>
                   </Link>
                 </li>
               </ul>
             </div>
             <div className="sidebar">
-              <h3>Price Range</h3>
+              <h3>Gama de precios</h3>
               <div className="boder-bar"></div>
               <div className="wrapper">
                 <fieldset className="filter-price">
@@ -479,7 +480,7 @@ const ProductSection = () => {
               </div>
             </div>
             <div className="sidebar">
-              <h3>Top Products</h3>
+              <h3>Productos principales</h3>
               <div className="boder-bar"></div>
               <ul className="top-products">
                 {context.dataProduct

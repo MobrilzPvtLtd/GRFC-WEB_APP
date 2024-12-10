@@ -42,7 +42,7 @@ const TestimonialCarousel = () => {
   return (
     <div  style={{ backgroundImage: `url(${testimonial_bg}`}}>
     <div className="testimonial-carousel h-1/2 py-10 container" >
-      <h1 className=' pb-3 text-center text-lg sm:text-6xl sm:text-left sm:ml-20 sm:pb-10 font-semibold'>What Our Clients Say</h1>
+      <h1 className=' pb-3 text-center text-lg sm:text-6xl sm:text-left sm:ml-20 sm:pb-10 font-semibold'>Lo que dicen nuestras clientas</h1>
       <Slider {...settings}>
         {testimonials.map((testimonial, index) => (
           <div key={index} className="testimonial-item " >

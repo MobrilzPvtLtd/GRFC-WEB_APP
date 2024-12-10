@@ -7,7 +7,7 @@ const AwardSection = () => {
   return (
     <div className="gap">
       <div className="container">
-        <h3 className="awards">Awards Winning Company</h3>
+        <h3 className="awards">Empresa ganadora de premios</h3>
         <div className="awards">
           <img src={award1} alt="awards 1" />
           <img src={award2} alt="awards 2" />
