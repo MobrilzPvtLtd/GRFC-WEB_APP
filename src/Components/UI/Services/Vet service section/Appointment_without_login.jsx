@@ -302,26 +302,29 @@ const Appointment_without_login = ({ Id_data }) => {
     date: "",
     pet_details: "",
   });
+  const Pet_data = JSON.parse(sessionStorage.getItem("Pet_data"));
   const [petData, setPetData] = useState([]);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [pet_id, setPet_ID]= useState('')
   const context = useContext(ValueContext);
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
+ console.log('pet-----------data',Pet_data)
   // Fetch pet data based on owner_id
-  useEffect(() => {
-    const fetchPetsData = async () => {
-      try {
-        const res = await axios.get(`${url}/pets/${Id_data.owner_id}`);
-        setPetData(res.data.data);
-      } catch (error) {
-        console.error("Error fetching pet data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPetsData = async () => {
+  //     try {
+  //       const res = await axios.get(`${url}/pets`);
+  //       setPetData(res.data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching pet data:", error);
+  //     }
+  //   };
 
-    if (Id_data.owner_id) {
-      fetchPetsData();
-    }
-  }, [Id_data.owner_id]);
+    
+  //     fetchPetsData();
+    
+  // }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -336,7 +339,7 @@ const Appointment_without_login = ({ Id_data }) => {
           appointment_time: form.time,
           appointment_date: form.date,
           disease_description: form.pet_details,
-          pet_id: Id_data.pet_id,
+          pet_id:Id_data.pet_id,
           owner_id: Id_data.owner_id,
         },
         {
@@ -347,8 +350,8 @@ const Appointment_without_login = ({ Id_data }) => {
       );
 
       if (appointment_data.status === 200) {
-        toast.success("Appointment booked successfully!");
         setIsConfirmed(true); // Show confirmation page
+        toast.success("Appointment booked successfully!");
       }
     } catch (error) {
       console.log("Error submitting form:", error);
@@ -427,13 +430,12 @@ const Appointment_without_login = ({ Id_data }) => {
               ></textarea>
 
               <div className="table-responsive mb-3">
-                <table class="table  table-striped ">
+                <table class="table text-center table-striped ">
                   <thead>
                     <tr className="bg-success-subtle">
-                      <th>Owner Name</th>
-                      <th>Phone</th>
-                      <th>Email</th>
-                      <th>Owner Size Record</th> <th>Pet Name</th>
+                     
+                     
+                       <th>Pet Name</th>
                       <th>Pet Code</th>
                       <th>Status</th>
                       <th>Species</th>
@@ -445,32 +447,48 @@ const Appointment_without_login = ({ Id_data }) => {
                       <th>Color</th>
                       <th>DOB</th>
                       <th>Weight Kg</th>
+                      <th>Owner Size Record</th>
                       <th>Size record date</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {petData?.map((item, index) => (
-                      <tr key={index}>
-                        <td>{item.name}</td>
-                        <td>{item.phone}</td>
-                        <td>{item.email}</td>
-                        <td>{item.owner_size_rec}</td>
-                        <td>{item.pet_code}</td>
-                        <td>{item.pet_code}</td>
-                        <td>{item.status_ID}</td>
-                        <td>{item.species_id}</td>
-                        <td>{item.breed_id}</td>
-                        <td>{item.size_id}</td>
-                        <td>{item.coat_id}</td>
-                        <td>{item.character_id}</td>
-                        <td>{item.sex_id}</td>
-                        <td>{item.color_id}</td>
-                        <td>{item.birth_date}</td>
-                        <td>{item.weight}</td>
+                   
+                    <td>{Pet_data.name}</td>
+                    <td>{Pet_data.petCode}</td>
+                    <td>{Pet_data.status}</td>
+                    <td>{Pet_data.species}</td>
+                    <td>{Pet_data.breeds}</td>
+                    <td>{Pet_data.size}</td>
+                    <td>{Pet_data.coat}</td>
+                    <td>{Pet_data.character}</td>
+                    <td>{Pet_data.sex}</td>
+                    <td>{Pet_data.color}</td>
+                    <td>{Pet_data.dob}</td>
+                    <td>{Pet_data.weight}</td>
+                    <td>{Pet_data.size_record_data}</td>
+                    <td>{Pet_data.ownerSizeRecrd}</td>
+                  {/* {Pet_data.map((item,index)=>( 
+                      <tr key={ index}>
+                      
+                        
+                        <td>{item?.owner_size_rec}</td>
+                        <td>{item?.pet_code}</td>
+                       
+                        <td>{item?.status_ID}</td>
+                        <td>{item?.species_id}</td>
+                        <td>{item?.breed_id}</td>
+                        <td>{item?.size_id}</td>
+                        <td>{item?.coat_id}</td>
+                        <td>{item?.character_id}</td>
+                        <td>{item?.sex_id}</td>
+                        <td>{item?.color_id}</td>
+                        <td>{item?.birth_date}</td>
+                        <td>{item?.weight}</td>
 
-                        <td>{item.size_record_date}</td>
+                        <td>{item?.size_record_date}</td>
                       </tr>
-                    ))}
+                      ))} */}
+                    
                   </tbody>
                 </table>
               </div>

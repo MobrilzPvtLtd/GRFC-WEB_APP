@@ -15,6 +15,7 @@ const Pet_Form = () => {
     status: "",
     weight: "",
     species: "",
+    coat:"",
     breeds: "",
     size: "",
     character: "",
@@ -168,6 +169,14 @@ console.log('2222222222222',ID_data)
                   onChange={handleChange}
                   required={true}
                   name="species"
+                />
+                <input
+                  type="text"
+                  placeholder="Coat"
+                  className="form-control mb-3"
+                  onChange={handleChange}
+                  required={true}
+                  name="coat"
                 />
                 <input
                   type="text"
