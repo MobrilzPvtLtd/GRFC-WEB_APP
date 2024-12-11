@@ -47,20 +47,18 @@ const Wishlist = () => {
              Authorization: token,
              "Content-Type": "application/json",
            },
-         }).then((res)=> set_datawishlist(res.data.data))
-           .catch((err)=>console.log(err));
-
-           console.log('111111111111',res)
- 
-        
- 
+         })
+          if(res.status===200){
+            set_datawishlist(res.data.data || [])
+          }
         
        } catch (error) {
          console.error("Error fetching  data:", error);
        }
      };
-     if (token) {
-         fetchWishlistData();
+     if(token){
+
+       fetchWishlistData()
      }
    }, [token]);
 

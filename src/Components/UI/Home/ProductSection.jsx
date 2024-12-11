@@ -73,7 +73,7 @@ const ProductSection = () => {
     if (token) {
       try {
         const wishlistvalue_api = await axios.post(
-          `${url}/cart`,
+          `${url}/wishlist`,
           {
             product_id: product.id,
           },

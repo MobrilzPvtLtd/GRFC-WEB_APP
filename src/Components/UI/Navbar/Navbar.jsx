@@ -69,7 +69,7 @@ const Navbar = ({ getVisibity }) => {
   };
   return (
     <>
-      <div className="relative w-full bg-white">
+      <div className="relative w-full bg-white ">
         <header className="fixed top-0 ">
           <div class="top-bar bg-white">
             <div class="container">
@@ -205,7 +205,7 @@ const Navbar = ({ getVisibity }) => {
                   </a>
                 </div>
                 <div class="line"></div>
-                <Link onClick={() => handlewislist()}>
+                <Link onClick={() => handlewislist()} >
                   <i class="fa-regular fa-heart"></i>
                   <span className="top-[1.5rem] right-[rem] bg-black rounded-[50%] w-5 flex justify-center items-center text-white p-1 text-xs absolute">
                     {context.wishlist_count}
@@ -240,6 +240,8 @@ const Navbar = ({ getVisibity }) => {
        
         {/* </header> */}
       </div>
+
+      
       {context.wishlist_value === 1 ? <Wishlist /> : null}
     </>
   );

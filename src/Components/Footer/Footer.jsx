@@ -1,6 +1,7 @@
 import React from "react";
 import logo from '../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png';
-import headphone from '../../assets/img/hadphon.png'
+import headphone from '../../assets/img/hadphon.png';
+import visaicon from '../../assets/img/visa.jpg';
 
 const Footer = () => {
   return (
@@ -182,7 +183,7 @@ const Footer = () => {
             <a href="https://mobrilz.com/">Mobrilz</a>
           </p>
           <a href="#">
-            <img src="assets/img/visa.jpg" alt="cad" />
+            <img src={visaicon} alt="cad" />
           </a>
         </div>
       </div>
