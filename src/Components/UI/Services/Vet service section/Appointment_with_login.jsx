@@ -107,6 +107,7 @@ const Appointment_with_login = () => {
         }
       );
       if (appointment_data.status == 200) {
+        setIsConfirmed(true); // Show confirmation page
         toast.success("Appointment Book Successfully");
         
         navigate("/");
@@ -169,6 +170,7 @@ const Appointment_with_login = () => {
                       value={item?.owner_name}
                       // name = "name"
                       // onChange={handleChange}
+                      readOnly
                     />
                     <input
                       type="email"
@@ -177,6 +179,7 @@ const Appointment_with_login = () => {
                       value={item?.email}
                       // name = "email"
                       // onChange={handleChange}
+                      readOnly
                     />
                     <input
                       type="number"
@@ -185,6 +188,7 @@ const Appointment_with_login = () => {
                       value={item?.phone}
                       // name = "phone"
                       // onChange={handleChange}
+                      readOnly
                     />
                     <input
                       type="time"
@@ -220,8 +224,8 @@ const Appointment_with_login = () => {
                             {/* <th>Owner Name</th>
                           <th>Phone</th>*/}
                              <th>Select</th> 
-                            <th>Owner Size Record</th>
-                            {/* <th>Pet Name</th> */}
+                            
+                            <th>Pet Name</th>
                             <th>Pet Code</th>
                             <th>Status</th>
                             <th>Species</th>
@@ -234,6 +238,7 @@ const Appointment_with_login = () => {
                             <th>DOB</th>
                             <th>Weight Kg</th>
                             <th>Size record date</th>
+                            <th>Owner Size Record</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -244,7 +249,7 @@ const Appointment_with_login = () => {
                               <td>
                                 <input type="checkbox" onClick={()=>handle_petID(item.id)} />
                               </td>
-                              <td>{item.owner_size_rec}</td>
+                              <td>{item.name}</td>
                               <td>{item.pet_code}</td>
 
                               <td>{item.status_ID}</td>
@@ -259,6 +264,7 @@ const Appointment_with_login = () => {
                               <td>{item.weight}</td>
 
                               <td>{item.size_record_date}</td>
+                              <td>{item.owner_size_rec}</td>
                             </tr>
                           ))}
                         </tbody>

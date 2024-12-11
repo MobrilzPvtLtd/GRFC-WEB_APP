@@ -6,19 +6,22 @@ import banner_1 from "../../../../images_new/banner-img-1-1.jpg";
 import banner_2 from "../../../../images_new/banner-img-2.jpg";
 import dog_pic from "../../../../images_new/pet-walking.jpg";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Descr_Page = () => {
-  const urlparam =  window.location.pathname
+  // const urlparam = window.location.pathname;
+  const location = useLocation(); // Use the useLocation hook to get the current URL path
+  const urlparam = location.pathname; // Extract the pathname from location
+
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
-  const[description,setDescription]=useState()
-  
+  const [description, setDescription] = useState([]);
+  const [filteredDescription, setFilteredDescription] = useState(null); // For filtered description
+
   useEffect(() => {
     const fetchCategory_descr = async () => {
       try {
         const res = await axios.get(`${url}/subcategory/2`);
         setDescription(res.data.data);
-      
-      
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -27,11 +30,24 @@ const Descr_Page = () => {
     fetchCategory_descr();
   }, []);
 
+  // Filter description based on urlparam
+  useEffect(() => {
+    if (description && description?.length > 0 && urlparam) {
+      const filtered = description.find(item => urlparam.includes(item.name.toLowerCase()));
+      setFilteredDescription(filtered); // Set filtered description based on urlparam match
+    }
+  }, [description, urlparam]);
+
+
   return (
     <>
       <section
         className="banner"
-        style={{ backgroundColor: "#fff", backgroundImage: `url(${bg})`, backgroundPosition:`center` }}
+        style={{
+          backgroundColor: "#fff",
+          backgroundImage: `url(${bg})`,
+          backgroundPosition: `center`,
+        }}
       >
         <div className="container">
           <div className="row align-items-center">
@@ -88,12 +104,19 @@ const Descr_Page = () => {
             </div>
           </div>
           <div className="col-lg-7 col-md-6  mb-2 mt-6">
-            {description?.map((item,index)=>(     
-            <p className="p-5 text-xl" key={index}>
-             {item?.description}
-             
-            </p>
-             ))}
+            {/* {description?.map((item, index) => (
+              <p className="p-5 text-xl" key={index}>
+                {item?.description}
+              </p>
+            ))} */}
+             {/* Display filtered description if it exists */}
+             {filteredDescription ? (
+              <p className="p-5 text-xl">
+                {filteredDescription.description}
+              </p>
+            ) : (
+              <p className="p-5 text-xl">No matching description found.</p>
+            )}
             <div className="flex justify-center">
               {" "}
               <button className="btn btn-success">
