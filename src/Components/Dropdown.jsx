@@ -50,8 +50,8 @@ const Dropdown = ({ label, items }) => {
       {isOpen && (
         <ul className="dropdown-menu">
           {items?.map((item, index) => (
-            <li key={index}>
-              <Link className="px-4 dropdown-item" to={`/services/${formatName(item.name)}`}>
+            <li key={index} >
+              <Link onClick={handleClick} className="px-4 dropdown-item" to={`/services/${formatName(item.name)}`}>
                 {item.name}
               </Link>
             </li>

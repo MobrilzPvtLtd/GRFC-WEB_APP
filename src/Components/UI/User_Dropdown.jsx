@@ -37,9 +37,9 @@ const UserDropdown = () => {
       {isOpen && (
         token ? (
           <div className="userdropdown-menu border-0">
-            <Link to="/userprofile">Edit User</Link>
-            <Link to="/forget">Reset Password</Link>
-            <Link to="/" onClick={() => {
+            <Link to="/userprofile" onClick={toggleDropdown}>Edit User</Link>
+            <Link to="/forget" onClick={toggleDropdown}>Reset Password</Link>
+            <Link to="/"  onClick={() => {
               // Handle sign-out here (if required)
               console.log("Sign Out");
               sessionStorage.removeItem("token"); 
@@ -52,7 +52,7 @@ const UserDropdown = () => {
           </div>
         ) : (
           <div className="userdropdown-menu border-0">
-            <Link to="/login-Register">Login/Register</Link>
+            <Link onClick={toggleDropdown} to="/login-Register">Login/Register</Link>
           </div>
         )
       )}
