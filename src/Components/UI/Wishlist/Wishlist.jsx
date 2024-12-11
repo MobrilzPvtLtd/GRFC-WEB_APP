@@ -33,13 +33,14 @@ const Wishlist = () => {
       return acc;
     }, []);
 
-    // set_datawishlist(transformedItems);
+    set_datawishlist(transformedItems);
   }, [context.wishlist_data]);
 
   //  const total = datawislist?.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
    useEffect(() => {
      const fetchWishlistData = async() => {
+      
        try {
          const res = await axios.get(`${url}/wishlist`, {
            headers: {
@@ -69,6 +70,7 @@ const Wishlist = () => {
   
 
   const handlewishlist_remove = async(id)=>{
+    if(token){ 
     try {
   
         const response = await axios.delete(`${url}/wishlist/${id}`,{
@@ -85,12 +87,23 @@ const Wishlist = () => {
           context.setWishlist_Data((prev) => prev.filter((item) => item.id !== id));
           
         
-          context.setWishlist_count(context.wishlist_count - 1);
+          if(context.wishlist_count>0){
+
+            context.setWishlist_count(context.wishlist_count - 1);
+          }
         } else {
           console.error('Failed to remove the item');
         }
       } catch (error) {
         console.error('Error removing item from wishlist:', error);
+      }}else{
+        console.log("Removing wishlist item locally:", id);
+        set_datawishlist((prev) => prev.filter((item) => item.id !== id));
+        if(context.wishlist_count>0){
+
+          context.setWishlist_count(context.wishlist_count - 1);
+        }
+
       }
 
   }
@@ -107,7 +120,7 @@ const Wishlist = () => {
             
               <li key={item?.id} className="d-flex align-items-center position-relative">
                 <div className="p-img light-bg">
-                  <img src={item?.product_img_url} alt="Product Image" />
+                  <img src={item?.product_img_url || item?.product_img} alt="Product Image" />
                 </div>
                 <div className="p-data">
                   <h3 className="font-semi-bold">{item?.title}</h3>

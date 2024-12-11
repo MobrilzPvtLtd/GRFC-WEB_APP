@@ -315,7 +315,7 @@ const ProductSection = () => {
     productData();
   }, [productvalue]);
 
-  const handleAddCartValue = async(array) => {
+  const handleAddCartValue = async (array) => {
     if (token) {
       try {
         const cartvalue_api = await axios.post(
@@ -331,31 +331,28 @@ const ProductSection = () => {
             },
           }
         );
-    
+
         if (cartvalue_api.status === 200) {
           toast.success("Inserted into the cart successfully!", {
             autoClose: 1000,
           });
-    
-      
+
           context.setDataArray((prev) => [...prev, array]);
         }
-        console.log('cartvalue_api', cartvalue_api);
+        console.log("cartvalue_api", cartvalue_api);
       } catch (error) {
         console.error("Error adding to cart:", error);
       }
     } else {
-    
       console.warn("No token provided. Updating cart locally.");
-    
+
       // Update cart locally
       context.setCart_num(context.Cart_num + 1);
       context.setDataArray((prev) => [...prev, array]);
     }
-    
+
     // Increment cart number
     context.setCart_num(context.Cart_num + 1);
-   
   };
 
   const handleProps = (array) => {
@@ -377,14 +374,12 @@ const ProductSection = () => {
   // If there are products available, filter them by price range
   const filteredProducts = Data_Product ? filterByPrice(Data_Product) : [];
 
-  const handlewishlist_count = async(product) => {
-
+  const handlewishlist_count = async (product) => {
     try {
       const wislistvalue_api = await axios.post(
         `${url}/wishlist`,
         {
           product_id: product.id,
-          
         },
         {
           headers: {
@@ -393,16 +388,15 @@ const ProductSection = () => {
           },
         }
       );
-  
+
       if (wislistvalue_api.status === 200) {
         toast.success("Added Successfully", {
           autoClose: 1000,
         });
-  
-    
+
         context.setWishlist_Data((prev) => [...prev, product]);
       }
-      console.log('cartvalue_api', wislistvalue_api);
+      console.log("cartvalue_api", wislistvalue_api);
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -433,23 +427,22 @@ const ProductSection = () => {
               <ul className="category">
                 <li>
                   <Link onClick={() => setProductvalue(0)}>
-                  Todos los productos<span>7</span>
+                    Todos los productos<span>7</span>
                   </Link>
                 </li>
                 <li>
                   <Link onClick={() => setProductvalue(2)}>
-                    
-Suministros para perros<span>1</span>
+                    Suministros para perros<span>1</span>
                   </Link>
                 </li>
                 <li>
                   <Link onClick={() => setProductvalue(1)}>
-                  Medicamento<span>6</span>
+                    Medicamento<span>6</span>
                   </Link>
                 </li>
                 <li className="end">
                   <Link onClick={() => setProductvalue(3)}>
-                  Accesorios<span>0</span>
+                    Accesorios<span>0</span>
                   </Link>
                 </li>
               </ul>
@@ -483,21 +476,19 @@ Suministros para perros<span>1</span>
               <h3>Productos principales</h3>
               <div className="boder-bar"></div>
               <ul className="top-products">
-                {context.dataProduct
-                  .slice(0, 3)
-                  ?.map((item, index) => (
-                    <li key={index}>
-                      <img
-                        src={item.product_img}
-                        alt="top-products"
-                        className="w-25"
-                      />
-                      <div>
-                        <a href="#">Procan Adult Dog Food</a>
-                        <span>$32.00</span>
-                      </div>
-                    </li>
-                  ))}
+                {context.dataProduct.slice(0, 3)?.map((item, index) => (
+                  <li key={index}>
+                    <img
+                      src={item.product_img}
+                      alt="top-products"
+                      className="w-25"
+                    />
+                    <div>
+                      <a href="#">Procan Adult Dog Food</a>
+                      <span>$32.00</span>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
