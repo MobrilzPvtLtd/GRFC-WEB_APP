@@ -2,6 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
 import { useTranslation } from "react-i18next";
+import { slide as Menu } from "react-burger-menu";
+import {
+  FaUser,
+  FaShoppingCart,
+  FaSearch,
+  FaBars,
+  FaUserCircle,
+  FaHome, FaInfoCircle, FaConciergeBell, FaProductHunt, FaEnvelope 
+} from "react-icons/fa";
 import logo from "../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,6 +19,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Wishlist from "../Wishlist/Wishlist";
 import Dropdown from "../../Dropdown";
 import UserDropdown from "../User_Dropdown";
+import userlogo from "../../../assets/images_new/user_logo24.png";
 
 const Navbar = ({ getVisibity }) => {
   const [visible, setVisible] = useState(true);
@@ -69,7 +79,7 @@ const Navbar = ({ getVisibity }) => {
   };
   return (
     <>
-      <div className="relative w-full bg-white ">
+      <div className="relative w-full bg-white d-none d-md-block">
         <header className="fixed top-0 ">
           <div class="top-bar bg-white">
             <div class="container">
@@ -205,7 +215,7 @@ const Navbar = ({ getVisibity }) => {
                   </a>
                 </div>
                 <div class="line"></div>
-                <Link onClick={() => handlewislist()} >
+                <Link onClick={() => handlewislist()}>
                   <i class="fa-regular fa-heart"></i>
                   <span className="top-[1.5rem] right-[rem] bg-black rounded-[50%] w-5 flex justify-center items-center text-white p-1 text-xs absolute">
                     {context.wishlist_count}
@@ -237,11 +247,119 @@ const Navbar = ({ getVisibity }) => {
             </div>
           </div>
         </header>
-       
+
         {/* </header> */}
       </div>
 
-      
+      {/* mobile View start */}
+
+      <div className="flex flex-col bg-gray-100 shadow-md d-block d-md-none ">
+        {/* Top Bar */}
+        <div className="flex justify-between items-center p-4 bg-white shadow-sm">
+          <Link
+            className="text-gray-700 text-2xl"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions"
+            aria-controls="offcanvasWithBothOptions"
+          >
+            <FaBars />
+          </Link>
+
+          {/* Logo */}
+          <Link to="/">
+            <img src={logo} alt="Logo" className="h-12" />
+          </Link>
+
+          {/* Icons */}
+          <div className="flex space-x-4">
+            <Link to="/" className="text-gray-700 text-2xl">
+              <FaUserCircle />
+            </Link>
+            <Link to="/" className="text-gray-700 text-2xl">
+              <FaShoppingCart /> <span className="top-[1rem] right-[0.7rem] bg-slate-300 rounded-[50%] w-7 flex justify-center items-center text-white p-1 text-xs absolute">
+                        {context.Cart_num}
+                      </span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Search Bar */}
+        <div className="flex items-center p-4 bg-gray-200">
+          <input
+            type="text"
+            placeholder="Search for products"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+          />
+          <button className="px-4 py-3 bg-yellow-500 text-white rounded-xl hover:bg-yellow-600">
+            <FaSearch />
+          </button>
+        </div>
+      </div>
+      <div
+        class="offcanvas offcanvas-start w-75"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel"
+      >
+        <div class="offcanvas-header">
+        <Link to="/">
+            <img src={logo} alt="Logo" className="h-12" />
+          </Link>
+          <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            GRFC 
+
+            
+          </h5>
+         
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+        <ul className="menu-list">
+    <li>
+      <Link to="/" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+        <FaHome className="mr-2" />
+        Hogar
+      </Link>
+    </li>
+    <li>
+      <Link to="/about-us" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+        <FaInfoCircle className="mr-2" />
+        About Us
+      </Link>
+    </li>
+    <li>
+      <Link to="/category3" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+        <FaConciergeBell className="mr-2" />
+        Service
+        {/* <ul>
+                  
+                    <Dropdown label="Servicio" items={category_data} />
+                  </ul> */}
+      </Link>
+    </li>
+    <li>
+      <Link to="/our-products" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+        <FaProductHunt className="mr-2" />
+        Product
+      </Link>
+    </li>
+    <li>
+      <Link to="/contact-us" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+        <FaEnvelope className="mr-2" />
+        Contact
+      </Link>
+    </li>
+  </ul>
+        </div>
+      </div>
+
       {context.wishlist_value === 1 ? <Wishlist /> : null}
     </>
   );
