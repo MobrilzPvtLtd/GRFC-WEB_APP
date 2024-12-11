@@ -69,15 +69,13 @@ const ProductSection = () => {
     context.setSubproduct_data(array);
   };
 
-  const handlewishlist_Value = async(product) => {
-
+  const handlewishlist_Value = async (product) => {
     if (token) {
       try {
         const wishlistvalue_api = await axios.post(
           `${url}/cart`,
           {
             product_id: product.id,
-            
           },
           {
             headers: {
@@ -101,30 +99,20 @@ const ProductSection = () => {
     } else {
       console.warn("No token provided. Updating cart locally.");
       if (!context.wishlist_data.some((item) => item.id === product.id)) {
-      // Update cart locally
-      context.setWishlist_count(context.wishlist_count + 1);
-      context.setWishlist_Data((prev) => [...prev, product]);
+        // Update cart locally
+        context.setWishlist_count(context.wishlist_count + 1);
+        context.setWishlist_Data((prev) => [...prev, product]);
+      } else {
+        toast.warn("Product already in wishlist!");
+      }
     }
-  }
 
     // Increment cart number
     context.setWishlist_count(context.wishlist_count + 1);
   };
 
+  console.log("44444", context.wishlist_data, "count", context.wishlist_count);
 
-    // if (!context.wishlist_data.some((item) => item.id === product.id)) {
-    //   context.setWishlist_Data((prev) => [...prev, product]);
-    //   context.setWishlist_count(context.wishlist_count + 1); // Increment count
-    // } else {
-    //   toast.warn("Product already in wishlist!");
-    // }
-    console.log(
-      "44444",
-      context.wishlist_data,
-      "count",
-      context.wishlist_count
-    );
-  
   return (
     <div>
       <section
@@ -184,76 +172,78 @@ const ProductSection = () => {
 
             <div class="col-lg-12 ">
               <div class="deal-of-the-week">
-                
                 <div className="row">
-                { dataProduct?.slice(0, 1).map((items, index) =>  ( <>  
-                  <div className="col-md-4">
-                    <div class="healthy-product-img">
-                      <h6>Oferta de la semana</h6>
+                  {dataProduct?.slice(0, 1).map((items, index) => (
+                    <>
+                      <div className="col-md-4">
+                        <div class="healthy-product-img">
+                          <h6>Oferta de la semana</h6>
 
-                      <img
-                        src={items?.product_img}
-                        alt="food"
-                      />
-                      <ul class="star">
-                        <li>
-                          <i class="fa-solid fa-star"></i>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-star"></i>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-star"></i>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-star"></i>
-                        </li>
-                        <li>
-                          <i class="fa-solid fa-star"></i>
-                        </li>
-                      </ul>
-                    </div>{" "}
-                  </div>
-
-                  <div className="col-md-8">
-                    <div class="healthy-product">
-                      <span>alimento para animales</span>
-                      <a href="our-products.html">
-                        Comida Saludable Para Perros Pollo Asado
-                      </a>
-                      <h6>
-                        <del>$32.00</del>$22.00
-                      </h6>
-                      <h5>up to 14% off</h5>
-                      <div class="add-to-cart">
-                        <Link  class="button" onClick={() => handleAddCartValue(items)}>
-                          Add to Cart
-                        </Link>
-                        <Link  class="heart-wishlist">
-                          <i class="fa-regular fa-heart"  onClick={() => handlewishlist_Value(items)}></i>
-                        </Link>
+                          <img src={items?.product_img} alt="food" />
+                          <ul class="star">
+                            <li>
+                              <i class="fa-solid fa-star"></i>
+                            </li>
+                            <li>
+                              <i class="fa-solid fa-star"></i>
+                            </li>
+                            <li>
+                              <i class="fa-solid fa-star"></i>
+                            </li>
+                            <li>
+                              <i class="fa-solid fa-star"></i>
+                            </li>
+                            <li>
+                              <i class="fa-solid fa-star"></i>
+                            </li>
+                          </ul>
+                        </div>{" "}
                       </div>
-                      <div id="countdown">
-                        <ul>
-                          <li>
-                            <span id="days"></span>days
-                          </li>
-                          <li>
-                            <span id="hours"></span>Hour
-                          </li>
-                          <li>
-                            <span id="minutes"></span>Min
-                          </li>
-                          <li class="mb-0">
-                            <span id="seconds"></span>Sec
-                          </li>
-                        </ul>
-                      </div>
-                    </div>{" "}
-                  </div> </>
-                   ))} 
+                      <div className="col-md-8">
+                        <div class="healthy-product">
+                          <span>alimento para animales</span>
+                          <a href="our-products.html">
+                            Comida Saludable Para Perros Pollo Asado
+                          </a>
+                          <h6>
+                            <del>$32.00</del>$22.00
+                          </h6>
+                          <h5>up to 14% off</h5>
+                          <div class="add-to-cart">
+                            <Link
+                              class="button"
+                              onClick={() => handleAddCartValue(items)}
+                            >
+                              Add to Cart
+                            </Link>
+                            <Link class="heart-wishlist">
+                              <i
+                                class="fa-regular fa-heart"
+                                onClick={() => handlewishlist_Value(items)}
+                              ></i>
+                            </Link>
+                          </div>
+                          <div id="countdown">
+                            <ul>
+                              <li>
+                                <span id="days"></span>days
+                              </li>
+                              <li>
+                                <span id="hours"></span>Hour
+                              </li>
+                              <li>
+                                <span id="minutes"></span>Min
+                              </li>
+                              <li class="mb-0">
+                                <span id="seconds"></span>Sec
+                              </li>
+                            </ul>
+                          </div>
+                        </div>{" "}
+                      </div>{" "}
+                    </>
+                  ))}
                 </div>
-                
               </div>
             </div>
           </div>
@@ -261,6 +251,6 @@ const ProductSection = () => {
       </section>
     </div>
   );
-}
+};
 
 export default ProductSection;

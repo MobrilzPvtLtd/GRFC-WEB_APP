@@ -300,12 +300,17 @@ const ProductSection = () => {
     max: largestNum,
   });
   useEffect(() => {
-    const productData = () => {
+    const productData = async () => {
       try {
-        axios
-          .get(`${url}/product/${productvalue}`)
-          .then((res) => context.setdataProduct(res.data.data))
-          .catch((err) => console.error(err));
+        const res = await axios.get(`${url}/product/${productvalue}`);
+        context.setdataProduct(res.data.data);
+
+        // Set the price range based on fetched data
+        const sortedData = res.data.data.sort((a, b) => a.price - b.price);
+        const smallestNum = sortedData[0]?.price || 0;
+        const largestNum = sortedData[sortedData.length - 1]?.price || 0;
+
+        setPriceRange({ min: smallestNum, max: largestNum });
         setLoader(false);
       } catch (error) {
         console.error(error);
@@ -314,6 +319,15 @@ const ProductSection = () => {
 
     productData();
   }, [productvalue]);
+
+  // Filter products based on price range
+  const filterByPrice = (products) => {
+    return products.filter(
+      (item) =>
+        parseFloat(item.price) >= priceRange.min &&
+        parseFloat(item.price) <= priceRange.max
+    );
+  };
 
   const handleAddCartValue = async (array) => {
     if (token) {
@@ -359,15 +373,6 @@ const ProductSection = () => {
     context.setSubproduct_data(array);
   };
 
-  // Filter products based on price range
-  const filterByPrice = (products) => {
-    return products.filter(
-      (item) =>
-        parseFloat(item.price) >= priceRange.min &&
-        parseFloat(item.price) <= priceRange.max
-    );
-  };
-
   const Data_Product = context.dataProduct;
 
   sessionStorage.setItem("data_subproduct", JSON.stringify(Data_Product));
@@ -375,39 +380,44 @@ const ProductSection = () => {
   const filteredProducts = Data_Product ? filterByPrice(Data_Product) : [];
 
   const handlewishlist_count = async (product) => {
-    try {
-      const wislistvalue_api = await axios.post(
-        `${url}/wishlist`,
-        {
-          product_id: product.id,
-        },
-        {
-          headers: {
-            Authorization: token,
-            "Content-Type": "application/json",
+    if (token) {
+      try {
+        const wislistvalue_api = await axios.post(
+          `${url}/wishlist`,
+          {
+            product_id: product.id,
           },
+          {
+            headers: {
+              Authorization: token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (wislistvalue_api.status === 200) {
+          toast.success("Added Successfully", {
+            autoClose: 1000,
+          });
+
+          context.setWishlist_Data((prev) => [...prev, product]);
         }
-      );
-
-      if (wislistvalue_api.status === 200) {
-        toast.success("Added Successfully", {
-          autoClose: 1000,
-        });
-
-        context.setWishlist_Data((prev) => [...prev, product]);
+        console.log("cartvalue_api", wislistvalue_api);
+      } catch (error) {
+        console.error("Error adding to cart:", error);
       }
-      console.log("cartvalue_api", wislistvalue_api);
-    } catch (error) {
-      console.error("Error adding to cart:", error);
+    } else {
+      console.warn("No token provided. Updating cart locally.");
+      if (!context.wishlist_data.some((item) => item.id === product.id)) {
+        // Update cart locally
+        context.setWishlist_count(context.wishlist_count + 1);
+        context.setWishlist_Data((prev) => [...prev, product]);
+      } else {
+        toast.warn("Product already in wishlist!");
+      }
     }
-
     context.setWishlist_count(context.wishlist_count + 1);
-    // if (!context.wishlist_data.some((item) => item.id === product.id)) {
-    //   context.setWishlist_Data((prev) => [...prev, product]);
-    //   context.setWishlist_count(context.wishlist_count + 1); // Increment count
-    // } else {
-    //   toast.warn("Product already in wishlist!");
-    // }
+
     console.log(
       "44444",
       context.wishlist_data,

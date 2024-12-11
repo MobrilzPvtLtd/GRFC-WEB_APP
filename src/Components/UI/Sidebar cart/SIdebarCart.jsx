@@ -79,20 +79,29 @@ const SidebarCart = ({ visible }) => {
     if (token) {
       try {
         // console.log("Removing cart item via API:", id);
-        await axios.delete(`${url}/cart/${id}`, {
+        const response =  await axios.delete(`${url}/cart/${id}`, {
           headers: {
             Authorization: token,
             "Content-Type": "application/json",
           },
         });
+        if (response.status === 200) {
+        if(context.Cart_num>0){
+
+          context.setCart_num(context.Cart_num - 1);
+        }
       
         Fetch_cartdata();
-      } catch (error) {
+      } }catch (error) {
         console.error("Error removing item from cart via API:", error);
       }
     } else {
       console.log("Removing cart item locally:", id);
       setCartItems((prev) => prev.filter((item) => item.id !== id));
+      if(context.Cart_num>0){
+
+        context.setCart_num(context.Cart_num - 1);
+      }
       
       
     }
