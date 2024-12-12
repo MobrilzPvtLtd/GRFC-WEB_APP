@@ -23,6 +23,7 @@ export const ValueProvider = ({ children }) => {
   const [wishlist_value,setWishlist_value] =useState(0)
   const [wishlist_count,setWishlist_count] =useState(0)
   const [wishlist_data,setWishlist_Data] =useState([])
+  const [total_sum,setTotal_Sum] =useState()
 
   return (
     <ValueContext.Provider
@@ -46,7 +47,9 @@ export const ValueProvider = ({ children }) => {
         wishlist_data,
         setWishlist_Data,
         wishlist_count,
-        setWishlist_count
+        setWishlist_count,
+        total_sum, 
+        setTotal_Sum,
       }}
     >
       {children}

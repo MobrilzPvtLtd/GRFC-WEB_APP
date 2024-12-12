@@ -74,7 +74,9 @@ const SidebarCart = ({ visible }) => {
         0
       );
 
-  
+  useEffect(()=>{
+    context.setTotal_Sum(total)
+  },[total])
   const handleCartRemove = async (id) => {
     if (token) {
       try {
@@ -169,7 +171,7 @@ const SidebarCart = ({ visible }) => {
 
           <div className="cart-total d-flex align-items-center justify-content-between">
             <span className="font-semi-bold">Total:</span>
-            <span className="font-semi-bold">${total?.toFixed(2)}</span>
+            <span className="font-semi-bold">${context.total_sum?.toFixed(2)}</span>
           </div>
 
           <div className="cart-btns d-flex align-items-center justify-content-between">

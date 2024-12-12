@@ -1,10 +1,16 @@
 import React, { useContext, useState } from "react";
 
 import { ValueContext } from "../../Context/Context_Hook";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+
 
 const SubProduct = () => {
   const context = useContext(ValueContext);
+  let token = sessionStorage.getItem("token");
   const [quantity, setQuantity] = useState(1);
+  const url = process.env.REACT_APP_BACKEND_BASE_URL;
   let data_subproduct = sessionStorage.getItem("data_subproduct")
  console.log('object222222222',data_subproduct)
   const subproddata = [context.subproduct_data];
@@ -21,17 +27,53 @@ const SubProduct = () => {
     context.subproduct_data
   );
 
-  const handlecart = (array) => {
-    context.setCart_num(context.Cart_num + quantity);
-    context.setDataArray((prev) => [...prev, array]);
-  };
+  const handlecart = async(array) => {
+    if (token) {
+      try {
+        const cartvalue_api = await axios.post(
+          `${url}/cart`,
+          {
+            product_id: array.id,
+            quantity: quantity,
+          },
+          {
+            headers: {
+              Authorization: token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-  console.log("context ka data", context.Cart_num ,quantity);
+        if (cartvalue_api.status === 200) {
+          toast.success("Added successfully!", {
+            autoClose: 1000,
+          });
+
+          context.setDataArray((prev) => [...prev, array]);
+        }
+        console.log("cartvalue_api", cartvalue_api);
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    } else {
+      console.warn("No token provided. Updating cart locally.");
+
+      // Update cart locally
+      context.setCart_num(context.Cart_num + 1);
+      context.setDataArray((prev) => [...prev, array]);
+    }
+
+    // Increment cart number
+    context.setCart_num(context.Cart_num + 1);
+  };
+  
+
+  console.log("context ka data", context.Cart_num ,quantity,'gggggggggggg',subproddata);
 
   return (
     <>
       <div className="container mt-64">
-        {[data_subproduct]?.map((item, index, array) => (
+        {subproddata?.map((item, index, array) => (
           <div className="row" key={index}>
             <div className="col-md-4">
               <img src={item?.product_img} alt="product" />
@@ -97,7 +139,7 @@ const SubProduct = () => {
 
               <div className="flex mt-6 space-x-4">
                 <button
-                  onClick={() => handlecart(array[0])}
+                  onClick={()=>handlecart(item)}
                   className="bg-orange-600 rounded-full px-8 py-3 text-white font-semibold  transition duration-200"
                 >
                   Add to Cart
