@@ -11,6 +11,7 @@ const Wishlist = () => {
     let token = sessionStorage.getItem("token");
   const [isVisible, setIsVisible] = useState(true); 
   const[datawislist,set_datawishlist] =useState();
+  const[datawishlist_api,set_datawishlist_api] =useState();
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
 
   const closePopup = () => { setIsVisible(false)
@@ -39,29 +40,30 @@ const Wishlist = () => {
   //  const total = datawislist?.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
    useEffect(() => {
-     const fetchWishlistData = async() => {
-      
-       try {
-         const res = await axios.get(`${url}/wishlist`, {
-           headers: {
-             Authorization: token,
-             "Content-Type": "application/json",
-           },
-         })
-          if(res.status===200){
-            set_datawishlist(res.data.data || [])
-          }
-        
-       } catch (error) {
-         console.error("Error fetching  data:", error);
-       }
-     };
      if(token){
-
+       
        fetchWishlistData()
-     }
-   }, [token]);
+      }
+    }, [token]);
+    
+    const fetchWishlistData = async() => {
+     
+      try {
+        const res = await axios.get(`${url}/wishlist`, {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        })
+         if(res.status===200){
+          set_datawishlist_api(res.data.data || [])
 
+         }
+       
+      } catch (error) {
+        console.error("Error fetching  data:", error);
+      }
+    };
   if (!isVisible) return null; 
  
  
@@ -82,13 +84,14 @@ const Wishlist = () => {
           toast.success('Item removed successfully');
           
           
-          context.setWishlist_Data((prev) => prev.filter((item) => item.id !== id));
+          // context.setWishlist_Data((prev) => prev.filter((item) => item.id !== id));
           
-        
+          
           if(context.wishlist_count>0){
-
+            
             context.setWishlist_count(context.wishlist_count - 1);
           }
+          fetchWishlistData()
         } else {
           console.error('Failed to remove the item');
         }
@@ -114,7 +117,7 @@ const Wishlist = () => {
         </button>
         <div className="cart-popup">
           <ul>  <span className='text-3xl '>Wishlist <i className="fa-regular fa-heart"></i> </span>
-            {datawislist?.map((item) => (
+            {(token ? datawishlist_api : datawislist)?.map((item) => (
             
               <li key={item?.id} className="d-flex align-items-center position-relative">
                 <div className="p-img light-bg">

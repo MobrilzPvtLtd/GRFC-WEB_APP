@@ -560,6 +560,31 @@ const ProductSection = () => {
                     </div>
                   </div>
                 ))}
+
+                  {/* <ul className="pagination m-auto">
+//                 <li className="prev">
+//                   <a href="#">
+//                     <i className="fa-solid fa-arrow-left"></i>
+//                   </a>
+//                 </li>
+//                 <li>
+//                   <a href="#">1</a>
+//                 </li>
+//                 <li>
+//                   <a href="#">2</a>
+//                 </li>
+//                 <li>
+//                   <a href="#">......</a>
+//                 </li>
+//                 <li>
+//                   <a href="#">18</a>
+//                 </li>
+//                 <li className="next">
+//                   <a href="#">
+//                     <i className="fa-solid fa-arrow-right"></i>
+//                   </a>
+//                 </li>
+//               </ul> */}
               </div>
             </div>
           )}

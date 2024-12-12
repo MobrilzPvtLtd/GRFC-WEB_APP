@@ -6,6 +6,7 @@ import food2 from "../../../images_new/img/food-categorie-2.png";
 import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const SidebarCart = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -49,15 +50,18 @@ const SidebarCart = ({ visible }) => {
   }, [token, isVisible]);
 
   // Fetch cart data from the API
-  const Fetch_cartdata = async () => {
+  const Fetch_cartdata = async() => {
     try {
       const data_api = await axios.get(`${url}/cart`, {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
-      });
-      setApi_cartitems(data_api.data.data || []);
+      })
+      if(data_api.status===200){
+
+        setApi_cartitems(data_api.data.data || []);
+      }
     } catch (error) {
       console.error("Error fetching cart data:", error);
     }
@@ -88,6 +92,7 @@ const SidebarCart = ({ visible }) => {
           },
         });
         if (response.status === 200) {
+          toast.success('Item removed successfully');
         if(context.Cart_num>0){
 
           context.setCart_num(context.Cart_num - 1);

@@ -79,7 +79,7 @@ const Navbar = ({ getVisibity }) => {
   };
   return (
     <>
-      <div className="relative w-full bg-white d-none d-md-block">
+      <div className="relative w-full bg-white d-none d-lg-block">
         <header className="fixed top-0 ">
           <div class="top-bar bg-white">
             <div class="container">
@@ -253,11 +253,12 @@ const Navbar = ({ getVisibity }) => {
 
       {/* mobile View start */}
 
-      <div className="flex flex-col bg-gray-100 shadow-md d-block d-md-none ">
+      <div className="flex flex-col bg-gray-100 shadow-md d-block d-sm-block d-lg-none ">
         {/* Top Bar */}
         <div className="flex justify-between items-center p-4 bg-white shadow-sm">
+          <div className="flex space-x-4">   
           <Link
-            className="text-gray-700 text-2xl"
+            className="text-gray-700 text-2xl mt-2"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasWithBothOptions"
@@ -270,7 +271,7 @@ const Navbar = ({ getVisibity }) => {
           <Link to="/">
             <img src={logo} alt="Logo" className="h-12" />
           </Link>
-
+          </div>
           {/* Icons */}
           <div className="flex space-x-4">
             <Link to="/" className="text-gray-700 text-2xl">
