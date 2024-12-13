@@ -1,12 +1,64 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import bg from "../../../images_new/img/banner.png"
 import banner_1 from "../../../images_new/banner-img-1-1.jpg"
 import banner_2 from "../../../images_new/banner-img-2.jpg"
 import { ValueContext } from '../../Context/Context_Hook'
+import { toast } from 'react-toastify'
+import axios from 'axios'
+
 
 const Checkout = () => {
     const context = useContext(ValueContext);
+    const url = process.env.REACT_APP_BACKEND_BASE_URL;
+    let id = sessionStorage.getItem("id");
+    const[order_data , setOrderdata]= useState('')
+ 
+    // const product_data =context.api_cartitems
+    const product_data = context.api_cartitems 
+    const user_data = context.userData
+    
+    
+    const newArray = [];
+    product_data?.map((item , index)=>{
+        newArray.push(item)
+    })
+    console.log("newarrya" , newArray)
+
+    const handleplaceorder = async (e) => {
+        e.preventDefault()
+        console.log('888888888')
+        try {
+           
+          const place_order = await axios.post(`${url}/order`, {
+            userid: id,
+            total_amount: context.total_sum,
+            shipping_address: "noida",
+            billing_address: "noida",
+            product: newArray,
+          });
+      
+          if (place_order.status === 200) {
+            toast.success("Order placed successfully!", { autoClose: 5000 });
+            // console.log('0000000', place_order)
+            setOrderdata(place_order.data)
+
+            if (place_order.data.approve_link) {
+                window.open(place_order.data.approve_link, '_blank');
+            }
+
+
+          } else {
+            console.error("Unexpected response:", place_order);
+            toast.error("Order failed. Please try again.");
+          }
+        } catch (error) {
+          console.error("Error placing order:", error);
+          toast.error("An error occurred. Please check the console.");
+        }
+      };
+      
+     console.log(' place data.......', context.api_cartitems ,'fghj', product_data ,'userid',order_data ,"user",user_data)
   return (
     <>
    <section className="banner mt-48"  style={{ backgroundColor: '#fff', backgroundImage: `url(${bg})`,  backgroundPosition:`center` }} >
@@ -46,18 +98,19 @@ const Checkout = () => {
   </section>
   <section className="gap"> 
   <div className="container">
-      <form className="checkout-meta donate-page">
+      <form className="checkout-meta donate-page" onSubmit={handleplaceorder}>
           <div className="row">
               <div className="col-lg-8">
                   <h3>Billing details</h3>
                       <div className="col-lg-12">
-                          <input type="text" className="input-text " name="" placeholder="Full Name"/>
-                          <input type="tele" className="input-text " name=""  placeholder="Phone Number"/>
-                          <input type="text" className="input-text " name="" placeholder="House No./Flat No. "/>
-                          <input type="text" className="input-text " name="" placeholder="Locality"/>
-                          <input type="text" className="input-text " name="" placeholder="Postal Code"/>
-                          <input type="text" className="input-text " name="" placeholder="City "/>
-                          <input type="text" className="input-text " name="" placeholder="Country "/>
+                       
+                          <input type="text" required={true} className="input-text "  name="" placeholder="Full Name"/>
+                          <input type="tele" required={true} className="input-text "  name=""  placeholder="Phone Number"/>
+                          <input type="text" required={true} className="input-text " name="" placeholder="House No./Flat No. "/>
+                          <input type="text" required={true} className="input-text " name="" placeholder="Locality"/>
+                          <input type="text" required={true} className="input-text " name="" placeholder="Postal Code"/>
+                          <input type="text" required={true} className="input-text " name="" placeholder="City "/>
+                          <input type="text" required={true} className="input-text " name="" placeholder="Country "/>
                           
                           {/* <div className="row">
                           <div className="col-lg-6">
@@ -159,7 +212,8 @@ const Checkout = () => {
                               </label>
                           </li>
                       </ul>
-                      <button type="submit" className="button">Place Order</button>
+                      <button type="submit" className="button"   >Place Order</button>
+                    
                   </div>
               </div>
           </div>

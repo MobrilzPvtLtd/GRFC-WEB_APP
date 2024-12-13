@@ -4,6 +4,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ValueContext } from '../../Context/Context_Hook';
 import axios from 'axios';
+import {
+  FaTrash
+} from "react-icons/fa";
 import { toast } from 'react-toastify';
 
 const Wishlist = () => {
@@ -81,7 +84,9 @@ const Wishlist = () => {
         });
         
         if (response.status === 200) {
-          toast.success('Item removed successfully');
+          toast.success('Item removed successfully',{
+            autoClose:1000
+          });
           
           
           // context.setWishlist_Data((prev) => prev.filter((item) => item.id !== id));
@@ -100,6 +105,7 @@ const Wishlist = () => {
       }}else{
         console.log("Removing wishlist item locally:", id);
         set_datawishlist((prev) => prev.filter((item) => item.id !== id));
+        
         if(context.wishlist_count>0){
 
           context.setWishlist_count(context.wishlist_count - 1);
@@ -125,13 +131,16 @@ const Wishlist = () => {
                 </div>
                 <div className="p-data">
                   <h3 className="font-semi-bold">{item?.title}</h3>
+                  <p className="theme-clr font-semi-bold">
+                     ${parseFloat(item.price)?.toFixed(2)}
+                  </p>
                 
                 </div>
                 <button
                   onClick={() => {handlewishlist_remove(item.id)}}
-                  className="remove-btn"
+                  className="remove-btn ms-4"
                 >
-                  <FontAwesomeIcon icon={faCircleXmark} />
+                  <FaTrash icon={faCircleXmark} />
                 </button>
               </li>
             ))}
@@ -140,9 +149,9 @@ const Wishlist = () => {
          
 
           <div className="cart-btns d-flex align-items-center justify-content-between">
-            <Link to="/view-cart" className="font-bold">
+            {/* <Link to="/view-cart" className="font-bold">
               View Cart
-            </Link>
+            </Link> */}
             <Link to="/checkout" className="font-bold theme-bg-clr text-white checkout">
               Checkout
             </Link>

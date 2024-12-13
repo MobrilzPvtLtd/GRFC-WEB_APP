@@ -25,6 +25,7 @@ const Appointment_with_login = () => {
   const [pet_data, set_Pet_Data] = useState([]);
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
+   const [id_data, setId_Data] = useState();
 
   const [open, setOpen] = useState(false);
 
@@ -44,7 +45,7 @@ const Appointment_with_login = () => {
     date: "",
     pet_details: "",
   });
-  const [id_data, setId_Data] = useState();
+  // const [id_data, setId_Data] = useState();
 
   const navigate = useNavigate();
 
@@ -61,7 +62,7 @@ const Appointment_with_login = () => {
           },
         });
 
-        setUserData([res.data.data]);
+        context.setUserData([res.data.data]);
         setLoader(false);
         setForm((prevForm) => ({
           ...prevForm,
@@ -129,13 +130,13 @@ const Appointment_with_login = () => {
   useEffect(()=>{
 
 
-    if (userData) {
-      let petsData = userData[0]?.pets;
+    if (context.userData) {
+      let petsData = context.userData[0]?.pets;
       set_Pet_Data(petsData);
   
-      console.log("Response:", userData, "pets ka data", petsData);
+      console.log("Response:", context.userData, "pets ka data", petsData);
     }
-  },[userData])
+  },[context.userData])
 
   const handle_petID = (state) => {
     // console.log('999999999',state)
@@ -156,7 +157,7 @@ const Appointment_with_login = () => {
               {loader ? (
                 <Skeleton />
               ) : (
-                userData?.map((item, index) => (
+                context.userData?.map((item, index) => (
                   <form
                     onSubmit={handleSubmitForm}
                     action=""

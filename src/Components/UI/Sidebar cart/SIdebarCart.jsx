@@ -7,11 +7,14 @@ import { Link } from "react-router-dom";
 import { ValueContext } from "../../Context/Context_Hook";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {
+  FaTrash
+} from "react-icons/fa";
 
 const SidebarCart = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [cartItems, setCartItems] = useState([]);
-  const [api_cartitems, setApi_cartitems] = useState();
+  // const [api_cartitems, setApi_cartitems] = useState();
    const [localCartItems, setLocalCartItems] = useState([]);
   let token = sessionStorage.getItem("token");
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -60,7 +63,7 @@ const SidebarCart = ({ visible }) => {
       })
       if(data_api.status===200){
 
-        setApi_cartitems(data_api.data.data || []);
+        context.setApi_cartitems(data_api.data.data || []);
       }
     } catch (error) {
       console.error("Error fetching cart data:", error);
@@ -69,7 +72,7 @@ const SidebarCart = ({ visible }) => {
 
   
   const total = token
-    ? api_cartitems?.reduce(
+    ? context.api_cartitems?.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
       )
@@ -84,35 +87,43 @@ const SidebarCart = ({ visible }) => {
   const handleCartRemove = async (id) => {
     if (token) {
       try {
-        // console.log("Removing cart item via API:", id);
-        const response =  await axios.delete(`${url}/cart/${id}`, {
+        const response = await axios.delete(`${url}/cart/${id}`, {
           headers: {
             Authorization: token,
             "Content-Type": "application/json",
           },
         });
         if (response.status === 200) {
-          toast.success('Item removed successfully');
-        if(context.Cart_num>0){
-
-          context.setCart_num(context.Cart_num - 1);
-        }
+          toast.success('Item removed successfully', { autoClose: 1000 });
+          if (context.Cart_num > 0) {
+            context.setCart_num(context.Cart_num - 1);
+          }
+          
+          await Fetch_cartdata();
+  
       
-        Fetch_cartdata();
-      } }catch (error) {
+          if (context.api_cartitems.length === 0) {
+            context.setApi_cartitems([]); 
+          }
+        }
+      } catch (error) {
         console.error("Error removing item from cart via API:", error);
       }
     } else {
-      console.log("Removing cart item locally:", id);
-      setCartItems((prev) => prev.filter((item) => item.id !== id));
-      if(context.Cart_num>0){
-
+      
+      const updatedCart = cartItems.filter((item) => item.id !== id);
+      setCartItems(updatedCart);
+      if (context.Cart_num > 0) {
         context.setCart_num(context.Cart_num - 1);
       }
+  
       
-      
+      if (updatedCart.length === 0) {
+        setCartItems([]); 
+      }
     }
   };
+  
 
   
 
@@ -140,59 +151,68 @@ const SidebarCart = ({ visible }) => {
     "cartuiop",
     cartItems,
     "api dataa",
-    api_cartitems
+    context.api_cartitems
   );
   return (
-    <div id="lightbox" className="lightbox clearfix">
-      <div className="white_content" ref={sidebarRef}>
-        <button className="textright" onClick={closePopup}>
-          <FontAwesomeIcon icon={faCircleXmark} />
-        </button>
-        <div className="cart-popup">
-          <ul>
-            {(token ? api_cartitems : cartItems)?.map((item) => (
-              <li
-                key={item.id}
-                className="d-flex align-items-center position-relative"
-              >
-                <div className="p-img light-bg">
-                  <img src={item?.product_img_url || item?.product_img} alt="Product Image" />
+ 
+      <div id="lightbox" className="lightbox clearfix">
+        <div className="white_content" ref={sidebarRef}>
+          <button className="textright" onClick={closePopup}>
+            <FontAwesomeIcon icon={faCircleXmark} />
+          </button>
+          <div className="cart-popup">
+            {((token ? context.api_cartitems : cartItems)?.length === 0) ? (
+              <p className="empty-cart-message">Your cart is empty.</p>
+            ) : (
+              <>
+                <ul>
+                  {(token ? context.api_cartitems : cartItems)?.map((item) => (
+                    <li
+                      key={item.id}
+                      className="d-flex align-items-center position-relative"
+                    >
+                      <div className="p-img light-bg">
+                        <img src={item?.product_img_url || item?.product_img} alt="Product Image" />
+                      </div>
+                      <div className="p-data">
+                        <h3 className="font-semi-bold">{item?.title}</h3>
+                        <p className="theme-clr font-semi-bold">
+                          ({item.quantity} x ${parseFloat(item.price)?.toFixed(2)})
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => handleCartRemove(item.id)}
+                        className="remove-btn ms-4"
+                      >
+                        <FaTrash icon={faCircleXmark} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+    
+                <div className="cart-total d-flex align-items-center justify-content-between">
+                  <span className="font-semi-bold">Total:</span>
+                  <span className="font-semi-bold">${context.total_sum?.toFixed(2)}</span>
                 </div>
-                <div className="p-data">
-                  <h3 className="font-semi-bold">{item?.title}</h3>
-                  <p className="theme-clr font-semi-bold">
-                    ({item.quantity} x ${parseFloat(item.price)?.toFixed(2)})
-                  </p>
+    
+                <div className="cart-btns d-flex align-items-center justify-content-between">
+                  <Link to="/view-cart" className="font-bold">
+                    View Cart
+                  </Link>
+                  <Link
+                    to="/checkout"
+                    className="font-bold theme-bg-clr text-white checkout"
+                  >
+                    Checkout
+                  </Link>
                 </div>
-                <button
-                  onClick={() => handleCartRemove(item.id)}
-                  className="remove-btn"
-                >
-                  <FontAwesomeIcon icon={faCircleXmark} />
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <div className="cart-total d-flex align-items-center justify-content-between">
-            <span className="font-semi-bold">Total:</span>
-            <span className="font-semi-bold">${context.total_sum?.toFixed(2)}</span>
-          </div>
-
-          <div className="cart-btns d-flex align-items-center justify-content-between">
-            <Link to="/view-cart" className="font-bold">
-              View Cart
-            </Link>
-            <Link
-              to="/checkout"
-              className="font-bold theme-bg-clr text-white checkout"
-            >
-              Checkout
-            </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    
+    
   );
 };
 

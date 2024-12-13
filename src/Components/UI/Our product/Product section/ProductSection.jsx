@@ -347,7 +347,7 @@ const ProductSection = () => {
         );
 
         if (cartvalue_api.status === 200) {
-          toast.success("Inserted into the cart successfully!", {
+          toast.success("Added successfully!", {
             autoClose: 1000,
           });
 
