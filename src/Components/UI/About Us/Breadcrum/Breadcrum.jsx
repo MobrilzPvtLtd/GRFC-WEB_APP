@@ -69,7 +69,7 @@ const Breadcrumb = () => {
 >
   <div className="container">
     <div className="row align-items-center">
-      <div className="col-lg-6 col-4">
+      <div className="col-lg-6 col-6">
         <div className="banner-text">
           <h2 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-5xl">Acerca de</h2>
           <ol className="breadcrumb">
@@ -82,7 +82,7 @@ const Breadcrumb = () => {
           </ol>
         </div>
       </div>
-      <div className="col-lg-6 col-8">
+      <div className="col-lg-6 col-6">
         <div className="banner-img">
           <div className="banner-img-1">
             <svg width="100%" height="100%" viewBox="0 0 673 673" xmlns="http://www.w3.org/2000/svg">

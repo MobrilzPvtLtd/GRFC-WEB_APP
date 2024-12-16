@@ -296,13 +296,13 @@ const Navbar = ({ getVisibity }) => {
     <li>
       <Link to="/about-us" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
         <FaInfoCircle className="mr-2" />
-        About Us
+        Acerca de
       </Link>
     </li>
     <li>
-      <Link to="/category3" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+      <Link className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
         <FaConciergeBell className="mr-2" />
-        Service
+        Servicio
         {/* <ul>
                   
                     <Dropdown label="Servicio" items={category_data} />
@@ -312,13 +312,13 @@ const Navbar = ({ getVisibity }) => {
     <li>
       <Link to="/our-products" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
         <FaProductHunt className="mr-2" />
-        Product
+        Producto
       </Link>
     </li>
     <li>
       <Link to="/contact-us" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
         <FaEnvelope className="mr-2" />
-        Contact
+        Contacto
       </Link>
     </li>
   </ul>
