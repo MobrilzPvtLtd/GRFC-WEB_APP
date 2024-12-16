@@ -122,6 +122,12 @@ const Wishlist = () => {
           <FontAwesomeIcon icon={faCircleXmark} />
         </button>
         <div className="cart-popup">
+        {((token ? datawishlist_api : datawislist)?.length === 0) ? (
+              <p className="empty-cart-message">Your cart is empty.</p>
+            ) : ( 
+               <>  
+          
+         
           <ul>  <span className='text-3xl '>Wishlist <i className="fa-regular fa-heart"></i> </span>
             {(token ? datawishlist_api : datawislist)?.map((item) => (
             
@@ -156,6 +162,8 @@ const Wishlist = () => {
               Checkout
             </Link>
           </div>
+
+          </>)}
         </div>
       </div>
     </div>
