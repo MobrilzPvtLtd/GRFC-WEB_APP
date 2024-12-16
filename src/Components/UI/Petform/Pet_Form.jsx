@@ -104,11 +104,11 @@ console.log('2222222222222',ID_data)
                 backgroundColor: "#5badbdfa",
               }}
             >
-              <h1 className="text-4xl py-4 text-center">Pet Form</h1>
+              <h1 className="text-4xl py-4 text-center">Forma de mascota</h1>
               <form onSubmit={handlePetform} className="p-3">
                 <input
                   type="text"
-                  placeholder="Pet Name"
+                  placeholder="Nombre de mascota"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -116,7 +116,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Pet Code"
+                  placeholder="Código de mascota"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -124,7 +124,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Owner Name"
+                  placeholder="Nombre del propietario"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -132,15 +132,16 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="Correo electrónico"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
                   name="email"
                 />
                 <input
-                  type="number"
-                  placeholder="Phone"
+                  type="tel"
+                  placeholder="Teléfono"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -148,7 +149,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Status"
+                  placeholder="Estado"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -156,7 +157,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="number"
-                  placeholder="Weight"
+                  placeholder="Peso"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -164,7 +165,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Species"
+                  placeholder="Especies"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -172,7 +173,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Coat"
+                  placeholder="Abrigo"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -180,7 +181,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Breeds"
+                  placeholder="Razas"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -188,7 +189,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Size"
+                  placeholder="Tamaño"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -196,7 +197,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Character"
+                  placeholder="Personaje"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -204,7 +205,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Sex"
+                  placeholder="Sexo"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -212,7 +213,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="date"
-                  placeholder="Date of Birth"
+                  placeholder="Fecha de nacimiento"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -228,7 +229,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Size Record Data"
+                  placeholder="Datos de registro de tamaño"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}
@@ -236,7 +237,7 @@ console.log('2222222222222',ID_data)
                 />
                 <input
                   type="text"
-                  placeholder="Owner Size Record"
+                  placeholder="Registro de tamaño del propietario"
                   className="form-control mb-3"
                   onChange={handleChange}
                   required={true}

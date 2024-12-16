@@ -123,12 +123,12 @@ const Wishlist = () => {
         </button>
         <div className="cart-popup">
         {((token ? datawishlist_api : datawislist)?.length === 0) ? (
-              <p className="empty-cart-message">Your cart is empty.</p>
+              <p className="empty-cart-message">Tu carrito está vacío.</p>
             ) : ( 
                <>  
           
          
-          <ul>  <span className='text-3xl '>Wishlist <i className="fa-regular fa-heart"></i> </span>
+          <ul>  <span className='text-3xl '>Lista de deseos <i className="fa-regular fa-heart"></i> </span>
             {(token ? datawishlist_api : datawislist)?.map((item) => (
             
               <li key={item?.id} className="d-flex align-items-center position-relative">
@@ -159,7 +159,7 @@ const Wishlist = () => {
               View Cart
             </Link> */}
             <Link to="/checkout" className="font-bold theme-bg-clr text-white checkout">
-              Checkout
+            Verificar
             </Link>
           </div>
 

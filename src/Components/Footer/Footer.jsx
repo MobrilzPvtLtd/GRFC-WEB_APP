@@ -47,7 +47,7 @@ const Footer = () => {
                     ></path>
                   </svg>
                 </i>
-                <a href="mallto:username@domain.com">username@domain.com</a>
+                <a href="mallto:username@domain.com">usuario@dominio.com</a>
               </div>
               <div class="phone d-flax align-items-center">
                 <i>
@@ -106,32 +106,32 @@ const Footer = () => {
           </div>
           <div class="col-xl-4 col-lg-4 col-md-6">
             <div class="widget-title">
-              <h3>Quick Links</h3>
+              <h3>Enlaces rápidos</h3>
               <div class="boder"></div>
               <ul>
                 <li>
                   <i class="fa-solid fa-angle-right"></i>
-                  <a href="javascript:void(0)">Dog Boarding Services</a>
+                  <a href="javascript:void(0)">Servicios de alojamiento para perros</a>
                 </li>
                 <li>
                   <i class="fa-solid fa-angle-right"></i>
-                  <a href="javascript:void(0)">Cat Boarding Services</a>
+                  <a href="javascript:void(0)">Servicios de alojamiento para gatos</a>
                 </li>
                 <li>
                   <i class="fa-solid fa-angle-right"></i>
-                  <a href="javascript:void(0)">Spa and Grooming Services</a>
+                  <a href="javascript:void(0)">Servicios de spa y peluquería</a>
                 </li>
                 <li>
                   <i class="fa-solid fa-angle-right"></i>
-                  <a href="javascript:void(0)">Care for Puppy</a>
+                  <a href="javascript:void(0)">Cuidar al cachorro</a>
                 </li>
                 <li>
                   <i class="fa-solid fa-angle-right"></i>
-                  <a href="javascript:void(0)">Service at a Resort</a>
+                  <a href="javascript:void(0)">Servicio en un Resort</a>
                 </li>
                 <li>
                   <i class="fa-solid fa-angle-right"></i>
-                  <a href="javascript:void(0)">Veterinary Service</a>
+                  <a href="javascript:void(0)">Servicio Veterinario</a>
                 </li>
               </ul>
             </div>
@@ -139,20 +139,20 @@ const Footer = () => {
           <div class="col-xl-4 col-lg-4 col-md-6 sm:mt-5">
             <div class="working-hours">
               <div class="widget-title">
-                <h3>working hours</h3>
+                <h3>horas de trabajo</h3>
                 <div class="boder"></div>
                 <div class="working-time">
                   <h6 class="pt-0">
-                    Monday - Saturday <span>08AM - 10PM</span>
+                  Lunes - Sábado <span>08AM - 10PM</span>
                   </h6>
                   <h6>
-                    Sunday<span>08AM - 10PM</span>
+                  Domingo<span>08AM - 10PM</span>
                   </h6>
                   <div class="call-us">
                     <img src={headphone} alt="hadphon" />
                     <div>
                       <a href="#">+021 01283492</a>
-                      <span>Got Questions? Call us 24/7</span>
+                      <span>¿Tienes preguntas? Llámanos 24/7</span>
                     </div>
                   </div>
                   <ul class="social-icon">
@@ -179,7 +179,7 @@ const Footer = () => {
         </div>
         <div class="copyright">
           <p>
-            © 2024 All Rights Reserved. Designed & Developed By{" "}
+            © 2024 Reservados todos los derechos. Diseñado y desarrollado por{" "}
             <a href="https://mobrilz.com/">Mobrilz</a>
           </p>
           <a href="#">

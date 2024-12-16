@@ -148,7 +148,7 @@ const ProductSection = () => {
                     </ul>
                     <div class="add-to-cart">
                       <Link onClick={() => handleAddCartValue(items)}>
-                        Add to Cart
+                      añadir a la cesta
                       </Link>
                       <Link to="" class="heart-wishlist">
                         <i
@@ -214,7 +214,7 @@ const ProductSection = () => {
                               class="button"
                               onClick={() => handleAddCartValue(items)}
                             >
-                              Add to Cart
+                              añadir a la cesta
                             </Link>
                             <Link class="heart-wishlist">
                               <i

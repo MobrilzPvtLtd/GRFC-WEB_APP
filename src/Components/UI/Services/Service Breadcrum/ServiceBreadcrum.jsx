@@ -13,13 +13,13 @@ const ServiceBreadcrum = () => {
       <div className="row align-items-center">
         <div className="col-lg-6">
           <div className="banner-text">
-            <h2 className='text-7xl font-bold'>services</h2>
+            <h2 className='text-7xl font-bold'>servicios</h2>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="index.html">Hogar</a>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                services
+              servicios
               </li>
             </ol>
           </div>

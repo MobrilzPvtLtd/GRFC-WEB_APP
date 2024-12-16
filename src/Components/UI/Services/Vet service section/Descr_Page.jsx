@@ -53,7 +53,7 @@ const Descr_Page = () => {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="banner-text">
-                <h2 className="text-6xl font-bold">Book Here</h2>
+                <h2 className="text-6xl font-bold">Reserva Aquí</h2>
               </div>
             </div>
             <div className="col-lg-6">
@@ -115,13 +115,13 @@ const Descr_Page = () => {
                 {filteredDescription.description}
               </p>
             ) : (
-              <p className="p-5 text-xl">No matching description found.</p>
+              <p className="p-5 text-xl">No se encontró ninguna descripción que coincida.</p>
             )}
             <div className="flex justify-center">
               {" "}
               <button className="btn btn-success">
                 <a href={`${urlparam}/booknow`} className="text-white">
-                  Book Now{" "}
+                Reserva ahora{" "}
                 </a>
               </button>{" "}
             </div>

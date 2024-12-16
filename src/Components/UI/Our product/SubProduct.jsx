@@ -89,7 +89,7 @@ const SubProduct = () => {
                   4.3{" "}
                 </button>
                 <span className="text-gray-600">
-                  2367 ratings and 45 reviews
+                2367 calificaciones y 45 reseñas
                 </span>
               </div>
 
@@ -142,10 +142,10 @@ const SubProduct = () => {
                   onClick={()=>handlecart(item)}
                   className="bg-orange-600 rounded-full px-8 py-3 text-white font-semibold  transition duration-200"
                 >
-                  Add to Cart
+                  Añadir a la cesta
                 </button>
                 <button className="bg-orange-600 rounded-full px-8 py-3 text-white font-semibold  transition duration-200">
-                  Buy Now
+                  Comprar ahora
                 </button>
               </div>
             </div>

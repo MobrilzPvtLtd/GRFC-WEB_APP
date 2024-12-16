@@ -99,7 +99,7 @@ const ContactSection = () => {
                     <input
                       type="text"
                       name="first_name"
-                      placeholder="First Name"
+                      placeholder="Nombre de pila"
                       value={formData.first_name}
                       onChange={handleChange}
                     />
@@ -109,7 +109,7 @@ const ContactSection = () => {
                     <input
                       type="text"
                       name="last_name"
-                      placeholder="Last Name"
+                      placeholder="Apellido"
                       value={formData.last_name}
                       onChange={handleChange}
                     />
@@ -118,7 +118,7 @@ const ContactSection = () => {
                     <input
                       type="email"
                       name="email"
-                      placeholder="Email Address"
+                      placeholder="Dirección de correo electrónico"
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -127,14 +127,14 @@ const ContactSection = () => {
                   <div className="col-lg-12 mt-3">
                     <textarea
                       name="description"
-                      placeholder="Write from here............"
+                      placeholder="Escribe desde aquí............"
                       value={formData.description}
                       onChange={handleChange}
                     ></textarea>
                   </div>
                 </div>
                 <button type="submit" className="button">
-                  Send
+                Enviar
                 </button>
               </form>
             </div>

@@ -25,7 +25,7 @@ const Appointment_with_login = () => {
   const [pet_data, set_Pet_Data] = useState([]);
   const context = useContext(ValueContext);
   let url = process.env.REACT_APP_BACKEND_BASE_URL;
-   const [id_data, setId_Data] = useState();
+  const [id_data, setId_Data] = useState();
 
   const [open, setOpen] = useState(false);
 
@@ -110,7 +110,7 @@ const Appointment_with_login = () => {
       if (appointment_data.status == 200) {
         setIsConfirmed(true); // Show confirmation page
         toast.success("Appointment Book Successfully");
-        
+
         navigate("/");
       }
 
@@ -127,16 +127,14 @@ const Appointment_with_login = () => {
   const handleCancel = () => {
     setIsConfirmed(false); // Reset to form view
   };
-  useEffect(()=>{
-
-
+  useEffect(() => {
     if (context.userData) {
       let petsData = context.userData[0]?.pets;
       set_Pet_Data(petsData);
-  
+
       console.log("Response:", context.userData, "pets ka data", petsData);
     }
-  },[context.userData])
+  }, [context.userData]);
 
   const handle_petID = (state) => {
     // console.log('999999999',state)
@@ -153,7 +151,7 @@ const Appointment_with_login = () => {
                 backgroundColor: "#5badbdfa",
               }}
             >
-              <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
+              <h1 className="text-4xl py-4">Complete el formulario de cita</h1>
               {loader ? (
                 <Skeleton />
               ) : (
@@ -166,7 +164,7 @@ const Appointment_with_login = () => {
                   >
                     <input
                       type="text"
-                      placeholder="username"
+                      placeholder="nombre de usuario"
                       className="form-control mb-3 txt-dg"
                       value={item?.owner_name}
                       // name = "name"
@@ -175,7 +173,7 @@ const Appointment_with_login = () => {
                     />
                     <input
                       type="email"
-                      placeholder="Email"
+                      placeholder="Correo electrónico"
                       className="form-control mb-3 txt_dg"
                       value={item?.email}
                       // name = "email"
@@ -183,8 +181,8 @@ const Appointment_with_login = () => {
                       readOnly
                     />
                     <input
-                      type="number"
-                      placeholder="Phone"
+                      type="tel"
+                      placeholder="Teléfono"
                       className="form-control mb-3 txt_dg"
                       value={item?.phone}
                       // name = "phone"
@@ -193,7 +191,7 @@ const Appointment_with_login = () => {
                     />
                     <input
                       type="time"
-                      placeholder="Pickup Time"
+                      placeholder="Hora de recogida"
                       className="form-control mb-3 txt_dg "
                       name="time"
                       onChange={handleChange}
@@ -201,19 +199,19 @@ const Appointment_with_login = () => {
                     />
                     <input
                       type="date"
-                      placeholder="Pickup Date"
+                      placeholder="Fecha de recogida"
                       className="form-control mb-3 txt_dg"
                       name="date"
                       onChange={handleChange}
                       required={true}
                     />
                     <label>
-                      <b>Pet Details </b>
+                      <b>Detalles de la mascota </b>
                     </label>
                     <textarea
                       name="pet_details"
                       id=""
-                      placeholder="Write Here"
+                      placeholder="Escribe aquí"
                       className="form-control mb-3 "
                       onChange={handleChange}
                       required={true}
@@ -222,24 +220,22 @@ const Appointment_with_login = () => {
                       <table class="table  table-striped ">
                         <thead>
                           <tr className="bg-success-subtle">
-                            {/* <th>Owner Name</th>
-                          <th>Phone</th>*/}
-                             <th>Select</th> 
-                            
-                            <th>Pet Name</th>
-                            <th>Pet Code</th>
-                            <th>Status</th>
-                            <th>Species</th>
-                            <th>Breed</th>
-                            <th>Size</th>
-                            <th>Coat</th>
-                            <th>Character</th>
-                            <th>Sex</th>
+                            <th>Seleccionar</th>
+
+                            <th>Nombre de la Mascota</th>
+                            <th>Código de la Mascota</th>
+                            <th>Estado</th>
+                            <th>Especie</th>
+                            <th>Raza</th>
+                            <th>Tamaño</th>
+                            <th>Pelo</th>
+                            <th>Carácter</th>
+                            <th>Sexo</th>
                             <th>Color</th>
-                            <th>DOB</th>
-                            <th>Weight Kg</th>
-                            <th>Size record date</th>
-                            <th>Owner Size Record</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Peso Kg</th>
+                            <th>Fecha de Registro de Tamaño</th>
+                            <th>Tamaño Registrado por el Propietario</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -248,7 +244,10 @@ const Appointment_with_login = () => {
                               {/* <td>{item.owner_name}</td>
                           <td>{item.phone}</td>*/}
                               <td>
-                                <input type="checkbox" onClick={()=>handle_petID(item.id)} />
+                                <input
+                                  type="checkbox"
+                                  onClick={() => handle_petID(item.id)}
+                                />
                               </td>
                               <td>{item.name}</td>
                               <td>{item.pet_code}</td>
@@ -278,7 +277,7 @@ const Appointment_with_login = () => {
                         onClick={() => handleClickOpen}
                         className="btn btn-success"
                       >
-                        Submit
+                       Entregar
                       </button>{" "}
                     </div>
                   </form>
@@ -289,40 +288,40 @@ const Appointment_with_login = () => {
         ) : (
           // Confirmation Page
           <div className="confirmation-container">
-            <h1 className="text-4xl py-4">Booking Confirmed</h1>
+            <h1 className="text-4xl py-4">Reserva confirmada</h1>
             <div className="container">
               <div className="row">
                 <div className="col-6">
-                  <label>Name:</label> <span>{form.name}</span>
+                  <label>Nombre:</label> <span>{form.name}</span>
                 </div>
                 <div className="col-6">
-                  <label>Email:</label> <span>{form.email}</span>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label>Phone:</label> <span>{form.phone}</span>
-                </div>
-                <div className="col-6">
-                  <label>Time:</label> <span>{form.time}</span>
+                  <label>Correo electrónico:</label> <span>{form.email}</span>
                 </div>
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label>Date:</label> <span>{form.date}</span>
+                  <label>Teléfono:</label> <span>{form.phone}</span>
                 </div>
                 <div className="col-6">
-                  <label>Pet Details:</label> <span>{form.pet_details}</span>
+                  <label>Tiempo:</label> <span>{form.time}</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <label>Fecha:</label> <span>{form.date}</span>
+                </div>
+                <div className="col-6">
+                  <label>Detalles de la mascota:</label> <span>{form.pet_details}</span>
                 </div>
               </div>
             </div>
 
             <div className="confirmation-buttons">
               <button className="btn btn-danger mx-2" onClick={handleCancel}>
-                Cancel
+              Cancelar
               </button>
               <button className="btn btn-success" onClick={handleConfirm}>
-                Confirm
+              Confirmar
               </button>
             </div>
           </div>

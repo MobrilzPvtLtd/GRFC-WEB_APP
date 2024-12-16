@@ -539,7 +539,7 @@ const ProductSection = () => {
                         </Link>
                         <div className="add-to-cart">
                           <Link onClick={() => handleAddCartValue(item)}>
-                            Add to Cart
+                          añadir a la cesta
                           </Link>
                           <Link to="" className="heart-wishlist">
                             <i

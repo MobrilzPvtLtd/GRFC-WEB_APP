@@ -162,7 +162,7 @@ const SidebarCart = ({ visible }) => {
           </button>
           <div className="cart-popup">
             {((token ? context.api_cartitems : cartItems)?.length === 0) ? (
-              <p className="empty-cart-message">Your cart is empty.</p>
+              <p className="empty-cart-message">Tu carrito está vacío.</p>
             ) : (
               <>
                 <ul>
@@ -197,13 +197,13 @@ const SidebarCart = ({ visible }) => {
     
                 <div className="cart-btns d-flex align-items-center justify-content-between">
                   <Link to="/view-cart" className="font-bold">
-                    View Cart
+                  Ver carrito
                   </Link>
                   <Link
                     to="/checkout"
                     className="font-bold theme-bg-clr text-white checkout"
                   >
-                    Checkout
+                    Verificar
                   </Link>
                 </div>
               </>

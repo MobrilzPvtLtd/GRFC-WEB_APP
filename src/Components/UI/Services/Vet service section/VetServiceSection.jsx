@@ -56,7 +56,7 @@ const VetServicesSection = () => {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="banner-text">
-                <h2 className="text-6xl font-bold">Facility</h2>
+                <h2 className="text-6xl font-bold">Instalación</h2>
               </div>
             </div>
             <div className="col-lg-6">

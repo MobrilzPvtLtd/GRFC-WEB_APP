@@ -378,11 +378,11 @@ const Appointment_without_login = ({ Id_data }) => {
               backgroundColor: "#5badbdfa",
             }}
           >
-            <h1 className="text-4xl py-4">Fill out the Appointment Form</h1>
+            <h1 className="text-4xl py-4">Complete el formulario de cita</h1>
             <form onSubmit={handleSubmitForm} className="p-3">
               <input
                 type="text"
-                placeholder="Username"
+                placeholder="Nombre de usuario"
                 className="form-control mb-3 txt-dg"
                 name="name"
                 onChange={handleChange}
@@ -390,16 +390,17 @@ const Appointment_without_login = ({ Id_data }) => {
               />
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Correo electrónico"
                 className="form-control mb-3 txt-dg"
                 name="email"
                 onChange={handleChange}
                 value={form.email}
               />
               <input
-                type="number"
-                placeholder="Phone"
+                type="tel"
+                placeholder="Teléfono"
                 className="form-control mb-3 txt-dg"
+                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                 name="phone"
                 onChange={handleChange}
                 value={form.phone}
@@ -419,10 +420,10 @@ const Appointment_without_login = ({ Id_data }) => {
                 value={form.date}
               />
               <label>
-                <b>Pet Details</b>
+                <b>Detalles de la mascota</b>
               </label>
               <textarea
-                placeholder="Write Here"
+                placeholder="Escribe aquí"
                 className="form-control mb-3"
                 name="pet_details"
                 onChange={handleChange}
@@ -435,20 +436,20 @@ const Appointment_without_login = ({ Id_data }) => {
                     <tr className="bg-success-subtle">
                      
                      
-                       <th>Pet Name</th>
-                      <th>Pet Code</th>
-                      <th>Status</th>
-                      <th>Species</th>
-                      <th>Breed</th>
-                      <th>Size</th>
-                      <th>Coat</th>
-                      <th>Character</th>
-                      <th>Sex</th>
-                      <th>Color</th>
-                      <th>DOB</th>
-                      <th>Weight Kg</th>
-                      <th>Owner Size Record</th>
-                      <th>Size record date</th>
+                    <th>Nombre de la Mascota</th>
+                            <th>Código de la Mascota</th>
+                            <th>Estado</th>
+                            <th>Especie</th>
+                            <th>Raza</th>
+                            <th>Tamaño</th>
+                            <th>Pelo</th>
+                            <th>Carácter</th>
+                            <th>Sexo</th>
+                            <th>Color</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Peso Kg</th>
+                            <th>Fecha de Registro de Tamaño</th>
+                            <th>Tamaño Registrado por el Propietario</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -495,7 +496,7 @@ const Appointment_without_login = ({ Id_data }) => {
 
               <div className="flex justify-center">
                 <button className="btn btn-success" type="submit">
-                  Submit
+                Entregar
                 </button>
               </div>
             </form>
@@ -504,40 +505,40 @@ const Appointment_without_login = ({ Id_data }) => {
       ) : (
         // Confirmation Page
         <div className="confirmation-container">
-          <h1 className="text-4xl py-4">Booking Confirmed</h1>
+          <h1 className="text-4xl py-4">Reserva confirmada</h1>
           <div className="container">
             <div className="row">
               <div className="col-6">
-                <label>Name:</label> <span>{form.name}</span>
+                <label>Nombre:</label> <span>{form.name}</span>
               </div>
               <div className="col-6">
-                <label>Email:</label> <span>{form.email}</span>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <label>Phone:</label> <span>{form.phone}</span>
-              </div>
-              <div className="col-6">
-                <label>Time:</label> <span>{form.time}</span>
+                <label>Correo electrónico:</label> <span>{form.email}</span>
               </div>
             </div>
             <div className="row">
               <div className="col-6">
-                <label>Date:</label> <span>{form.date}</span>
+                <label>Teléfono:</label> <span>{form.phone}</span>
               </div>
               <div className="col-6">
-                <label>Pet Details:</label> <span>{form.pet_details}</span>
+                <label>Tiempo:</label> <span>{form.time}</span>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
+                <label>Fecha:</label> <span>{form.date}</span>
+              </div>
+              <div className="col-6">
+                <label>Detalles de la mascota:</label> <span>{form.pet_details}</span>
               </div>
             </div>
           </div>
 
           <div className="confirmation-buttons">
             <button className="btn btn-danger mx-2" onClick={handleCancel}>
-              Cancel
+            Cancelar
             </button>
             <button className="btn btn-success" onClick={handleConfirm}>
-              Confirm
+            Confirmar
             </button>
           </div>
         </div>
