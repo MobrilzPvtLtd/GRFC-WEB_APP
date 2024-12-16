@@ -400,7 +400,7 @@ header {
 
 .navbar-links {
   list-style-type: none;
-  display: flex;
+  /* display: flex; */
 }
 /* .navbar-links li {
     padding: 20px 30px;

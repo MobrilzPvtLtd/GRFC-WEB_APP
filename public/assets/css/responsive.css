@@ -172,9 +172,9 @@
 		width: 100%;
 	}
 	.navbar-links li {
-    padding: 20px 30px;
+    /* padding: 20px 30px; */
     padding-left: 0;
-    padding-right: 36px;
+    /* padding-right: 36px; */
 	}
 	.package.two {
     padding: 30px 40px;
@@ -761,7 +761,7 @@
     font-size: 50px;
 	}
 	.top-bar,.navbar-links,.header-search-button,.menu-end > a,.menu-end .line{
-		display: none;
+		/* display: none; */
 	}
 	.bar-menu {
     display: block;

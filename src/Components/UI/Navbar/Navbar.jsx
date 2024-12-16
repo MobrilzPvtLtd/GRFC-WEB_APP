@@ -39,20 +39,10 @@ const Navbar = ({ getVisibity }) => {
   };
   let token = sessionStorage.getItem("token");
 
-  const lngs = [
-    { code: "es", native: "Spanish" },
-    { code: "en", native: "English" },
-  ];
 
-  const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    const handleTrans = () => {
-      i18n.changeLanguage(langCode);
-      console.log("code ", langCode);
-    };
-    handleTrans(langCode);
-  }, [langCode]);
+
+ 
 
   const handleChange = async (e) => {
     const selectedValue = e.target.value;
@@ -135,33 +125,7 @@ const Navbar = ({ getVisibity }) => {
                   </div>
                 </div>
 
-                {/* <div>
-                  <div class="time">
-                    <div class="ordering">
-                      {token ? (
-                        <div class="login">
-                          <button
-                            className="px-3 mx-2 flex justify-center items-center py-2 text-black transition-transform hover:scale-110"
-                            onClick={() => {
-                              sessionStorage.removeItem("token");
-                              localStorage.removeItem("User_info");
-                              window.location.reload();
-                            }}
-                          >
-                            {" "}
-                            <i class="fa-solid fa-user"></i> Logout
-                          </button>
-                        </div>
-                      ) : (
-                        <div class="login">
-                          <i class="fa-solid fa-user"></i>
-                          <Link to="/login-Register">Login / Register</Link>
-                        </div>
-                      )}
-                    </div>
-                   
-                  </div>
-                </div> */}
+               
 
                 <UserDropdown />
               </div>
@@ -175,10 +139,10 @@ const Navbar = ({ getVisibity }) => {
 
               <nav>
                 <ul class="navbar-links">
-                  <li class="navbar-dropdown mx-4">
+                  <li class="navbar-dropdown mx-2">
                     <Link to="/">Hogar</Link>
                   </li>
-                  <li class="navbar-dropdown mx-4">
+                  <li class="navbar-dropdown mx-2">
                     <Link to="/about-us">Acerca de</Link>
                   </li>
 
@@ -187,11 +151,11 @@ const Navbar = ({ getVisibity }) => {
                     <Dropdown label="Servicio" items={category_data} />
                   </ul>
 
-                  <li class="navbar-dropdown mx-4">
+                  <li class="navbar-dropdown mx-2">
                     <Link to="/our-products">Producto</Link>
                   </li>
 
-                  <li class="navbar-dropdown mx-4">
+                  <li class="navbar-dropdown mx-2">
                     <Link to="/contact-us">Contacto</Link>
                   </li>
                 </ul>

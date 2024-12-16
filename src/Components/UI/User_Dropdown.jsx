@@ -37,8 +37,8 @@ const UserDropdown = () => {
       {isOpen && (
         token ? (
           <div className="userdropdown-menu border-0">
-            <Link to="/userprofile" onClick={toggleDropdown}>Edit User</Link>
-            <Link to="/forget" onClick={toggleDropdown}>Reset Password</Link>
+            <Link to="/userprofile" onClick={toggleDropdown}>Editar usuario</Link>
+            <Link to="/forget" onClick={toggleDropdown}>Restablecer contraseña</Link>
             <Link to="/"  onClick={() => {
               // Handle sign-out here (if required)
               console.log("Sign Out");
@@ -47,12 +47,12 @@ const UserDropdown = () => {
             //   window.location.reload();
               // Example of sign-out logic
             }}>
-              Sign Out
+              Desconectar
             </Link>
           </div>
         ) : (
           <div className="userdropdown-menu border-0">
-            <Link onClick={toggleDropdown} to="/login-Register">Login/Register</Link>
+            <Link onClick={toggleDropdown} to="/login-Register">Iniciar sesión/Registrarse</Link>
           </div>
         )
       )}
