@@ -9,6 +9,7 @@ import axios from "axios";
 
 const Checkout = () => {
   const context = useContext(ValueContext);
+  let token = sessionStorage.getItem("token");
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
   let id = sessionStorage.getItem("id");
   const [orderData, setOrderdata] = useState("");
@@ -17,16 +18,46 @@ const Checkout = () => {
   const [TransactionId, setTransactionId] = useState(null);
   const [transactionStatus, setTransactionStatus] = useState("pending"); // Success or Failed
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [UserData, setUserData] = useState([]);
 
   // const product_data =context.api_cartitems
   const product_data = context.api_cartitems;
-  const user_data = context.userData;
+ 
 
   const newArray = [];
   product_data?.map((item, index) => {
     newArray.push(item);
   });
   console.log("newarrya", newArray);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get(`${url}/user`, {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        });
+
+        setUserData(res.data.data);
+       
+
+       
+
+        console.log("object", res, );
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    if (token) {
+      fetchUserData();
+    }
+  }, [ token]);
+
+
+
+
+
 
   const handleplaceorder = async (e) => {
     e.preventDefault();
@@ -80,7 +111,7 @@ const Checkout = () => {
         if (TransactionId?.status === "PAID") {
           setTransactionStatus("success");
         } else {
-          setTransactionStatus("failed");
+          setTransactionStatus("pending");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -107,7 +138,7 @@ const Checkout = () => {
     orderData,
     "paymenttoken",
     paymentToken
-,'jjjjjjjjjjjjjjjj',TransactionId  );
+,'jjjjjjjjjjjjjjjj',TransactionId , 'user4444',UserData );
   return (
     <>
       <section
@@ -171,8 +202,7 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        {/* <img src="assets/img/hero-shaps-1.png" alt="hero-shaps" className="img-2"/>
-        <img src="assets/img/hero-shaps-1.png" alt="hero-shaps" className="img-4"/> */}
+       
       </section>
       <section className="gap">
         <div className="container">
@@ -189,6 +219,7 @@ const Checkout = () => {
                     required={true}
                     className="input-text "
                     name=""
+                    value={UserData.owner_name}
                     placeholder="Nombre completo"
                   />
                   <input
@@ -196,6 +227,7 @@ const Checkout = () => {
                     required={true}
                     className="input-text "
                     name=""
+                    value={UserData.phone}
                     placeholder="Número de teléfono"
                   />
                   <input
