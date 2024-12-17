@@ -6,6 +6,7 @@ import banner_2 from "../../../images_new/banner-img-2.jpg";
 import { ValueContext } from "../../Context/Context_Hook";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const context = useContext(ValueContext);
@@ -19,6 +20,7 @@ const Checkout = () => {
   const [transactionStatus, setTransactionStatus] = useState("pending"); // Success or Failed
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [UserData, setUserData] = useState([]);
+  const navigate = useNavigate()
 
   // const product_data =context.api_cartitems
   const product_data = context.api_cartitems;
@@ -54,7 +56,24 @@ const Checkout = () => {
     }
   }, [ token]);
 
+  const [formData, setFormData] = useState({
+    houseNo: "",
+    locality: "",
+    postalCode: "",
+    city: "",
+    country: "",
+  });
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form submitted:", formData);
+  //   // You can add additional logic to send the data to a server or perform other actions.
+  // };
 
 
 
@@ -62,6 +81,7 @@ const Checkout = () => {
   const handleplaceorder = async (e) => {
     e.preventDefault();
     console.log("888888888");
+    console.log("Form submitted:", formData);
     try {
       const place_order = await axios.post(`${url}/order`, {
         userid: id,
@@ -78,7 +98,7 @@ const Checkout = () => {
         setUrlLink(place_order.data.approve_link);
 
         if (place_order.data.approve_link) {
-          window.open(place_order.data.approve_link, "_blank");
+          window.location.href=place_order.data.approve_link;
         }
       } else {
         console.error("Unexpected response:", place_order);
@@ -89,6 +109,39 @@ const Checkout = () => {
       toast.error("An error occurred. Please check the console.");
     }
   };
+
+  // const handlepbillingForm = async (e) => {
+  //   e.preventDefault();
+  //   console.log("888888888");
+  //   console.log("Form submitted:", );
+  //   try {
+  //     const billing_details = await axios.post(`${url}/nonauthuser `, {
+      
+  //         name : "non auth user",
+  //         email :"nonauth@gmail.com ",
+  //         phone : "0987554321",
+  //         address : "address of non auth user"
+      
+  //     });
+
+  //     if (billing_details.status === 200) {
+  //       toast.success("Order placed successfully!", { autoClose: 3000 });
+  //       // console.log('0000000', place_order)
+  //       setOrderdata(billing_details.data);
+  //       setUrlLink(billing_details.data.approve_link);
+
+  //       if (billing_details.data.approve_link) {
+  //         window.open(billing_details.data.approve_link, "_blank");
+  //       }
+  //     } else {
+  //       console.error("Unexpected response:", place_order);
+  //       toast.error("Order failed. Please try again.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error placing order:", error);
+  //     toast.error("An error occurred. Please check the console.");
+  //   }
+  // };
 
   useEffect(() => {
     if (urlLink) {
@@ -110,8 +163,11 @@ const Checkout = () => {
         setTransactionId(res.data.data);
         if (TransactionId?.status === "PAID") {
           setTransactionStatus("success");
-        } else {
-          setTransactionStatus("pending");
+          navigate('/')
+
+        } else if(TransactionId?.status === "FAILED") {
+          setTransactionStatus("failed");
+           navigate('/about-us')
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -211,7 +267,7 @@ const Checkout = () => {
             onSubmit={handleplaceorder}
           >
             <div className="row">
-              <div className="col-lg-8">
+              {token?   ( <div className="col-lg-8">
                 <h3>Detalles de facturación</h3>
                 <div className="col-lg-12">
                   <input
@@ -234,36 +290,46 @@ const Checkout = () => {
                     type="text"
                     required={true}
                     className="input-text "
-                    name=""
+                    name="houseNo"
                     placeholder="Nº casa/nº piso "
+                    value={formData.houseNo}
+                    onChange={handleChange}
                   />
                   <input
                     type="text"
                     required={true}
                     className="input-text "
-                    name=""
+                    name="locality"
                     placeholder="Localidad"
+                    value={formData.locality}
+                    onChange={handleChange}
                   />
                   <input
                     type="text"
                     required={true}
                     className="input-text "
-                    name=""
+                    name="postalCode"
                     placeholder="Código Postal"
+                    value={formData.postalCode}
+                    onChange={handleChange}
                   />
                   <input
                     type="text"
                     required={true}
                     className="input-text "
-                    name=""
+                    name="city"
                     placeholder="Ciudad"
+                    value={formData.city}
+                    onChange={handleChange}
                   />
                   <input
                     type="text"
                     required={true}
                     className="input-text "
-                    name=""
+                    name="country"
                     placeholder="País"
+                    value={formData.country}
+                    onChange={handleChange}
                   />
 
                   {/* <div className="row">
@@ -316,7 +382,113 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>):(  <div className="col-lg-8">
+                <h3>Detalles de facturación</h3>
+                <div className="col-lg-12">
+                  <input
+                    type="text"
+                    required={true}
+                    className="input-text "
+                    name="name"
+                    value={''}
+                    placeholder="Nombre completo"
+                  />
+                  <input
+                    type="tel"
+                    required={true}
+                    className="input-text "
+                    name="phone"
+                    value={''}
+                    placeholder="Número de teléfono"
+                  />
+                  <input
+                    type="email"
+                    required={true}
+                    className="input-text "
+                    name="email"
+                    value={''}
+                    placeholder="Número de teléfono"
+                  />
+                  <input
+                    type="text"
+                    required={true}
+                    className="input-text "
+                    name="houseNo"
+                    placeholder="Nº casa/nº piso "
+                    value={''}
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="text"
+                    required={true}
+                    className="input-text "
+                    name="locality"
+                    placeholder="Localidad"
+                    value={''}
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="text"
+                    required={true}
+                    className="input-text "
+                    name="postalCode"
+                    placeholder="Código Postal"
+                    value={''}
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="text"
+                    required={true}
+                    className="input-text "
+                    name="city"
+                    placeholder="Ciudad"
+                    value={''}
+                    onChange={handleChange}
+                  />
+                  <input
+                    type="text"
+                    required={true}
+                    className="input-text "
+                    name="country"
+                    placeholder="País"
+                    value={''}
+                    onChange={handleChange}
+                  />
+
+                 
+                  <div className="ship-address">
+                    <div className="d-flex">
+                      <input
+                        type="radio"
+                        id="Create"
+                        name="Create"
+                        value="Create"
+                      />
+                      <label for="Create">
+                      Crear una cuenta para usarla más adelante
+                      </label>
+                    </div>
+                    <div className="d-flex">
+                      <input
+                        type="radio"
+                        id="ShipAddress"
+                        name="Create"
+                        value="ShipAddress"
+                      />
+                      <label for="ShipAddress">Enviar a la misma dirección</label>
+                    </div>
+                  </div>
+                </div>
+              </div>)}
+             
+
+
+
+
+
+
+
+
               <div className="col-lg-4">
                 <div className="woocommerce-additional-fields">
                   <h3>Nota de pedido</h3>

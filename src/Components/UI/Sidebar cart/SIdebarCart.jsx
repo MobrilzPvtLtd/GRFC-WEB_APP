@@ -95,16 +95,14 @@ const SidebarCart = ({ visible }) => {
         });
         if (response.status === 200) {
           toast.success('Item removed successfully', { autoClose: 1000 });
+  
+          
           if (context.Cart_num > 0) {
             context.setCart_num(context.Cart_num - 1);
           }
+  
           
           await Fetch_cartdata();
-  
-      
-          if (context.api_cartitems.length === 0) {
-            context.setApi_cartitems([]); 
-          }
         }
       } catch (error) {
         console.error("Error removing item from cart via API:", error);
@@ -113,13 +111,10 @@ const SidebarCart = ({ visible }) => {
       
       const updatedCart = cartItems.filter((item) => item.id !== id);
       setCartItems(updatedCart);
-      if (context.Cart_num > 0) {
-        context.setCart_num(context.Cart_num - 1);
-      }
   
       
-      if (updatedCart.length === 0) {
-        setCartItems([]); 
+      if (context.Cart_num > 0) {
+        context.setCart_num(context.Cart_num - 1);
       }
     }
   };

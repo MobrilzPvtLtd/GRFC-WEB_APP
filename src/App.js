@@ -24,6 +24,7 @@ import SubProduct from "./Components/UI/Our product/SubProduct";
 import Forgotpassword from "./Components/UI/Forgot/Forgotpassword";
 import User_Profile from "./Components/UI/UserProfile/User_Profile";
 import Checkout from "./Components/UI/Checkout/Checkout";
+import OrderConfirmation from "./Components/UI/OrderConfirmation/OrderConfirmation";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -66,6 +67,7 @@ function App() {
           <Route path="/forget" element={<Forgotpassword />} />
           <Route path="/userprofile" element={<User_Profile />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-confirmation" element={<OrderConfirmation />} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer />
