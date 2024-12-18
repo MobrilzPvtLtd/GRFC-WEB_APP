@@ -13,7 +13,7 @@ import {
 
 const SidebarCart = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   // const [api_cartitems, setApi_cartitems] = useState();
    const [localCartItems, setLocalCartItems] = useState([]);
   let token = sessionStorage.getItem("token");
@@ -43,7 +43,7 @@ const SidebarCart = ({ visible }) => {
       return acc;
     }, []);
 
-    setCartItems(transformedItems);
+    context.setCartItems(transformedItems);
   }, [context.dataArray, context.subproduct_data]);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ const SidebarCart = ({ visible }) => {
         (sum, item) => sum + item.price * item.quantity,
         0
       )
-    : cartItems?.reduce(
+    : context.cartItems?.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0
       );
@@ -109,8 +109,8 @@ const SidebarCart = ({ visible }) => {
       }
     } else {
       
-      const updatedCart = cartItems.filter((item) => item.id !== id);
-      setCartItems(updatedCart);
+      const updatedCart = context.cartItems.filter((item) => item.id !== id);
+      context.setCartItems(updatedCart);
   
       
       if (context.Cart_num > 0) {
@@ -144,7 +144,7 @@ const SidebarCart = ({ visible }) => {
     "123456",
     context.dataArray,
     "cartuiop",
-    cartItems,
+    context.cartItems,
     "api dataa",
     context.api_cartitems
   );
@@ -156,12 +156,12 @@ const SidebarCart = ({ visible }) => {
             <FontAwesomeIcon icon={faCircleXmark} />
           </button>
           <div className="cart-popup">
-            {((token ? context.api_cartitems : cartItems)?.length === 0) ? (
+            {((token ? context.api_cartitems : context.cartItems)?.length === 0) ? (
               <p className="empty-cart-message">Tu carrito está vacío.</p>
             ) : (
               <>
                 <ul>
-                  {(token ? context.api_cartitems : cartItems)?.map((item) => (
+                  {(token ? context.api_cartitems : context.cartItems)?.map((item) => (
                     <li
                       key={item.id}
                       className="d-flex align-items-center position-relative"
@@ -191,7 +191,7 @@ const SidebarCart = ({ visible }) => {
                 </div>
     
                 <div className="cart-btns d-flex align-items-center justify-content-between">
-                  <Link to="/view-cart" className="font-bold">
+                  <Link to="#" className="font-bold">
                   Ver carrito
                   </Link>
                   <Link

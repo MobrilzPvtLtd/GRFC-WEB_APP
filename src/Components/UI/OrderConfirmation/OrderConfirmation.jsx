@@ -7,7 +7,7 @@ const OrderConfirmation = () => {
         <h3>Thank You</h3>
 
         <div>
-          <h2>Transaction Successful</h2>
+          <h2 className="text-success">Transaction Successful</h2>
           <p>Your transaction has been completed successfully.</p>
         </div>
       </div>

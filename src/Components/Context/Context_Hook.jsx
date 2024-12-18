@@ -26,6 +26,7 @@ export const ValueProvider = ({ children }) => {
   const [total_sum,setTotal_Sum] =useState()
    const [api_cartitems, setApi_cartitems] = useState();
     const [userData, setUserData] = useState();
+     const [cartItems, setCartItems] = useState([]);
   
 
   return (
@@ -56,7 +57,8 @@ export const ValueProvider = ({ children }) => {
         api_cartitems, 
         setApi_cartitems,
         userData, 
-        setUserData
+        setUserData,
+        cartItems, setCartItems
        
       }}
     >

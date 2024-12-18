@@ -5586,6 +5586,8 @@ input[type='radio']:checked:after {
     visibility: visible;
     border: 2px solid white;
 }
+
+
 .cart_totals.cart-Total h4 {
     color: #000;
 }

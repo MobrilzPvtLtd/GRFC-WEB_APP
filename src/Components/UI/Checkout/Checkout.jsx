@@ -6,7 +6,7 @@ import banner_2 from "../../../images_new/banner-img-2.jpg";
 import { ValueContext } from "../../Context/Context_Hook";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const context = useContext(ValueContext);
@@ -20,17 +20,33 @@ const Checkout = () => {
   const [transactionStatus, setTransactionStatus] = useState("pending"); // Success or Failed
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [UserData, setUserData] = useState([]);
+  const [FullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [UserID, setUserID] = useState();
   const navigate = useNavigate()
 
   // const product_data =context.api_cartitems
   const product_data = context.api_cartitems;
+  const localproduct_data = context.cartItems
+  console.log('check local data',localproduct_data)
  
+  // Transform the data
+const transformedData = localproduct_data.map(item => ({
+  product_id: item.id, // Rename 'id' to 'product_id'
+  ...item,            // Spread other properties
+}));
 
+// Remove the original 'id' key
+transformedData.forEach(item => delete item.id);
+
+console.log('pppppppppppppp', transformedData);
   const newArray = [];
-  product_data?.map((item, index) => {
+  (product_data||transformedData)?.map((item, index) => {
     newArray.push(item);
   });
   console.log("newarrya", newArray);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -84,11 +100,11 @@ const Checkout = () => {
     console.log("Form submitted:", formData);
     try {
       const place_order = await axios.post(`${url}/order`, {
-        userid: id,
+        userid: id || UserID[0]?.id,
         total_amount: context.total_sum,
         shipping_address: "noida",
         billing_address: "noida",
-        product: newArray,
+        product: newArray
       });
 
       if (place_order.status === 200) {
@@ -110,38 +126,33 @@ const Checkout = () => {
     }
   };
 
-  // const handlepbillingForm = async (e) => {
-  //   e.preventDefault();
-  //   console.log("888888888");
-  //   console.log("Form submitted:", );
-  //   try {
-  //     const billing_details = await axios.post(`${url}/nonauthuser `, {
+  const handlepbillingForm = async (e) => {
+    e.preventDefault();
+    const addressString = JSON.stringify(formData);
+    console.log("Form submitted:",formData );
+    try {
+      const billing_details = await axios.post(`${url}/nonauthuser `, {
       
-  //         name : "non auth user",
-  //         email :"nonauth@gmail.com ",
-  //         phone : "0987554321",
-  //         address : "address of non auth user"
+          name : FullName,
+          email :email,
+          phone : phone,
+          address : addressString
       
-  //     });
+      });
 
-  //     if (billing_details.status === 200) {
-  //       toast.success("Order placed successfully!", { autoClose: 3000 });
-  //       // console.log('0000000', place_order)
-  //       setOrderdata(billing_details.data);
-  //       setUrlLink(billing_details.data.approve_link);
+      if (billing_details.status === 200) {
+        
+        console.log('0000000', billing_details.data.data)
+        setUserID(billing_details.data.data)
+       
+        
 
-  //       if (billing_details.data.approve_link) {
-  //         window.open(billing_details.data.approve_link, "_blank");
-  //       }
-  //     } else {
-  //       console.error("Unexpected response:", place_order);
-  //       toast.error("Order failed. Please try again.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error placing order:", error);
-  //     toast.error("An error occurred. Please check the console.");
-  //   }
-  // };
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      toast.error("An error occurred. Please check the console.");
+    }
+  };
 
   useEffect(() => {
     if (urlLink) {
@@ -267,7 +278,9 @@ const Checkout = () => {
             onSubmit={handleplaceorder}
           >
             <div className="row">
-              {token?   ( <div className="col-lg-8">
+              {token?   ( 
+                
+                <div className="col-lg-8">
                 <h3>Detalles de facturación</h3>
                 <div className="col-lg-12">
                   <input
@@ -366,6 +379,7 @@ const Checkout = () => {
                         id="Create"
                         name="Create"
                         value="Create"
+                        
                       />
                       <label for="Create">
                       Crear una cuenta para usarla más adelante
@@ -382,104 +396,129 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-              </div>):(  <div className="col-lg-8">
-                <h3>Detalles de facturación</h3>
-                <div className="col-lg-12">
-                  <input
-                    type="text"
-                    required={true}
-                    className="input-text "
-                    name="name"
-                    value={''}
-                    placeholder="Nombre completo"
-                  />
-                  <input
-                    type="tel"
-                    required={true}
-                    className="input-text "
-                    name="phone"
-                    value={''}
-                    placeholder="Número de teléfono"
-                  />
-                  <input
-                    type="email"
-                    required={true}
-                    className="input-text "
-                    name="email"
-                    value={''}
-                    placeholder="Número de teléfono"
-                  />
-                  <input
-                    type="text"
-                    required={true}
-                    className="input-text "
-                    name="houseNo"
-                    placeholder="Nº casa/nº piso "
-                    value={''}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    required={true}
-                    className="input-text "
-                    name="locality"
-                    placeholder="Localidad"
-                    value={''}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    required={true}
-                    className="input-text "
-                    name="postalCode"
-                    placeholder="Código Postal"
-                    value={''}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    required={true}
-                    className="input-text "
-                    name="city"
-                    placeholder="Ciudad"
-                    value={''}
-                    onChange={handleChange}
-                  />
-                  <input
-                    type="text"
-                    required={true}
-                    className="input-text "
-                    name="country"
-                    placeholder="País"
-                    value={''}
-                    onChange={handleChange}
-                  />
+              </div>):( 
+                  <div className="col-lg-8">
+                  <h3>Detalles de facturación</h3>
+                  <div className="col-lg-12">
+                    <form action="" onSubmit={handlepbillingForm} >  
+                    <input
+                      type="text"
+                      required={true}
+                      className="input-text "
+                      name="name"
+                      value={FullName}
+                      placeholder="Nombre completo"
+                      onChange={(e)=>setFullName(e.target.value)}
+                    />
+                    <input
+                      type="tel"
+                      required={true}
+                      className="input-text "
+                      name="phone"
+                      value={phone}
+                      placeholder="Número de teléfono"
+                      onChange={(e)=>setPhone(e.target.value)}
+                    />
+                    <input
+                      type="email"
+                      required={true}
+                      className="input-text "
+                      name="email"
+                      value={email}
+                      placeholder="Email"
+                      onChange={(e)=>setEmail(e.target.value)}
+  
+                    />
+                    <input
+                      type="text"
+                      required={true}
+                      className="input-text "
+                      name="houseNo"
+                      placeholder="Nº casa/nº piso "
+                      value={formData.houseNo}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="text"
+                      required={true}
+                      className="input-text "
+                      name="locality"
+                      placeholder="Localidad"
+                      value={formData.locality}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="text"
+                      required={true}
+                      className="input-text "
+                      name="postalCode"
+                      placeholder="Código Postal"
+                      value={formData.postalCode}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="text"
+                      required={true}
+                      className="input-text "
+                      name="city"
+                      placeholder="Ciudad"
+                      value={formData.city}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="text"
+                      required={true}
+                      className="input-text "
+                      name="country"
+                      placeholder="País"
+                      value={formData.country}
+                      onChange={handleChange}
+                      
+                    />
+                    <input type="checkbox"  onChange={handlepbillingForm} /> confirm details
+                  {/* <a href="#create_order"> <button type="submit" label="click" name="Confirm" value="Proceed to continue">Continue to proceed</button>  </a> */}
 
-                 
-                  <div className="ship-address">
-                    <div className="d-flex">
-                      <input
-                        type="radio"
-                        id="Create"
-                        name="Create"
-                        value="Create"
-                      />
-                      <label for="Create">
-                      Crear una cuenta para usarla más adelante
-                      </label>
-                    </div>
-                    <div className="d-flex">
-                      <input
-                        type="radio"
-                        id="ShipAddress"
-                        name="Create"
-                        value="ShipAddress"
-                      />
-                      <label for="ShipAddress">Enviar a la misma dirección</label>
+  
+  </form>
+                    <div className="ship-address">
+
+                      {/* <form >
+                        <input type="checkbox" onClick={handlepbillingForm} /> Crear una cuenta para usarla más adelante
+                        <input type="checkbox"  />Enviar a la misma dirección
+                      </form> */}
+                       <div className="d-flex">
+                        <input
+                          type="radio"
+                          // onChange={handlepbillingForm}
+                          name="Create"
+                          value="ShipAddress"
+                        />
+                        <label for="ShipAddress"> confirm Details</label>
+                      </div>
+                      <div className="d-flex">
+                        <input
+                          type="radio"
+                          name="Create"
+                          value="ShipAddress"
+                         
+                        />
+                        <label for="Create">
+                        Crear una cuenta para usarla más adelante
+                        </label>
+                      </div>
+                      <div className="d-flex">
+                        <input
+                          type="radio"
+                         
+                          name="Create"
+                          value="ShipAddress"
+                        />
+                        <label for="ShipAddress">Enviar a la misma dirección</label>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>)}
+            )}
              
 
 
@@ -556,7 +595,7 @@ const Checkout = () => {
                       <label for="PayPal">PayPal</label>
                     </li>
                   </ul>
-                  <button type="submit" className="button">
+                  <button id="create_order" type="submit" className="button" disabled={''}>
                   Realizar pedido
                   </button>
                 </div>
@@ -566,7 +605,7 @@ const Checkout = () => {
         </div>
 
         
-        {isModalOpen && (
+        {/* {isModalOpen && (
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-body">
@@ -592,7 +631,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </section>
     </>
   );
