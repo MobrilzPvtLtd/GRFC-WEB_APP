@@ -59,7 +59,7 @@ const OrderConfirmation = () => {
 
   return (
     <>
-      <div className="mt-64">
+      <div className="mt-32">
         {transactionStatus === "pending" && (
           <div className="d-flex justify-content-center align-items-center vh-100">
             <div
