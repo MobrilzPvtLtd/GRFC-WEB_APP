@@ -54,56 +54,47 @@ const OrderConfirmation = () => {
 
   return (
     <>
-      <div className="mt-64 mx-auto">
+      <div className="mt-64">
        
 
         {transactionStatus === "pending" && (
-                  <div>
-                    <h2>Transaction Pending</h2>
-                    <p>Your transaction is being processed. Please wait...</p>
+                  <div className="d-flex justify-content-center align-items-center vh-100">
+                  <div className="card shadow-lg p-4 text-center" style={{ maxWidth: '400px' }}>
+                    <div className="card-body">
+                      <h2 className="text-warning">Transaction Pending</h2>
+                      <h6>Your Transaction ID:{TransactionId?.id}</h6>
+                      <p className="mt-3">Your transaction has been Pending.</p>
+                    </div>
                   </div>
+                </div>
+                
                 )}
                 {transactionStatus === "success" && (
-                  <div>
-                    <h2>Transaction Successful</h2>
-                    <p>Your transaction has been completed successfully.</p>
-                  </div>
+                 <div className="d-flex justify-content-center align-items-center vh-100">
+                 <div className="card shadow-lg p-4 text-center" style={{ maxWidth: '400px' }}>
+                   <div className="card-body">
+                     <h2 className="text-success">Transaction Successful</h2>
+                     <h6>Your Transaction ID:{TransactionId?.id}</h6>
+                     <p className="mt-3">Your transaction has been completed successfully.</p>
+                   </div>
+                 </div>
+               </div>
+               
                 )}
                 {transactionStatus === "failed" && (
-                  <div>
-                    <h2>Transaction Failed</h2>
-                    <p>Something went wrong. Please try again later.</p>
-                  </div>
+                 <div className="d-flex justify-content-center align-items-center vh-100">
+                 <div className="card shadow-lg p-4 text-center" style={{ maxWidth: '400px' }}>
+                   <div className="card-body">
+                     <h2 className="text-danger">Transaction Failed</h2>
+                     <h6>Your Transaction ID:{TransactionId?.id}</h6>
+                     <p className="mt-3">Your transaction has been Failed.</p>
+                   </div>
+                 </div>
+               </div>
+               
                 )}
       </div>
-       {/* {isModalOpen && (
-          product?token=5E019378CM981124E&PayerID=4JZJFCGZ73L5A
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body">
-                {transactionStatus === "pending" && (
-                  <div>
-                    <h2>Transaction Pending</h2>
-                    <p>Your transaction is being processed. Please wait...</p>
-                  </div>
-                )}
-                {transactionStatus === "success" && (
-                  <div>
-                    <h2>Transaction Successful</h2>
-                    <p>Your transaction has been completed successfully.</p>
-                  </div>
-                )}
-                {transactionStatus === "failed" && (
-                  <div>
-                    <h2>Transaction Failed</h2>
-                    <p>Something went wrong. Please try again later.</p>
-                  </div>
-                )}
-                <button onClick={closeModal}>Close</button>
-              </div>
-            </div>
-          </div>
-        )} */}
+      
     </>
   );
 };
