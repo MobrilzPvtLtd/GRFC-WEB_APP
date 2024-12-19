@@ -9,7 +9,11 @@ import {
   FaSearch,
   FaBars,
   FaUserCircle,
-  FaHome, FaInfoCircle, FaConciergeBell, FaProductHunt, FaEnvelope 
+  FaHome,
+  FaInfoCircle,
+  FaConciergeBell,
+  FaProductHunt,
+  FaEnvelope,
 } from "react-icons/fa";
 import logo from "../../../images_new/Idenditad-Visual-Grupo-Felino-Canino-3.png";
 import axios from "axios";
@@ -20,6 +24,7 @@ import Wishlist from "../Wishlist/Wishlist";
 import Dropdown from "../../Dropdown";
 import UserDropdown from "../User_Dropdown";
 import userlogo from "../../../assets/images_new/user_logo24.png";
+import SidebarCart from "../Sidebar cart/SIdebarCart";
 
 const Navbar = ({ getVisibity }) => {
   const [visible, setVisible] = useState(true);
@@ -38,11 +43,6 @@ const Navbar = ({ getVisibity }) => {
     console.log("visibiility check", visible);
   };
   let token = sessionStorage.getItem("token");
-
-
-
-
- 
 
   const handleChange = async (e) => {
     const selectedValue = e.target.value;
@@ -124,8 +124,6 @@ const Navbar = ({ getVisibity }) => {
                     </div>
                   </div>
                 </div>
-
-               
 
                 <UserDropdown />
               </div>
@@ -220,31 +218,32 @@ const Navbar = ({ getVisibity }) => {
       <div className="flex flex-col bg-gray-100 shadow-md d-block d-sm-block d-lg-none ">
         {/* Top Bar */}
         <div className="flex justify-between items-center p-4 bg-white shadow-sm">
-          <div className="flex space-x-4">   
-          <Link
-            className="text-gray-700 text-2xl mt-2"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasWithBothOptions"
-            aria-controls="offcanvasWithBothOptions"
-          >
-            <FaBars />
-          </Link>
+          <div className="flex space-x-4">
+            <Link
+              className="text-gray-700 text-2xl mt-2"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasWithBothOptions"
+              aria-controls="offcanvasWithBothOptions"
+            >
+              <FaBars />
+            </Link>
 
-          {/* Logo */}
-          <Link to="/">
-            <img src={logo} alt="Logo" className="h-12" />
-          </Link>
+            {/* Logo */}
+            <Link to="/">
+              <img src={logo} alt="Logo" className="h-12" />
+            </Link>
           </div>
           {/* Icons */}
           <div className="flex space-x-4">
             <Link to="/" className="text-gray-700 text-2xl">
               <FaUserCircle />
             </Link>
-            <Link to="/" className="text-gray-700 text-2xl">
-              <FaShoppingCart /> <span className="top-[1rem] right-[0.7rem] bg-slate-300 rounded-[50%] w-7 flex justify-center items-center text-white p-1 text-xs absolute">
-                        {context.Cart_num}
-                      </span>
+            <Link to="/" className="text-gray-700 text-2xl" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <FaShoppingCart />{" "}
+              <span className="top-[1rem] right-[0.7rem] bg-slate-300 rounded-[50%] w-7 flex justify-center items-center text-white p-1 text-xs absolute">
+                {context.Cart_num}
+              </span>
             </Link>
           </div>
         </div>
@@ -269,15 +268,13 @@ const Navbar = ({ getVisibity }) => {
         aria-labelledby="offcanvasWithBothOptionsLabel"
       >
         <div class="offcanvas-header">
-        <Link to="/">
+          <Link to="/">
             <img src={logo} alt="Logo" className="h-12" />
           </Link>
           <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-            GRFC 
-
-            
+            GRFC
           </h5>
-         
+
           <button
             type="button"
             class="btn-close"
@@ -286,44 +283,68 @@ const Navbar = ({ getVisibity }) => {
           ></button>
         </div>
         <div class="offcanvas-body">
-        <ul className="menu-list">
-    <li>
-      <Link to="/" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
-        <FaHome className="mr-2" />
-        Hogar
-      </Link>
-    </li>
-    <li>
-      <Link to="/about-us" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
-        <FaInfoCircle className="mr-2" />
-        Acerca de
-      </Link>
-    </li>
-    <li>
-      <Link className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
-        <FaConciergeBell className="mr-2" />
-        Servicio
-        {/* <ul>
+          <ul className="menu-list">
+            <li>
+              <Link
+                to="/"
+                className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2"
+              >
+                <FaHome className="mr-2" />
+                Hogar
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about-us"
+                className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2"
+              >
+                <FaInfoCircle className="mr-2" />
+                Acerca de
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
+                <FaConciergeBell className="mr-2" />
+                Servicio
+                {/* <ul>
                   
                     <Dropdown label="Servicio" items={category_data} />
                   </ul> */}
-      </Link>
-    </li>
-    <li>
-      <Link to="/our-products" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
-        <FaProductHunt className="mr-2" />
-        Producto
-      </Link>
-    </li>
-    <li>
-      <Link to="/contact-us" className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2">
-        <FaEnvelope className="mr-2" />
-        Contacto
-      </Link>
-    </li>
-  </ul>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/our-products"
+                className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2"
+              >
+                <FaProductHunt className="mr-2" />
+                Producto
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/contact-us"
+                className="menu-item text-gray-700 hover:text-gray-900 flex items-center py-2"
+              >
+                <FaEnvelope className="mr-2" />
+                Contacto
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
+
+      {/* Cart canvas */}
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">CART</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+   
+    <SidebarCart/>
+  </div>
+</div>
 
       {context.wishlist_value === 1 ? <Wishlist /> : null}
     </>
