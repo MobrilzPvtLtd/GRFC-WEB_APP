@@ -74,8 +74,10 @@ const Wishlist = () => {
           toast.success("Item removed successfully", {
             autoClose: 1000,
           });
+            const updatedItems = datawishlist_api.filter((item) => item.id !== id);
+            set_datawishlist_api(updatedItems);
 
-          // context.setWishlist_Data((prev) => prev.filter((item) => item.id !== id));
+          
 
           if (context.wishlist_count > 0) {
             context.setWishlist_count(context.wishlist_count - 1);
@@ -96,7 +98,7 @@ const Wishlist = () => {
       }
     }
   };
-
+console.log('ggggg',datawishlist_api  )
   return (
     <div id="lightbox" className="lightbox clearfix">
       <div className="white_content">
@@ -110,9 +112,9 @@ const Wishlist = () => {
             <>
               <ul>
                 {" "}
-                <span className="text-3xl ">
+                {/* <span className="text-3xl ">
                   Lista de deseos <i className="fa-regular fa-heart"></i>{" "}
-                </span>
+                </span> */}
                 {(token ? datawishlist_api : datawislist)?.map((item) => (
                   <li
                     key={item?.id}
@@ -140,8 +142,6 @@ const Wishlist = () => {
                     </button>
                   </li>
                 ))}
-              </ul>
-
               <div className="cart-btns d-flex align-items-center justify-content-between">
                 {/* <Link to="/view-cart" className="font-bold">
               View Cart
@@ -153,6 +153,8 @@ const Wishlist = () => {
                   Verificar
                 </Link>
               </div>
+              </ul>
+
             </>
           )}
         </div>

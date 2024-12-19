@@ -13,8 +13,7 @@ import {
 
 const SidebarCart = ({ visible }) => {
   const [isVisible, setIsVisible] = useState(true);
-  // const [cartItems, setCartItems] = useState([]);
-  // const [api_cartitems, setApi_cartitems] = useState();
+ 
    const [localCartItems, setLocalCartItems] = useState([]);
   let token = sessionStorage.getItem("token");
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
@@ -94,8 +93,9 @@ const SidebarCart = ({ visible }) => {
           },
         });
         if (response.status === 200) {
-          toast.success('Item removed successfully', { autoClose: 1000 });
-  
+          toast.success('Removed successfully', { autoClose: 1000 });
+          const updatedItems = context.api_cartitems.filter((item) => item.id !== id);
+          context.setApi_cartitems(updatedItems);
           
           if (context.Cart_num > 0) {
             context.setCart_num(context.Cart_num - 1);
@@ -143,7 +143,7 @@ const SidebarCart = ({ visible }) => {
   console.log(
     "123456",
     context.dataArray,
-    "cartuiop",
+    "cartuiop locally",
     context.cartItems,
     "api dataa",
     context.api_cartitems
