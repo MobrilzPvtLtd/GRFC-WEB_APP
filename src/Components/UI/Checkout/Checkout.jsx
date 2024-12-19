@@ -164,32 +164,32 @@ console.log('pppppppppppppp', transformedData);
     }
   }, [urlLink]);
 
-  useEffect(() => {
-    const fetchTransactionData = async () => {
-      try {
+  // useEffect(() => {
+  //   const fetchTransactionData = async () => {
+  //     try {
        
-        const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
+  //       const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
 
-        // console.log("transaction id", res.data.data);
-        setTransactionId(res.data.data);
-        // if (TransactionId?.status === "PAID") {
-        //   setTransactionStatus("success");
-        //   navigate('/')
+  //       // console.log("transaction id", res.data.data);
+  //       setTransactionId(res.data.data);
+  //       // if (TransactionId?.status === "PAID") {
+  //       //   setTransactionStatus("success");
+  //       //   navigate('/')
 
-        // } else if(TransactionId?.status === "FAILED") {
-        //   setTransactionStatus("failed");
-        //    navigate('/about-us')
-        // }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
+  //       // } else if(TransactionId?.status === "FAILED") {
+  //       //   setTransactionStatus("failed");
+  //       //    navigate('/about-us')
+  //       // }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
         
        
-      }
-    };
-    if (context.paymentToken) {
-      fetchTransactionData();
-    }
-  }, [context.paymentToken]);
+  //     }
+  //   };
+  //   if (context.paymentToken) {
+  //     fetchTransactionData();
+  //   }
+  // }, [context.paymentToken]);
 
 
   console.log(
