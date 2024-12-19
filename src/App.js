@@ -67,7 +67,7 @@ function App() {
           <Route path="/forget" element={<Forgotpassword />} />
           <Route path="/userprofile" element={<User_Profile />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
+          <Route path="/complete-order/:id" element={<OrderConfirmation />} />
         </Routes>
         {/* <SliderBanner/> */}
         <Footer />

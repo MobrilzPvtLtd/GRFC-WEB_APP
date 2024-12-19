@@ -14,11 +14,10 @@ const Checkout = () => {
   const url = process.env.REACT_APP_BACKEND_BASE_URL;
   let id = sessionStorage.getItem("id");
   const [orderData, setOrderdata] = useState("");
-  const [paymentToken, setPaymentToken] = useState(null);
+  // const [paymentToken, setPaymentToken] = useState(null);
   const [urlLink, setUrlLink] = useState("");
-  const [TransactionId, setTransactionId] = useState(null);
-  const [transactionStatus, setTransactionStatus] = useState("pending"); // Success or Failed
-  const [isModalOpen, setIsModalOpen] = useState(false);
+ 
+  
   const [UserData, setUserData] = useState([]);
   const [FullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -159,42 +158,38 @@ console.log('pppppppppppppp', transformedData);
       const queryParams = new URL(urlLink);
       const paymentValue = queryParams.searchParams.get("token");
       console.log("paymentValue inside hook", paymentValue);
-      setPaymentToken(paymentValue);
+      context.setPaymentToken(paymentValue);
     }
   }, [urlLink]);
 
-  useEffect(() => {
-    const fetchTransactionData = async () => {
-      try {
-        setTransactionStatus("pending");
-        setIsModalOpen(true);
-        const res = await axios.get(`${url}/transaction/${paymentToken}`);
+  // useEffect(() => {
+  //   const fetchTransactionData = async () => {
+  //     try {
+  //       setTransactionStatus("pending");
+  //       setIsModalOpen(true);
+  //       const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
 
-        // console.log("transaction id", res.data.data);
-        setTransactionId(res.data.data);
-        if (TransactionId?.status === "PAID") {
-          setTransactionStatus("success");
-          navigate('/')
+  //       // console.log("transaction id", res.data.data);
+  //       setTransactionId(res.data.data);
+  //       if (TransactionId?.status === "PAID") {
+  //         setTransactionStatus("success");
+  //         navigate('/')
 
-        } else if(TransactionId?.status === "FAILED") {
-          setTransactionStatus("failed");
-           navigate('/about-us')
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setTransactionStatus("failed"); 
-        setIsModalOpen(true);
-      }
-    };
-    if (paymentToken) {
-      fetchTransactionData();
-    }
-  }, [paymentToken]);
+  //       } else if(TransactionId?.status === "FAILED") {
+  //         setTransactionStatus("failed");
+  //          navigate('/about-us')
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       setTransactionStatus("failed"); 
+  //       setIsModalOpen(true);
+  //     }
+  //   };
+  //   if (context.paymentToken) {
+  //     fetchTransactionData();
+  //   }
+  // }, [context.paymentToken]);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTransactionStatus(null); 
-  };
 
   console.log(
     " place data.......",
@@ -204,8 +199,8 @@ console.log('pppppppppppppp', transformedData);
     "userid",
     orderData,
     "paymenttoken",
-    paymentToken
-,'jjjjjjjjjjjjjjjj',TransactionId , 'user4444',UserData );
+    context.paymentToken
+,'jjjjjjjjjjjjjjjj' , 'user4444',UserData );
   return (
     <>
       <section
@@ -605,33 +600,7 @@ console.log('pppppppppppppp', transformedData);
         </div>
 
         
-        {/* {isModalOpen && (
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-body">
-                {transactionStatus === "pending" && (
-                  <div>
-                    <h2>Transaction Pending</h2>
-                    <p>Your transaction is being processed. Please wait...</p>
-                  </div>
-                )}
-                {transactionStatus === "success" && (
-                  <div>
-                    <h2>Transaction Successful</h2>
-                    <p>Your transaction has been completed successfully.</p>
-                  </div>
-                )}
-                {transactionStatus === "failed" && (
-                  <div>
-                    <h2>Transaction Failed</h2>
-                    <p>Something went wrong. Please try again later.</p>
-                  </div>
-                )}
-                <button onClick={closeModal}>Close</button>
-              </div>
-            </div>
-          </div>
-        )} */}
+       
       </section>
     </>
   );

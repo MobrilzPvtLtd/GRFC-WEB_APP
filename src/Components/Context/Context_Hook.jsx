@@ -27,6 +27,7 @@ export const ValueProvider = ({ children }) => {
    const [api_cartitems, setApi_cartitems] = useState();
     const [userData, setUserData] = useState();
      const [cartItems, setCartItems] = useState([]);
+     const [paymentToken, setPaymentToken] = useState(null);
   
 
   return (
@@ -58,7 +59,8 @@ export const ValueProvider = ({ children }) => {
         setApi_cartitems,
         userData, 
         setUserData,
-        cartItems, setCartItems
+        cartItems, setCartItems,
+        paymentToken, setPaymentToken
        
       }}
     >
