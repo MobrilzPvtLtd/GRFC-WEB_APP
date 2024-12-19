@@ -54,7 +54,7 @@ const OrderConfirmation = () => {
     "local",
     localpaytmtoken,
     "trans000",
-    TransactionId.id
+    TransactionId
   );
 
   return (
@@ -64,11 +64,11 @@ const OrderConfirmation = () => {
           <div className="d-flex justify-content-center align-items-center vh-100">
             <div
               className="card shadow-lg p-4 text-center"
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "600px" }}
             >
               <div className="card-body">
                 <h2 className="text-warning">Transaction Pending</h2>
-                <h6>Your Transaction ID:{TransactionId?.id}</h6>
+                <h6>Your Transaction ID:1223</h6>
                 <p className="mt-3">Your transaction has been Pending.</p>
               </div>
             </div>
@@ -78,11 +78,11 @@ const OrderConfirmation = () => {
           <div className="d-flex justify-content-center align-items-center vh-100">
             <div
               className="card shadow-lg p-4 text-center"
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "600px" }}
             >
               <div className="card-body">
                 <h2 className="text-success">Transaction Successful</h2>
-                <h6>Your Transaction ID:{TransactionId?.id}</h6>
+                <h6>Your Transaction ID:2334</h6>
                 <p className="mt-3">
                   Your transaction has been completed successfully.
                 </p>
@@ -94,11 +94,11 @@ const OrderConfirmation = () => {
           <div className="d-flex justify-content-center align-items-center vh-100">
             <div
               className="card shadow-lg p-4 text-center"
-              style={{ maxWidth: "400px" }}
+              style={{ maxWidth: "600px" }}
             >
               <div className="card-body">
                 <h2 className="text-danger">Transaction Failed</h2>
-                <h6>Your Transaction ID:{TransactionId?.id}</h6>
+                <h6>Your Transaction ID:23454</h6>
                 <p className="mt-3">Your transaction has been Failed.</p>
               </div>
             </div>
