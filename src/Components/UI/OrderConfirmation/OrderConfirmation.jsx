@@ -67,7 +67,7 @@ const OrderConfirmation = () => {
               style={{ maxWidth: "600px" }}
             >
               <div className="card-body">
-                <h2 className="text-warning">Transaction Pending</h2>
+                <h4 className="text-warning">Transaction Pending</h4>
                 <h6>Your Transaction ID:1223</h6>
                 <p className="mt-3">Your transaction has been Pending.</p>
               </div>
@@ -81,7 +81,7 @@ const OrderConfirmation = () => {
               style={{ maxWidth: "600px" }}
             >
               <div className="card-body">
-                <h2 className="text-success">Transaction Successful</h2>
+                <h4 className="text-success">Transaction Successful</h4>
                 <h6>Your Transaction ID:2334</h6>
                 <p className="mt-3">
                   Your transaction has been completed successfully.
@@ -97,8 +97,8 @@ const OrderConfirmation = () => {
               style={{ maxWidth: "600px" }}
             >
               <div className="card-body">
-                <h2 className="text-danger">Transaction Failed</h2>
-                <h6>Your Transaction ID:23454</h6>
+                <h4 className="text-danger">Transaction Failed</h4>
+                <h6>Your Transaction ID:3454</h6>
                 <p className="mt-3">Your transaction has been Failed.</p>
               </div>
             </div>
