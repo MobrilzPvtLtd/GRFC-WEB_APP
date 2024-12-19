@@ -22,11 +22,11 @@ const OrderConfirmation = () => {
         setTransactionId(res.data.data);
         if (TransactionId?.status === "PAID") {
           setTransactionStatus("success");
-          navigate('/')
+          // navigate('/')
 
         } else if(TransactionId?.status === "FAILED") {
           setTransactionStatus("failed");
-           navigate('/about-us')
+          //  navigate('/about-us')
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -47,7 +47,7 @@ const OrderConfirmation = () => {
 
   return (
     <>
-      <div className="mt-64">
+      <div className="mt-64 mx-auto">
         <h3>Thank You</h3>
 
         <div>

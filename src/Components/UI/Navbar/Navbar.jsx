@@ -133,9 +133,9 @@ const Navbar = ({ getVisibity }) => {
           </div>
           <div class="container">
             <div class="bottom-bar">
-              <a href="index.html">
+              <Link to="/">
                 <img class="logo001" src={logo} alt="logo" />
-              </a>
+              </Link>
 
               <nav>
                 <ul class="navbar-links">
