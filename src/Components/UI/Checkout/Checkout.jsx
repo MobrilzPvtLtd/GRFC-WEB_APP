@@ -23,6 +23,7 @@ const Checkout = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [UserID, setUserID] = useState();
+   const [TransactionId, setTransactionId] = useState(null);
   const navigate = useNavigate()
 
   // const product_data =context.api_cartitems
@@ -162,33 +163,32 @@ console.log('pppppppppppppp', transformedData);
     }
   }, [urlLink]);
 
-  // useEffect(() => {
-  //   const fetchTransactionData = async () => {
-  //     try {
-  //       setTransactionStatus("pending");
-  //       setIsModalOpen(true);
-  //       const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
+  useEffect(() => {
+    const fetchTransactionData = async () => {
+      try {
+       
+        const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
 
-  //       // console.log("transaction id", res.data.data);
-  //       setTransactionId(res.data.data);
-  //       if (TransactionId?.status === "PAID") {
-  //         setTransactionStatus("success");
-  //         navigate('/')
+        // console.log("transaction id", res.data.data);
+        setTransactionId(res.data.data);
+        // if (TransactionId?.status === "PAID") {
+        //   setTransactionStatus("success");
+        //   navigate('/')
 
-  //       } else if(TransactionId?.status === "FAILED") {
-  //         setTransactionStatus("failed");
-  //          navigate('/about-us')
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //       setTransactionStatus("failed"); 
-  //       setIsModalOpen(true);
-  //     }
-  //   };
-  //   if (context.paymentToken) {
-  //     fetchTransactionData();
-  //   }
-  // }, [context.paymentToken]);
+        // } else if(TransactionId?.status === "FAILED") {
+        //   setTransactionStatus("failed");
+        //    navigate('/about-us')
+        // }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        
+       
+      }
+    };
+    if (context.paymentToken) {
+      fetchTransactionData();
+    }
+  }, [context.paymentToken]);
 
 
   console.log(
@@ -200,7 +200,7 @@ console.log('pppppppppppppp', transformedData);
     orderData,
     "paymenttoken",
     context.paymentToken
-,'jjjjjjjjjjjjjjjj' , 'user4444',UserData );
+,'jjjjjjjjjjjjjjjj' , TransactionId, 'user4444',UserData );
   return (
     <>
       <section
