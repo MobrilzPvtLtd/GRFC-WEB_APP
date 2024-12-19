@@ -59,9 +59,9 @@ const OrderConfirmation = () => {
 
   return (
     <>
-      <div className="mt-32">
+      <div className="mt-48 mb-5">
         {transactionStatus === "pending" && (
-          <div className="d-flex justify-content-center align-items-center vh-100">
+          <div className="d-flex justify-content-center align-items-center ">
             <div
               className="card shadow-lg p-4 text-center"
               style={{ maxWidth: "600px" }}
@@ -75,7 +75,7 @@ const OrderConfirmation = () => {
           </div>
         )}
         {transactionStatus === "success" && (
-          <div className="d-flex justify-content-center align-items-center vh-100">
+          <div className="d-flex justify-content-center align-items-center ">
             <div
               className="card shadow-lg p-4 text-center"
               style={{ maxWidth: "600px" }}
@@ -91,7 +91,7 @@ const OrderConfirmation = () => {
           </div>
         )}
         {transactionStatus === "failed" && (
-          <div className="d-flex justify-content-center align-items-center vh-100">
+          <div className="d-flex justify-content-center align-items-center ">
             <div
               className="card shadow-lg p-4 text-center"
               style={{ maxWidth: "600px" }}
