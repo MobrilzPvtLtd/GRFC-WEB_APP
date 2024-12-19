@@ -138,7 +138,7 @@ const Navbar = ({ getVisibity }) => {
               </Link>
 
               <nav>
-                <ul class="navbar-links">
+                <ul class="navbar-links d-flex">
                   <li class="navbar-dropdown mx-2">
                     <Link to="/">Hogar</Link>
                   </li>

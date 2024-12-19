@@ -48,14 +48,13 @@ const OrderConfirmation = () => {
   console.log(
     "transaction daata",
     TransactionId,
-    "paytm token",
-    context.paymentToken,
+    
     "vvvv",
     transactionStatus,
     "local",
     localpaytmtoken,
     "trans000",
-    TransactionId[0].id
+    TransactionId.id
   );
 
   return (
@@ -69,7 +68,7 @@ const OrderConfirmation = () => {
             >
               <div className="card-body">
                 <h2 className="text-warning">Transaction Pending</h2>
-                <h6>Your Transaction ID:{TransactionId[0]?.id}</h6>
+                <h6>Your Transaction ID:{TransactionId?.id}</h6>
                 <p className="mt-3">Your transaction has been Pending.</p>
               </div>
             </div>
@@ -83,7 +82,7 @@ const OrderConfirmation = () => {
             >
               <div className="card-body">
                 <h2 className="text-success">Transaction Successful</h2>
-                <h6>Your Transaction ID:{TransactionId[0]?.id}</h6>
+                <h6>Your Transaction ID:{TransactionId?.id}</h6>
                 <p className="mt-3">
                   Your transaction has been completed successfully.
                 </p>
@@ -99,7 +98,7 @@ const OrderConfirmation = () => {
             >
               <div className="card-body">
                 <h2 className="text-danger">Transaction Failed</h2>
-                <h6>Your Transaction ID:{TransactionId[0]?.id}</h6>
+                <h6>Your Transaction ID:{TransactionId?.id}</h6>
                 <p className="mt-3">Your transaction has been Failed.</p>
               </div>
             </div>
