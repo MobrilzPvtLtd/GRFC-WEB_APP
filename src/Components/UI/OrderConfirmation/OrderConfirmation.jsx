@@ -12,43 +12,43 @@ const OrderConfirmation = () => {
     const url = process.env.REACT_APP_BACKEND_BASE_URL;
     const navigate = useNavigate()
     
-  useEffect(() => {
-    const fetchTransactionData = async () => {
-      try {
-        setTransactionStatus("pending");
-        setIsModalOpen(true);
-        const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
+  // useEffect(() => {
+  //   const fetchTransactionData = async () => {
+  //     try {
+  //       setTransactionStatus("pending");
+  //       setIsModalOpen(true);
+  //       const res = await axios.get(`${url}/transaction/${context.paymentToken}`);
 
-        // console.log("transaction id", res.data.data);
-        setTransactionId(res.data.data);
-        if (TransactionId?.status === "PAID") {
-          setTransactionStatus("success");
-          // navigate('/')
+  //       // console.log("transaction id", res.data.data);
+  //       setTransactionId(res.data.data);
+  //       if (TransactionId?.status === "PAID") {
+  //         setTransactionStatus("success");
+  //         // navigate('/')
 
-        } else if(TransactionId?.status === "FAILED") {
-          setTransactionStatus("failed");
-          //  navigate('/about-us')
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setTransactionStatus("failed"); 
-        setIsModalOpen(true);
-      }
-    };
-    if(context.paymentToken) {
-      fetchTransactionData();
-    }
-  }, [context.paymentToken]);
+  //       } else if(TransactionId?.status === "FAILED") {
+  //         setTransactionStatus("failed");
+  //         //  navigate('/about-us')
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //       setTransactionStatus("failed"); 
+  //       setIsModalOpen(true);
+  //     }
+  //   };
+  //   if(context.paymentToken) {
+  //     fetchTransactionData();
+  //   }
+  // }, [context.paymentToken]);
 
-  const urlParams = new URL(window.location.search);
-  const localtokenpaytm = urlParams.searchParams.get('token');
+  // const urlParams = new URLSearchParams(window.location.search);
+  // const localtokenpaytm = urlParams.get('token');
 
   const closeModal = () => {
     setIsModalOpen(false);
     setTransactionStatus(null); 
   };
 
-  console.log('transaction daata',TransactionId , 'paytm token',context.paymentToken , 'vvvv', transactionStatus, 'localitem',urlParams,localtokenpaytm)
+  console.log('transaction daata',TransactionId , 'paytm token',context.paymentToken , 'vvvv', transactionStatus, 'local',)
 
   return (
     <>
