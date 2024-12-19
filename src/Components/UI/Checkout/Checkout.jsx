@@ -160,6 +160,7 @@ console.log('pppppppppppppp', transformedData);
       const paymentValue = queryParams.searchParams.get("token");
       console.log("paymentValue inside hook", paymentValue);
       context.setPaymentToken(paymentValue);
+      localStorage.setItem("transactiontoken" , paymentValue)
     }
   }, [urlLink]);
 

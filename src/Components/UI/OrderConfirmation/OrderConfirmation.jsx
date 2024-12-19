@@ -11,6 +11,8 @@ const OrderConfirmation = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const url = process.env.REACT_APP_BACKEND_BASE_URL;
     const navigate = useNavigate()
+
+    const localpaytmtoken = localStorage.getItem('transactiontoken')
     
   // useEffect(() => {
   //   const fetchTransactionData = async () => {
@@ -48,7 +50,7 @@ const OrderConfirmation = () => {
     setTransactionStatus(null); 
   };
 
-  console.log('transaction daata',TransactionId , 'paytm token',context.paymentToken , 'vvvv', transactionStatus, 'local',)
+  console.log('transaction daata',TransactionId , 'paytm token',context.paymentToken , 'vvvv', transactionStatus, 'local',localpaytmtoken)
 
   return (
     <>
