@@ -16,18 +16,20 @@ const OrderConfirmation = () => {
   useEffect(() => {
     const fetchTransactionData = async () => {
       try {
-        setTransactionStatus("pending");
-        setIsModalOpen(true);
+        
+        
         const res = await axios.get(`${url}/transaction/${localpaytmtoken}`);
 
         // console.log("transaction id", res.data.data);
-        setTransactionId(res.data.data);
+        setTransactionId(res.data.data[0]);
         if (TransactionId?.status === "PAID") {
           setTransactionStatus("success");
           // navigate('/')
         } else if (TransactionId?.status === "FAILED") {
           setTransactionStatus("failed");
           //  navigate('/about-us')
+        }else {
+          setTransactionStatus("pending");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -38,12 +40,16 @@ const OrderConfirmation = () => {
     if (localpaytmtoken) {
       fetchTransactionData();
     }
+    return () => {
+      localStorage.removeItem("transactiontoken");
+      console.log("transactiontoken removed from localStorage");
+    };
   }, []);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTransactionStatus(null);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   setTransactionStatus(null);
+  // };
 
   console.log(
     "transaction daata",
@@ -68,7 +74,7 @@ const OrderConfirmation = () => {
             >
               <div className="card-body">
                 <h4 className="text-warning">Transaction Pending</h4>
-                <h6>Your Transaction ID:1223</h6>
+                <h6>Your Transaction ID:{TransactionId?.id || "Loading..."}</h6>
                 <p className="mt-3">Your transaction has been Pending.</p>
               </div>
             </div>
@@ -82,7 +88,7 @@ const OrderConfirmation = () => {
             >
               <div className="card-body">
                 <h4 className="text-success">Transaction Successful</h4>
-                <h6>Your Transaction ID:2334</h6>
+                <h6>Your Transaction ID:{TransactionId?.id || "Loading..."}</h6>
                 <p className="mt-3">
                   Your transaction has been completed successfully.
                 </p>
@@ -98,7 +104,7 @@ const OrderConfirmation = () => {
             >
               <div className="card-body">
                 <h4 className="text-danger">Transaction Failed</h4>
-                <h6>Your Transaction ID:3454</h6>
+                <h6>Your Transaction ID:{TransactionId?.id || "Loading..."}</h6>
                 <p className="mt-3">Your transaction has been Failed.</p>
               </div>
             </div>
