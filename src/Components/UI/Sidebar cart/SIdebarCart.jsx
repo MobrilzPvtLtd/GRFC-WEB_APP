@@ -95,8 +95,8 @@ const SidebarCart = ({ visible }) => {
         if (response.status === 200) {
           toast.success('Removed successfully', { autoClose: 1000 });
           const updatedItems = context.api_cartitems.filter((item) => item.id !== id);
+           
           context.setApi_cartitems(updatedItems);
-          
           if (context.Cart_num > 0) {
             context.setCart_num(context.Cart_num - 1);
           }

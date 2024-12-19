@@ -56,7 +56,7 @@ const ContactSection = () => {
         <div className="row">
           <div className="col-lg-6">
             <div className="find-a-dog contact">
-              <h2>Encuentre un paseador de perros o cuidado de mascotas</h2>
+              <h2 >Encuentre un paseador de perros o cuidado de mascotas</h2>
               <p>
               Confía en We Love Pets, un paseador de perros premiado
               y cuidado de mascotas
